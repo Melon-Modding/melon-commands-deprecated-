@@ -4,9 +4,11 @@
     "package": "turniplabs.examplemod.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+      "CommandsMixin"
     ],
     "client": [
     ],
+  "server": [],
     "injectors": {
         "defaultRequire": 1
   }

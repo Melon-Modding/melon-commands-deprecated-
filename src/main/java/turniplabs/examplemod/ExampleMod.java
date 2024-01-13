@@ -13,7 +13,7 @@ public class ExampleMod implements ModInitializer, GameStartEntrypoint, RecipeEn
 
     @Override
     public void onInitialize() {
-        LOGGER.info("ExampleMod initialized.");
+        LOGGER.info("Testing Grounds initialized.");
     }
 
 	@Override

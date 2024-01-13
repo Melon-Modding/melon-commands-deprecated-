@@ -3,15 +3,15 @@
   "id": "examplemod",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
-  "authors": [
-    "Turnip Labs"
-  ],
-  "contact": {
-    "homepage": "",
-    "sources": ""
-  },
+	"name": "Testing Commands",
+	"description": "Attempting to figure out how commands work.",
+	"authors": [
+		"Prophet_Sama"
+	],
+	"contact": {
+		"homepage": "https://github.com/Master449",
+		"sources": ""
+	},
 
   "license": "CC0-1.0",
 
