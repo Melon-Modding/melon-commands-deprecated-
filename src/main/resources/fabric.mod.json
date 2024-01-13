@@ -31,7 +31,7 @@
 		]
 	},
   "mixins": [
-      "examplemod.mixins.json"
+		"testing.mixins.json"
   ],
 
   "depends": {
