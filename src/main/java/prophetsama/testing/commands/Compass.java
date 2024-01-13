@@ -15,6 +15,7 @@ import javax.naming.Name;
 public class Compass extends Command {
 	private final static String COMMAND = "compass";
 	private final static String NAME = "Compass";
+
 	public Compass() {
         super(COMMAND);
     }
@@ -33,6 +34,7 @@ public class Compass extends Command {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
+		// Feedback to the player that it executed
 		commandSender.sendMessage("Given 1x " + NAME + " to " + commandSender.getPlayer().username);
 	}
 }

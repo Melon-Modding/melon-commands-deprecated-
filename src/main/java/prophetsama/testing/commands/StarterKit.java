@@ -15,9 +15,13 @@ public class StarterKit extends Command {
 
 	@Override
 	public boolean execute(CommandHandler commandHandler, CommandSender commandSender, String[] strings) {
-		Item[] kit = {};
-		// Get the player and cast it to EntityPlayerMP
-		commandSender.getPlayer().inventory.insertItem(new ItemStack(Item.toolCompass), false);
+		// Array to hold items given
+		Item[] kit = { Item.toolCompass, Item.toolCalendar, Item.toolClock};
+
+		// Loop through and give items in array
+		for (Item i : kit ) {
+			commandSender.getPlayer().inventory.insertItem(new ItemStack(i), false);
+		}
 		return false;
 	}
 
@@ -28,6 +32,7 @@ public class StarterKit extends Command {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
+		// Feedback to the player that it executed
 		commandSender.sendMessage("Given 1x " + NAME + " to " + commandSender.getPlayer().username);
 	}
 }

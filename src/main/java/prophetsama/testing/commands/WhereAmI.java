@@ -42,6 +42,7 @@ public class WhereAmI extends Command {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
+		// Feedback is unneeded, since execute is printing the message
 		//commandSender.sendMessage("whereami");
 	}
 }

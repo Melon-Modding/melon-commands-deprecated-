@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import prophetsama.testing.commands.Compass;
+import prophetsama.testing.commands.StarterKit;
 import prophetsama.testing.commands.WhereAmI;
 
 import java.util.List;
@@ -21,5 +22,6 @@ public abstract class CommandsMixin {
 	private static void worldEdit_initCommands(CallbackInfo ci) {
 		commands.add(new Compass());
 		commands.add(new WhereAmI());
+		commands.add(new StarterKit());
 	}
 }
