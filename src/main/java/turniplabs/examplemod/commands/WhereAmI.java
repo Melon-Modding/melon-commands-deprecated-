@@ -1,5 +1,6 @@
 package turniplabs.examplemod.commands;
 
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.ClientPlayerCommandSender;
@@ -8,17 +9,25 @@ import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 
+/**
+ * This command when run prints out information of the players current coordinates.
+ ***********************************************************************************/
+
 public class WhereAmI extends Command {
 	public WhereAmI() {
-		super("/whereami");
+		super("whereami");
 	}
 
 	@Override
 	public boolean execute(CommandHandler commandHandler, CommandSender commandSender, String[] strings) {
-		EntityPlayerMP player = (EntityPlayerMP) commandSender.getPlayer();
-		int px = (int) player.x;
-		int py = (int) player.y;
-		int pz = (int) player.x;
+
+
+			EntityPlayer player = (EntityPlayer) commandSender.getPlayer();
+
+			int px = (int) player.x;
+			int py = (int) player.y;
+			int pz = (int) player.z;
+
 
 		commandSender.sendMessage("You are at " + px + " " + py + " " + pz);
 
@@ -32,6 +41,6 @@ public class WhereAmI extends Command {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
-		commandSender.sendMessage("whereami");
+		//commandSender.sendMessage("whereami");
 	}
 }
