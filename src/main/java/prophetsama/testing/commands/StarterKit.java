@@ -1,23 +1,22 @@
-package turniplabs.examplemod.commands;
+package prophetsama.testing.commands;
 
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
+import net.minecraft.server.entity.player.EntityPlayerMP;
 
-/**
- * This command gives the player a compass.
- ***********************************************************************************/
+public class StarterKit extends Command {
+	private final static String COMMAND = "starterkit";
+	private final static String NAME = "Starter Kit";
 
-public class Compass extends Command {
-	public Compass() {
-        super("compass");
-    }
+	public StarterKit() { super(COMMAND); }
 
 	@Override
 	public boolean execute(CommandHandler commandHandler, CommandSender commandSender, String[] strings) {
-		// Give the player a compass
+		Item[] kit = {};
+		// Get the player and cast it to EntityPlayerMP
 		commandSender.getPlayer().inventory.insertItem(new ItemStack(Item.toolCompass), false);
 		return false;
 	}
@@ -29,6 +28,6 @@ public class Compass extends Command {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
-		//commandSender.sendMessage("compass");
+		commandSender.sendMessage("Given 1x " + NAME + " to " + commandSender.getPlayer().username);
 	}
 }

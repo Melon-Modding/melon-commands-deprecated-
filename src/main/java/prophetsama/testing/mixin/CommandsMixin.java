@@ -1,4 +1,4 @@
-package turniplabs.examplemod.mixin;
+package prophetsama.testing.mixin;
 
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.Commands;
@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import turniplabs.examplemod.commands.Compass;
-import turniplabs.examplemod.commands.WhereAmI;
+import prophetsama.testing.commands.Compass;
+import prophetsama.testing.commands.WhereAmI;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package turniplabs.examplemod;
+package prophetsama.testing;
 
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
