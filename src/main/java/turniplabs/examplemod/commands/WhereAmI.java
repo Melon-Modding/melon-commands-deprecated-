@@ -20,15 +20,16 @@ public class WhereAmI extends Command {
 
 	@Override
 	public boolean execute(CommandHandler commandHandler, CommandSender commandSender, String[] strings) {
+		// Get the player and cast it to EntityPlayerMP
+		EntityPlayerMP player = (EntityPlayerMP) commandSender.getPlayer();
 
+		// Get the players coords
+		// casted to int to shorten them
+		int px = (int) player.x;
+		int py = (int) player.y;
+		int pz = (int) player.z;
 
-			EntityPlayer player = (EntityPlayer) commandSender.getPlayer();
-
-			int px = (int) player.x;
-			int py = (int) player.y;
-			int pz = (int) player.z;
-
-
+		// Send the info to the chat
 		commandSender.sendMessage("You are at " + px + " " + py + " " + pz);
 
 		return false;

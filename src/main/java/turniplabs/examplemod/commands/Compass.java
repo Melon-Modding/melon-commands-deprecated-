@@ -17,6 +17,7 @@ public class Compass extends Command {
 
 	@Override
 	public boolean execute(CommandHandler commandHandler, CommandSender commandSender, String[] strings) {
+		// Give the player a compass
 		commandSender.getPlayer().inventory.insertItem(new ItemStack(Item.toolCompass), false);
 		return false;
 	}
