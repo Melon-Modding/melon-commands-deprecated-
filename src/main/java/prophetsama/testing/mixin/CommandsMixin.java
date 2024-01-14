@@ -8,10 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import prophetsama.testing.commands.Compass;
-import prophetsama.testing.commands.Spawn;
-import prophetsama.testing.commands.StarterKit;
-import prophetsama.testing.commands.WhereAmI;
+import prophetsama.testing.commands.*;
 
 import java.util.List;
 
@@ -25,10 +22,6 @@ public abstract class CommandsMixin {
 		commands.add(new Compass());
 		commands.add(new WhereAmI());
 		commands.add(new StarterKit());
-		commands.add(new Spawn());
-
-		// Removes normal spawn command
-		// unsure of the object, so went with the index
-		commands.remove(11);
 	}
+
 }
