@@ -7,11 +7,16 @@ Just a small mod I started to accomplish a few things:
 
 ## Main Folder Hierarchy
 ```
-prophetsama/testing/
-├─ commands/
-│  ├─ Compass.java           Gives player Compass
-│  ├─ StarterKit.java        Gives player Compass, Clock, Calendar
-│  ├─ WhereAmI.java          Shows players coords in chat
-├─ mixin/
-│  ├─ Commands.java          Injects the new commands
+└── prophetsama/testing/
+    ├── commands/
+    │   ├── Compass.java      Gives player Compass
+    │   ├── StarterKit.java   Gives player Compass, Clock, Calendar
+    │   └── WhereAmI.java     Shows players coords in chat
+    └── mixin/
+        └── Commands.java     Injects the new commands
 ```
+
+Shoutout to these communities and people 
+- BetterThanAdventure Modding Discord
+- ModdingStation Discord
+- MelonBTA
