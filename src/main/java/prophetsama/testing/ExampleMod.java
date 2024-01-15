@@ -14,19 +14,26 @@ public class ExampleMod implements ModInitializer, GameStartEntrypoint, RecipeEn
     public static final String MOD_ID = "melonbtacommands";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-//
-//	Example using halplibe config
-//	public void updateConfig() {
-//		Toml properties = new Toml("MelonBTA Commands Configuration");
-//
-//		//properties.addEntry("starterKitItems", "List of items to be added to the Starter Kit.", );
-//
-//		properties.addEntry("entry", "comment", 0);
-//
-//		TomlConfigHandler config = new TomlConfigHandler(null, MOD_ID, properties);
-//
-//		entry = config.getInt("spawnX");
-//	}
+	public static int[] starterKitIDs;
+
+	//
+	public void updateConfig() {
+		Toml properties = new Toml("MelonBTA Commands Configuration");
+
+		properties.addEntry("starterKitItems", "List of Item IDs to be added to the Starter Kit." +
+															"Must be a string and comma separated.", "0,0,0");
+
+		TomlConfigHandler config = new TomlConfigHandler(null, MOD_ID, properties);
+
+		String ItemIDs = config.getString("starterKitItems");
+		String[] temp = ItemIDs.split(",");
+
+		starterKitIDs = new int[temp.length];
+
+		for (int i = 0; i < temp.length; i++) {
+			starterKitIDs[i] = Integer.parseInt(temp[i]);
+		}
+	}
 
 
     @Override

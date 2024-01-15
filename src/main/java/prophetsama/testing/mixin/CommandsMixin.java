@@ -19,7 +19,7 @@ public abstract class CommandsMixin {
 
 	@Inject(method = "initCommands", at = @At("TAIL"))
 	private static void melon_initCommands(CallbackInfo ci) {
-		commands.add(new Compass());
+		//commands.add(new Compass());
 		commands.add(new WhereAmI());
 		commands.add(new StarterKit());
 	}

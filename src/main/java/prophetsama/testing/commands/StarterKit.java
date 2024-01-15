@@ -16,11 +16,12 @@ public class StarterKit extends Command {
 	@Override
 	public boolean execute(CommandHandler commandHandler, CommandSender commandSender, String[] strings) {
 		// Array to hold items given
-		Item[] kit = { Item.toolCompass, Item.toolCalendar, Item.toolClock};
+		Item[] kit = { Item.toolCompass, Item.toolCalendar, Item.toolClock };
 
 		// Loop through and give items in array
 		for (Item i : kit ) {
 			commandSender.getPlayer().inventory.insertItem(new ItemStack(i), false);
+			commandSender.getPlayer().inventory.insertItem(new ItemStack(64, 1, 1), false);
 		}
 		return false;
 	}
