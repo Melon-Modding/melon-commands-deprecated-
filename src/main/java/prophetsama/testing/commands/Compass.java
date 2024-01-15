@@ -35,6 +35,6 @@ public class Compass extends Command {
 	@Override
 	public void sendCommandSyntax(CommandHandler handler, CommandSender sender) {
 		// Feedback to the player that it executed
-		handler.sendCommandFeedback(sender, "Given 1x " + NAME + " to " + sender.getPlayer().username);
+		handler.sendCommandFeedback(sender,"Given 1x " + NAME + " to " + sender.getPlayer().username);
 	}
 }

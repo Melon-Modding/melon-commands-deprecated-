@@ -4,8 +4,6 @@
     "package": "prophetsama.testing.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
-      "CommandsMixin",
-      "OverrideSpawnCommand"
     ],
     "client": [
     ],
