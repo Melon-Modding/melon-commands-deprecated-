@@ -1,6 +1,7 @@
 package prophetsama.testing.mixin;
 
 import net.minecraft.core.net.command.Command;
+import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.Commands;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,10 +21,14 @@ public abstract class CommandsMixin {
 	@Shadow public static List<Command> commands;
 
 	@Inject(method = "initCommands", at = @At("TAIL"))
-	private static void worldEdit_initCommands(CallbackInfo ci) {
+	private static void melon_initCommands(CallbackInfo ci) {
 		commands.add(new Compass());
 		commands.add(new WhereAmI());
 		commands.add(new StarterKit());
 		commands.add(new Spawn());
+
+		// Removes normal spawn command
+		// unsure of the object, so went with the index
+		commands.remove(11);
 	}
 }

@@ -21,7 +21,7 @@ public class Spawn extends Command {
 	@Override
 	public boolean execute(CommandHandler commandHandler, CommandSender commandSender, String[] strings) {
 		// Teleports player to spawn
-
+		commandSender.getPlayer().setPos(0, 100, 0);
 		return false;
 	}
 
@@ -33,6 +33,6 @@ public class Spawn extends Command {
 	@Override
 	public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
 		// Feedback to the player that it executed
-		commandSender.sendMessage("Teleported " + commandSender.getPlayer().username + " to Spawn");
+		commandSender.sendMessage("Teleported to Spawn");
 	}
 }
