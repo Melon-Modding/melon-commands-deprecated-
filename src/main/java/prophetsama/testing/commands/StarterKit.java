@@ -32,6 +32,18 @@ public static String hmsConversion(long millis) {
 	@Override
 	public boolean execute(CommandHandler handler, CommandSender sender, String[] strings) {
 		if(strings.length > 0 && strings[0].equals("reset")){
+			if(strings.length > 1){
+				if(handler.playerExists(strings[1])){
+					cooldowns.put(handler.getPlayer(strings[1]).username, 0L);
+					sender.sendMessage(handler.getPlayer(strings[1]).username + "'s StarterKit Cooldown Reset");
+					return true;
+				}
+				else{
+					sender.sendMessage("§ePlayer Doesn't Exist");
+					return false;
+				}
+			}
+
 			cooldowns.put(sender.getPlayer().username, 0L);
 			sender.sendMessage( "StarterKit Cooldown Reset");
 			return true;
@@ -64,6 +76,7 @@ public static String hmsConversion(long millis) {
 	public void sendCommandSyntax(CommandHandler handler, CommandSender sender) {
 		// Feedback to the player that it executed
 		sender.sendMessage("/starterkit");
+		sender.sendMessage("/starterkit reset [<player>]");
 	}
 
 	public static HashMap<String, Long> cooldowns = new HashMap<>();

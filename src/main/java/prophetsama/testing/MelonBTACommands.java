@@ -57,6 +57,11 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 
 	@Override
 	public void beforeGameStart() {
+
+	}
+
+	@Override
+	public void afterGameStart() {
 		for(Command command : Commands.commands){
 			if(command instanceof SpawnCommand){
 				Commands.commands.remove(command);
@@ -67,10 +72,5 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 		CommandHelper.createCommand(new Spawn());
 		CommandHelper.createCommand(new StarterKit());
 		CommandHelper.createCommand(new WhereAmI());
-	}
-
-	@Override
-	public void afterGameStart() {
-
 	}
 }
