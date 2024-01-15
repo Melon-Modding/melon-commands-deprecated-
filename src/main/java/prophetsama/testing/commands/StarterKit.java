@@ -5,7 +5,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
-import net.minecraft.server.entity.player.EntityPlayerMP;
+import prophetsama.testing.ExampleMod;
 
 public class StarterKit extends Command {
 	private final static String COMMAND = "starterkit";
@@ -15,13 +15,9 @@ public class StarterKit extends Command {
 
 	@Override
 	public boolean execute(CommandHandler commandHandler, CommandSender commandSender, String[] strings) {
-		// Array to hold items given
-		Item[] kit = { Item.toolCompass, Item.toolCalendar, Item.toolClock };
 
-		// Loop through and give items in array
-		for (Item i : kit ) {
-			commandSender.getPlayer().inventory.insertItem(new ItemStack(i), false);
-			commandSender.getPlayer().inventory.insertItem(new ItemStack(64, 1, 1), false);
+		for (int i : ExampleMod.starterKitIDs ) {
+			commandSender.getPlayer().inventory.insertItem(new ItemStack(i, 1, 1), false);
 		}
 		return false;
 	}

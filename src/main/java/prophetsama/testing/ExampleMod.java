@@ -21,7 +21,7 @@ public class ExampleMod implements ModInitializer, GameStartEntrypoint, RecipeEn
 		Toml properties = new Toml("MelonBTA Commands Configuration");
 
 		properties.addEntry("starterKitItems", "List of Item IDs to be added to the Starter Kit." +
-															"Must be a string and comma separated.", "0,0,0");
+															" Must be a string and comma separated.", "0,0,0");
 
 		TomlConfigHandler config = new TomlConfigHandler(null, MOD_ID, properties);
 
@@ -35,10 +35,11 @@ public class ExampleMod implements ModInitializer, GameStartEntrypoint, RecipeEn
 		}
 	}
 
+	public int[] getStarterKitIDs() { return starterKitIDs.clone(); }
 
     @Override
     public void onInitialize() {
-        //updateConfig();
+        updateConfig();
 		LOGGER.info("Testing Grounds initialized.");
     }
 
