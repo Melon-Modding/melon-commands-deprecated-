@@ -51,7 +51,7 @@ public static String hmsConversion(long millis) {
 		if(System.currentTimeMillis() - cooldowns.getOrDefault(sender.getPlayer().username, 0L) > starterKitCooldown){
 			cooldowns.put(sender.getPlayer().username, System.currentTimeMillis());
 			for (int i : MelonBTACommands.starterKitIDs) {
-				sender.getPlayer().inventory.insertItem(new ItemStack(i, 1, 1), false);
+				sender.getPlayer().inventory.insertItem(new ItemStack(i, 1, 0), false);
 			}
 			sender.sendMessage( "Given 1x " + NAME + " to " + sender.getPlayer().username);
 		}
@@ -66,10 +66,12 @@ public static String hmsConversion(long millis) {
 
 	@Override
 	public boolean opRequired(String[] strings) {
-		if(strings.length > 0 && strings[0].equals("reset")){
+		if(strings != null && strings.length > 0 && strings[0].equals("reset")){
 			return true;
 		}
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	@Override
