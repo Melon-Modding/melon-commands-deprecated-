@@ -4,6 +4,10 @@
     "package": "prophetsama.testing.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+      "gamerules.FireTickMixin",
+      "gamerules.WorldClientDaylightCycleMixin",
+      "gamerules.WorldDaylightCycleMixin",
+      "gamerules.WorldServerDaylightCycle"
     ],
     "client": [
     ],
