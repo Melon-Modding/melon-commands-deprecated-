@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "melonbtacommands",
   "version": "${version}",
 
 	"name": "Testing Commands",
@@ -17,17 +17,14 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "prophetsama.testing.ExampleMod"
-    ],
 		"beforeGameStart": [
-          "prophetsama.testing.ExampleMod"
+			"prophetsama.testing.MelonBTACommands"
 		],
-		"afterGameStart": [
-          "prophetsama.testing.ExampleMod"
-		],
-		"recipesReady": [
-          "prophetsama.testing.ExampleMod"
+    "afterGameStart": [
+			"prophetsama.testing.MelonBTACommands"
+    ],
+		"main": [
+			"prophetsama.testing.MelonBTACommands"
 		]
 	},
   "mixins": [
@@ -35,7 +32,8 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.13.3"
+    "fabricloader": ">=0.13.3",
+		"halplibe": ">=3.0.0"
   },
   "suggests": {
   }

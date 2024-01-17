@@ -1,38 +1,86 @@
 package prophetsama.testing.commands;
 
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
-import net.minecraft.server.entity.player.EntityPlayerMP;
+import prophetsama.testing.MelonBTACommands;
+
+import java.time.Duration;
+import java.util.HashMap;
 
 public class StarterKit extends Command {
 	private final static String COMMAND = "starterkit";
 	private final static String NAME = "Starter Kit";
 
-	public StarterKit() { super(COMMAND); }
+public static String hmsConversion(long millis) {
+
+	Duration duration = Duration.ofMillis(millis);
+
+	long h = duration.toHours();
+	long m = duration.toMinutes() % 60;
+	long s = duration.getSeconds() % 60;
+
+    return String.format("%02d Hours, %02d Minutes, and %02d Seconds", h, m, s);
+}
+
+	public static long starterKitCooldown = MelonBTACommands.config.getInt("starterKitCooldown") * 1000L;
+	public StarterKit() {
+		super(COMMAND);
+	}
 
 	@Override
-	public boolean execute(CommandHandler commandHandler, CommandSender commandSender, String[] strings) {
-		// Array to hold items given
-		Item[] kit = { Item.toolCompass, Item.toolCalendar, Item.toolClock};
+	public boolean execute(CommandHandler handler, CommandSender sender, String[] strings) {
+		if(strings.length > 0 && strings[0].equals("reset")){
+			if(strings.length > 1){
+				if(handler.playerExists(strings[1])){
+					cooldowns.put(handler.getPlayer(strings[1]).username, 0L);
+					sender.sendMessage(handler.getPlayer(strings[1]).username + "'s StarterKit Cooldown Reset");
+					return true;
+				}
+				else{
+					sender.sendMessage("§ePlayer Doesn't Exist");
+					return false;
+				}
+			}
 
-		// Loop through and give items in array
-		for (Item i : kit ) {
-			commandSender.getPlayer().inventory.insertItem(new ItemStack(i), false);
+			cooldowns.put(sender.getPlayer().username, 0L);
+			sender.sendMessage( "StarterKit Cooldown Reset");
+			return true;
 		}
-		return false;
+		if(System.currentTimeMillis() - cooldowns.getOrDefault(sender.getPlayer().username, 0L) > starterKitCooldown){
+			cooldowns.put(sender.getPlayer().username, System.currentTimeMillis());
+			for (int i : MelonBTACommands.starterKitIDs) {
+				sender.getPlayer().inventory.insertItem(new ItemStack(i, 1, 0), false);
+			}
+			sender.sendMessage( "Given 1x " + NAME + " to " + sender.getPlayer().username);
+		}
+		else{
+			sender.sendMessage("§eYou've already used StarterKit today... time left until next kit: ");
+			sender.sendMessage("§e" + hmsConversion(starterKitCooldown - (System.currentTimeMillis() - cooldowns.getOrDefault(sender.getPlayer().username, 0L))));
+		}
+
+
+		return true;
 	}
 
 	@Override
 	public boolean opRequired(String[] strings) {
-		return false;
+		if(strings != null && strings.length > 0 && strings[0].equals("reset")){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override
-	public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
+	public void sendCommandSyntax(CommandHandler handler, CommandSender sender) {
 		// Feedback to the player that it executed
-		commandSender.sendMessage("Given 1x " + NAME + " to " + commandSender.getPlayer().username);
+		sender.sendMessage("/starterkit");
+		sender.sendMessage("/starterkit reset [<player>]");
 	}
+
+	public static HashMap<String, Long> cooldowns = new HashMap<>();
+
 }
