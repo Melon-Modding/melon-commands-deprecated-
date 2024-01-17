@@ -1,6 +1,8 @@
 package prophetsama.testing;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.core.data.gamerule.GameRuleBoolean;
+import net.minecraft.core.data.gamerule.GameRules;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.Commands;
@@ -24,6 +26,10 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 
 	//
 
+	public static GameRuleBoolean FIRE_TICKS = (GameRuleBoolean) GameRules.register(new GameRuleBoolean("doFireTick", true));
+	public static GameRuleBoolean DAYLIGHT_CYCLE = (GameRuleBoolean) GameRules.register(new GameRuleBoolean("doDaylightCycle", true));
+
+	//
 	public static TomlConfigHandler config;
 
 	public void updateConfig() {
