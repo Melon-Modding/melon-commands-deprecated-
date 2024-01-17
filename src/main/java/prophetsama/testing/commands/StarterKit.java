@@ -56,7 +56,7 @@ public static String hmsConversion(long millis) {
 			sender.sendMessage( "Given 1x " + NAME + " to " + sender.getPlayer().username);
 		}
 		else{
-			sender.sendMessage("§eYou've already used StarterKit today... time left until next kit: ");
+			sender.sendMessage("§eYou've already used StarterKit... time left until next kit: ");
 			sender.sendMessage("§e" + hmsConversion(starterKitCooldown - (System.currentTimeMillis() - cooldowns.getOrDefault(sender.getPlayer().username, 0L))));
 		}
 
