@@ -4,10 +4,13 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
+import net.minecraft.core.player.inventory.IInventory;
+import net.minecraft.core.player.inventory.slot.Slot;
 import prophetsama.testing.config.ConfigManager;
 import prophetsama.testing.config.KitData;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -41,6 +44,10 @@ public static String hmsConversion(long millis) {
 		super(COMMAND);
 	}
 
+	static int listIndexOf(ItemStack[] items, ItemStack target) {
+		List<ItemStack> list = Arrays.asList(items);
+		return list.indexOf(target);
+	}
 	@Override
 	public boolean execute(CommandHandler handler, CommandSender sender, String[] args) {
 		subcommands:
@@ -65,8 +72,10 @@ public static String hmsConversion(long millis) {
 					if (System.currentTimeMillis() - cooldowns.getOrDefault(sender.getPlayer().username, 0L) > kitCooldown) {
 						cooldowns.put(sender.getPlayer().username, System.currentTimeMillis());
 
+						int counter = 0;
 						for (ItemStack item : kitdata.kitItems) {
-							sender.getPlayer().inventory.insertItem(new ItemStack(item), false);
+							sender.getPlayer().inventory.setInventorySlotContents(kitdata.kitItemsSlots.get(counter), item);
+							counter+=1;
 						}
 
 						ConfigManager.saveAll();
@@ -208,27 +217,45 @@ public static String hmsConversion(long millis) {
 				return true;
 			}
 
-			if (args[0].equals("additem")) {
+			if (args[0].equals("addto")) {
+
 				if (args.length == 1) {
-					sender.sendMessage("§eFailed to Add Item (Invalid Syntax)");
-					sender.sendMessage("§8/kit additem <kitName>");
+					sender.sendMessage("§eFailed to Add To Kit (Invalid Syntax)");
+					sender.sendMessage("§8/kit addto <kit> item/row/armor [head/chest/legs/boots]");
 					return true;
 				}
+
 				String kit = args[1];
+
 				if (!ConfigManager.configHashMap.containsKey(kit)) {
-					sender.sendMessage("§eFailed to Add Item to Kit: '" + kit + "' (Kit Doesn't Exist)");
+					sender.sendMessage("§eFailed to Add To Kit: '" + kit + "' (Kit Doesn't Exist)");
 					sender.sendMessage("§8*Tip: Double Check your Spelling*");
 					return true;
 				}
-				if (sender.getPlayer().getHeldItem() == null) {
-					sender.sendMessage("§eFailed to Add Item to Kit: '" + kit + "' (Held Item is Null)");
-					sender.sendMessage("§8*Tip: Hold an item in your hand*");
+
+				KitData kitdata = ConfigManager.getConfig(kit);
+
+				if (args[2].equals("item")){
+
+					if (sender.getPlayer().getHeldItem() == null) {
+						sender.sendMessage("§eFailed to Add To Kit: '" + kit + "' (Held Item is Null)");
+						sender.sendMessage("§8*Tip: Hold an item in your hand*");
+						return true;
+					}
+
+					kitdata.kitItems.add(new ItemStack(sender.getPlayer().getHeldItem()));
+					kitdata.kitItemsSlots.add(listIndexOf(sender.getPlayer().inventory.mainInventory, sender.getPlayer().getHeldItem()));
+					sender.sendMessage("§5Added [" + sender.getPlayer().getHeldItem() + "] to Kit: '" + kit + "'");
+					ConfigManager.saveAll();
 					return true;
 				}
-				KitData kitdata = ConfigManager.getConfig(kit);
-				kitdata.kitItems.add(new ItemStack(sender.getPlayer().getHeldItem()));
-				sender.sendMessage("§5Added [" + sender.getPlayer().getHeldItem() + "] to Kit: '" + kit + "'");
-				ConfigManager.saveAll();
+				if (args[2].equals("row")){
+					return true;
+				}
+				if (args[2].equals("armor")){
+					return true;
+				}
+
 				return true;
 			}
 
@@ -268,7 +295,7 @@ public static String hmsConversion(long millis) {
 		opList.add("reload");
 		opList.add("setcooldown");
 		opList.add("delete");
-		opList.add("additem");
+		opList.add("addto");
 	}
 	@Override
 	public boolean opRequired(String[] args) {
@@ -281,13 +308,13 @@ public static String hmsConversion(long millis) {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler handler, CommandSender sender) {
-		// Feedback to the player that it executed
+		// Feedback to the player that it executed [ * = To Do ]
 		if(sender.isAdmin()) {
-			sender.sendMessage("§8> /kit give <kit> *TODO[<player>]");
-			sender.sendMessage("§8> /kit create <kit> [<cooldown>] *TODO[inv]");
+			sender.sendMessage("§8> /kit give <kit> *[<player>]");
+			sender.sendMessage("§8> /kit create <kit> [<cooldown>] *[inv]");
 			sender.sendMessage("§8> /kit delete <kit>");
 			sender.sendMessage("§8> /kit setcooldown <kit> <cooldown>");
-			sender.sendMessage("§8> /kit additem <kit>");
+			sender.sendMessage("§8> /kit addto <kit> item/*row/*armor *[head/chest/legs/boots]");
 			sender.sendMessage("§8> /kit reset <kit> [<player>]");
 			sender.sendMessage("§8> /kit list [<kit>]");
 			sender.sendMessage("§8> /kit reload");

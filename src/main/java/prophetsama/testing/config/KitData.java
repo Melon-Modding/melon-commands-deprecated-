@@ -12,5 +12,7 @@ public class KitData {
 	public long kitCooldown = 0;
 	@SerializedName(value = "Kit Items (Item Stack List)") @Expose
 	public List<ItemStack> kitItems = new ArrayList<>();
+	@SerializedName(value = "Kit Items Slots (Integer List)") @Expose
+	public List<Integer> kitItemsSlots = new ArrayList<>();
 
 }
