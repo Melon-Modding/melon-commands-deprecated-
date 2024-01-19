@@ -74,6 +74,9 @@ public static String hmsConversion(long millis) {
 
 						int counter = 0;
 						for (ItemStack item : kitdata.kitItems) {
+							if(sender.getPlayer().inventory.getStackInSlot(counter) != null){
+								return true;
+							}
 							sender.getPlayer().inventory.setInventorySlotContents(kitdata.kitItemsSlots.get(counter), item);
 							counter+=1;
 						}
