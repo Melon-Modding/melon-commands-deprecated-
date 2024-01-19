@@ -1,16 +1,22 @@
 package prophetsama.testing;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.data.gamerule.GameRuleBoolean;
 import net.minecraft.core.data.gamerule.GameRules;
+import net.minecraft.core.data.registry.recipe.adapter.ItemStackJsonAdapter;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.Commands;
 import net.minecraft.core.net.command.commands.SpawnCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import prophetsama.testing.commands.Kitten;
 import prophetsama.testing.commands.Spawn;
-import prophetsama.testing.commands.StarterKit;
+import prophetsama.testing.commands.Kit;
 import prophetsama.testing.commands.WhereAmI;
 import turniplabs.halplibe.helper.CommandHelper;
 import turniplabs.halplibe.util.GameStartEntrypoint;
@@ -21,39 +27,19 @@ import turniplabs.halplibe.util.toml.Toml;
 public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
     public static final String MOD_ID = "melonbtacommands";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-
-	public static int[] starterKitIDs;
+	public static final Gson GSON = (new GsonBuilder()).setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().registerTypeAdapter(ItemStack.class, new ItemStackJsonAdapter()).create();
 
 	//
 
-	public static GameRuleBoolean FIRE_TICKS = (GameRuleBoolean) GameRules.register(new GameRuleBoolean("doFireTick", true));
-	public static GameRuleBoolean DAYLIGHT_CYCLE = (GameRuleBoolean) GameRules.register(new GameRuleBoolean("doDaylightCycle", true));
+	public static GameRuleBoolean FIRE_TICKS = GameRules.register(new GameRuleBoolean("doFireTick", true));
+	public static GameRuleBoolean DAYLIGHT_CYCLE = GameRules.register(new GameRuleBoolean("doDaylightCycle", true));
 
 	//
 	public static TomlConfigHandler config;
 
 	public void updateConfig() {
 
-		Toml properties = new Toml("MelonBTA Commands Configuration");
-
-		properties.addEntry("starterKitItems", "List of Item IDs to be added to the Starter Kit." +
-															" Must be a string and comma separated.", String.format("%d,%d,%d",Item.toolCompass.id,Item.toolCalendar.id,Item.toolClock.id));
-		properties.addEntry("starterKitCooldown", "Length of Time between each use of StarterKit in Seconds", "86400");
-
-		config = new TomlConfigHandler(null, MOD_ID, properties);
-
-		String ItemIDs = config.getString("starterKitItems");
-		String[] temp = ItemIDs.split(",");
-
-		starterKitIDs = new int[temp.length];
-
-		for (int i = 0; i < temp.length; i++) {
-			starterKitIDs[i] = Integer.parseInt(temp[i]);
-		}
 	}
-
-	public int[] getStarterKitIDs() { return starterKitIDs.clone(); }
-
 
 	@Override
 	public void onInitialize() {
@@ -74,9 +60,9 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 				break;
 			}
 		}
-		//CommandHelper.createCommand(new Compass());
 		CommandHelper.createCommand(new Spawn());
-		CommandHelper.createCommand(new StarterKit());
+		CommandHelper.createCommand(new Kit());
 		CommandHelper.createCommand(new WhereAmI());
+		CommandHelper.createCommand(new Kitten());
 	}
 }
