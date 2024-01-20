@@ -74,10 +74,7 @@ public static String hmsConversion(long millis) {
 
 						int counter = 0;
 						for (ItemStack item : kitdata.kitItems) {
-							if(sender.getPlayer().inventory.getStackInSlot(counter) != null){
-								return true;
-							}
-							sender.getPlayer().inventory.setInventorySlotContents(kitdata.kitItemsSlots.get(counter), item);
+							sender.getPlayer().inventory.setInventorySlotContents(kitdata.kitItemsSlots.get(counter), new ItemStack(item));
 							counter+=1;
 						}
 
@@ -253,6 +250,18 @@ public static String hmsConversion(long millis) {
 					return true;
 				}
 				if (args[2].equals("row")){
+					int row = sender.getPlayer().inventory.hotbarOffset;
+					for(int i=0;i<9;i++){
+
+						if (sender.getPlayer().inventory.getStackInSlot(i+row) == null) {
+							continue;
+						}
+
+						kitdata.kitItems.add(new ItemStack(sender.getPlayer().inventory.getStackInSlot(i+row)));
+						kitdata.kitItemsSlots.add(listIndexOf(sender.getPlayer().inventory.mainInventory, sender.getPlayer().inventory.getStackInSlot(i+row)));
+						sender.sendMessage("§5Added [" + sender.getPlayer().inventory.getStackInSlot(i+row) + "] to Kit: '" + kit + "'");
+					}
+					ConfigManager.saveAll();
 					return true;
 				}
 				if (args[2].equals("armor")){
@@ -317,7 +326,7 @@ public static String hmsConversion(long millis) {
 			sender.sendMessage("§8> /kit create <kit> [<cooldown>] *[inv]");
 			sender.sendMessage("§8> /kit delete <kit>");
 			sender.sendMessage("§8> /kit setcooldown <kit> <cooldown>");
-			sender.sendMessage("§8> /kit addto <kit> item/*row/*armor *[head/chest/legs/boots]");
+			sender.sendMessage("§8> /kit addto <kit> item/row/*armor *[head/chest/legs/boots]");
 			sender.sendMessage("§8> /kit reset <kit> [<player>]");
 			sender.sendMessage("§8> /kit list [<kit>]");
 			sender.sendMessage("§8> /kit reload");
