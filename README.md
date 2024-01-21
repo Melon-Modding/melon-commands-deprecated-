@@ -10,7 +10,7 @@ Just a small mod I (Prophet/Master) started to accomplish a few things:
 └── prophetsama/testing/
     ├── commands/
     │   ├── Compass.java      Gives player Compass
-    │   ├── Kit.java   Gives player Compass, Clock, Calendar
+    │   ├── Kit.java   Expansive Kit Creation
     │   ├── Kitten.java     50/50 Kitten Spawner lol
     │   ├── Spawn.java     Hardcoded Spawn Command to tp to MelonSurvival Spawn (DO NOT RELEASE)
     │   └── WhereAmI.java     Shows players coords in chat
