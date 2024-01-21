@@ -142,15 +142,46 @@ public static String hmsConversion(long millis) {
 			if (args[0].equals("give")) {
 				if (args.length == 1) {
 					sender.sendMessage("§eFailed to Give Kit (Invalid Syntax)");
-					sender.sendMessage("§8/kit give <kit> §a[<player>]");
+					sender.sendMessage("§8/kit give <kit> [<overwrite?>]");
 					return true;
 				}
 
-				if(ConfigManager.configHashMap.containsKey(args[1])) {
+				if (ConfigManager.configHashMap.containsKey(args[1])) {
 
 					String kit = args[1];
 					KitData kitdata = ConfigManager.getConfig(kit);
 					long kitCooldown = kitdata.kitCooldown * 1000L;
+
+					if (args.length > 2 && args[2].equals("true")) {
+
+						if (System.currentTimeMillis() - cooldowns.getOrDefault(sender.getPlayer().username, 0L) > kitCooldown) {
+							cooldowns.put(sender.getPlayer().username, System.currentTimeMillis());
+
+							int counter = 0;
+
+							for (ItemStack item : kitdata.kitItemStacks) {
+								if (kitdata.kitItemNames.get(counter) != null) {
+									item.setCustomName(kitdata.kitItemNames.get(counter));
+								}
+								sender.getPlayer().inventory.setInventorySlotContents(kitdata.kitArmorSlots.get(counter++), new ItemStack(item));
+							}
+							//give items ^
+
+							counter = 0;
+
+							for (ItemStack armor : kitdata.kitArmorStacks) {
+								if (kitdata.kitArmorNames.get(counter) != null) {
+									armor.setCustomName(kitdata.kitArmorNames.get(counter));
+								}
+								sender.getPlayer().inventory.setInventorySlotContents(kitdata.kitArmorSlots.get(counter++), new ItemStack(armor));
+							}
+							//give armor ^
+
+							ConfigManager.saveAll();
+							sender.sendMessage("§5Given Kit: '" + kit + "' to " + sender.getPlayer().username);
+							return true;
+						}
+					}
 
 					if (System.currentTimeMillis() - cooldowns.getOrDefault(sender.getPlayer().username, 0L) > kitCooldown) {
 						cooldowns.put(sender.getPlayer().username, System.currentTimeMillis());
@@ -159,7 +190,7 @@ public static String hmsConversion(long millis) {
 
 
 						for (ItemStack item : kitdata.kitItemStacks) {
-							if(kitdata.kitItemNames.get(counter) != null){
+							if (kitdata.kitItemNames.get(counter) != null) {
 								item.setCustomName(kitdata.kitItemNames.get(counter));
 							}
 							insertItemAtSlot(kitdata.kitItemSlots.get(counter++), item, sender);
@@ -169,8 +200,13 @@ public static String hmsConversion(long millis) {
 						counter = 0;
 
 						for (ItemStack armor : kitdata.kitArmorStacks) {
-							if(kitdata.kitArmorNames.get(counter) != null){
+							if (kitdata.kitArmorNames.get(counter) != null) {
 								armor.setCustomName(kitdata.kitArmorNames.get(counter));
+							}
+							if (sender.getPlayer().inventory.getStackInSlot(39 - counter) != null) {
+								insertItemAtSlot(0, armor, sender);
+								counter++;
+								continue;
 							}
 							sender.getPlayer().inventory.setInventorySlotContents(kitdata.kitArmorSlots.get(counter++), new ItemStack(armor));
 						}
@@ -190,7 +226,6 @@ public static String hmsConversion(long millis) {
 					}
 				}
 			}
-
 			if (args[0].equals("reset")) {
 				if (args.length == 1) {
 					sender.sendMessage("§eFailed to Reset Kit Cooldown (Invalid Syntax)");
@@ -513,7 +548,7 @@ public static String hmsConversion(long millis) {
 		// Feedback to the player that it executed [ * = To Do ]
 		if(sender.isAdmin()) {
 			sender.sendMessage("§8< Command Syntax >");
-			sender.sendMessage("§8  > /kit give <kit> <overwrite?>");
+			sender.sendMessage("§8  > /kit give <kit> [<overwrite?>]");
 			sender.sendMessage("§8  > /kit create <kit> [<cooldown>]");
 			sender.sendMessage("§8  > /kit delete <kit>");
 			sender.sendMessage("§8  > /kit setcooldown <kit> <cooldown>");
