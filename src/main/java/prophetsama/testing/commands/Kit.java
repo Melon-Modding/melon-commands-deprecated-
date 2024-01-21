@@ -559,8 +559,9 @@ public static String hmsConversion(long millis) {
 			sender.sendMessage("§8  > /kit reload");
 		}
 		else{
-			sender.sendMessage("§8> /kit give <kit> [<overwrite?>]");
-			sender.sendMessage("§8> /kit list [<kit>]");
+			sender.sendMessage("§8< Command Syntax >");
+			sender.sendMessage("§8  > /kit give <kit> [<overwrite?>]");
+			sender.sendMessage("§8  > /kit list [<kit>]");
 		}
 	}
 
