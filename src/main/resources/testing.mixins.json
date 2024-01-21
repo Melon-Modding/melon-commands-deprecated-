@@ -1,18 +1,19 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "prophetsama.testing.mixin",
-    "compatibilityLevel": "JAVA_8",
-    "mixins": [
-      "gamerules.FireTickMixin",
-      "gamerules.WorldClientDaylightCycleMixin",
-      "gamerules.WorldDaylightCycleMixin",
-      "gamerules.WorldServerDaylightCycle"
-    ],
-    "client": [
-    ],
+  "required": true,
+  "minVersion": "0.8",
+  "package": "prophetsama.testing.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "gamerules.FireTickMixin",
+    "gamerules.NetLoginHandlerMixin",
+    "gamerules.WorldClientDaylightCycleMixin",
+    "gamerules.WorldDaylightCycleMixin",
+    "gamerules.WorldServerDaylightCycle"
+  ],
+  "client": [
+  ],
   "server": [],
-    "injectors": {
-        "defaultRequire": 1
+  "injectors": {
+    "defaultRequire": 1
   }
 }
