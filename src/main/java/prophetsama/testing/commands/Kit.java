@@ -489,6 +489,8 @@ public static String hmsConversion(long millis) {
 					if (sender.getPlayer().inventory.getStackInSlot(36) != null) {
 						kitdata.addarmor(sender.getPlayer().inventory.getStackInSlot(36), 36);
 					}
+
+					sender.sendMessage("§5Added All Items and Armor to Kit: " + kit);
 					ConfigManager.saveAll();
 					return true;
 				}
