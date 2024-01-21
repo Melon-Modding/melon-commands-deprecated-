@@ -326,7 +326,7 @@ public static String hmsConversion(long millis) {
 
 				if (args.length == 1) {
 					sender.sendMessage("§eFailed to Create Kit (Invalid Syntax)");
-					sender.sendMessage("§8/kit create <kit> [<cooldown>] [inv]");
+					sender.sendMessage("§8/kit create <kit> [<cooldown>]");
 					return true;
 				}
 
@@ -559,7 +559,7 @@ public static String hmsConversion(long millis) {
 			sender.sendMessage("§8  > /kit reload");
 		}
 		else{
-			sender.sendMessage("§8> /kit give <kit>");
+			sender.sendMessage("§8> /kit give <kit> [<overwrite?>]");
 			sender.sendMessage("§8> /kit list [<kit>]");
 		}
 	}
