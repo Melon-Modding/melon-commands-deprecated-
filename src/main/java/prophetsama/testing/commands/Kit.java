@@ -163,7 +163,7 @@ public static String hmsConversion(long millis) {
 								if (kitdata.kitItemNames.get(counter) != null) {
 									item.setCustomName(kitdata.kitItemNames.get(counter));
 								}
-								sender.getPlayer().inventory.setInventorySlotContents(kitdata.kitArmorSlots.get(counter++), new ItemStack(item));
+								sender.getPlayer().inventory.setInventorySlotContents(kitdata.kitItemSlots.get(counter++), new ItemStack(item));
 							}
 							//give items ^
 

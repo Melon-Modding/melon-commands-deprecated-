@@ -25,6 +25,7 @@ public class KitData {
 	public List<String> kitArmorNames = new ArrayList<>();
 
 	public void additem(ItemStack stack, int position){
+		stack = new ItemStack(stack);
 		if(kitItemSlots.contains(position)){
 			int i = kitItemSlots.indexOf(position);
 			removeitem(i);
@@ -48,6 +49,7 @@ public class KitData {
 
 	}
 	public void addarmor(ItemStack stack, int position){
+		stack = new ItemStack(stack);
 		if(kitArmorSlots.contains(position)){
 			int i = kitArmorSlots.indexOf(position);
 			removearmor(i);
