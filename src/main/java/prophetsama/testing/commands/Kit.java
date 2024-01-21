@@ -291,14 +291,14 @@ public static String hmsConversion(long millis) {
 					KitData kitdata = ConfigManager.getConfig(args[1]);
 
 					sender.sendMessage("§8< Kit: '" + args[1] + "' List >");
-					sender.sendMessage("§8< Cooldown: " + hmsConversion(kitdata.kitCooldown * 1000) + " >");
-					sender.sendMessage("§8< Armor: >");
+					sender.sendMessage("§8  < Cooldown: " + hmsConversion(kitdata.kitCooldown * 1000) + " >");
+					sender.sendMessage("§8  < Armor: >");
 					for (ItemStack armor : kitdata.kitArmorStacks) {
-						sender.sendMessage("§8  > " + armor.getDisplayName());
+						sender.sendMessage("§8    > " + armor.getDisplayName());
 					}
-					sender.sendMessage("§8< Items: >");
+					sender.sendMessage("§8  < Items: >");
 					for (ItemStack item : kitdata.kitItemStacks) {
-						sender.sendMessage("§8  > " + item.getDisplayName() + " * " + item.stackSize);
+						sender.sendMessage("§8    > " + item.getDisplayName() + " * " + item.stackSize);
 					}
 
 
