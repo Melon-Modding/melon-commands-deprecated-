@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 public class ConfigManager {
 	private static final HashMap<String, File> fileHashMap = new HashMap<>();
 	public static final HashMap<String, KitData> configHashMap = new HashMap<>();
-	private static Path filePath = Paths.get(FabricLoader.getInstance().getConfigDirectory() + "/" + MelonBTACommands.MOD_ID);
+	private static final Path filePath = Paths.get(FabricLoader.getInstance().getConfigDirectory() + "/" + MelonBTACommands.MOD_ID);
 
 	/**Prepares the config file for either saving or loading
 	 * @param id Config Config entry identifier
