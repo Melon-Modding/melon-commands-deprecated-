@@ -10,6 +10,7 @@
     "gamerules.WorldDaylightCycleMixin",
     "gamerules.WorldServerDaylightCycle",
     "gamerules.vanish.EntityPlayerMixin",
+    "gamerules.vanish.EntityTrackerMixin",
     "gamerules.vanish.PlayerListMixin"
   ],
   "client": [
