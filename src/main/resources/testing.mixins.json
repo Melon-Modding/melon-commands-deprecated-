@@ -8,7 +8,9 @@
     "gamerules.NetLoginHandlerMixin",
     "gamerules.WorldClientDaylightCycleMixin",
     "gamerules.WorldDaylightCycleMixin",
-    "gamerules.WorldServerDaylightCycle"
+    "gamerules.WorldServerDaylightCycle",
+    "gamerules.vanish.EntityPlayerMixin",
+    "gamerules.vanish.PlayerListMixin"
   ],
   "client": [
   ],

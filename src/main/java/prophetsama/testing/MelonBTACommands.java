@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import prophetsama.testing.commands.Kitten;
 import prophetsama.testing.commands.Spawn;
 import prophetsama.testing.commands.Kit;
+import prophetsama.testing.commands.Vanish;
 import prophetsama.testing.commands.WhereAmI;
 import turniplabs.halplibe.helper.CommandHelper;
 import turniplabs.halplibe.util.GameStartEntrypoint;
@@ -64,5 +65,6 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 		CommandHelper.createCommand(new Kit());
 		CommandHelper.createCommand(new WhereAmI());
 		CommandHelper.createCommand(new Kitten());
+		CommandHelper.createCommand(new Vanish());
 	}
 }
