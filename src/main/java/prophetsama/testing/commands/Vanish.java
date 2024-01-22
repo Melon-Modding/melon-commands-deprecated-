@@ -1,9 +1,11 @@
 package prophetsama.testing.commands;
 
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandError;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
+import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.net.packet.Packet72UpdatePlayerProfile;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 import prophetsama.testing.mixininterfaces.IVanish;
@@ -46,7 +48,13 @@ public class Vanish extends Command {
 		}
 		return false;
 	}
-
+	public static String getVanishName(EntityPlayer player){
+		if (((IVanish)player).melonbta_commands$isVanished()) {
+			return (player.getDisplayName() + TextFormatting.RESET + " (Hidden)");
+		} else {
+			return (player.getDisplayName());
+		}
+	}
 	@Override
 	public boolean opRequired(String[] strings) {
 		return true;
