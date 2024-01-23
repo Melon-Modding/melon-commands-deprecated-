@@ -7,6 +7,8 @@ import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.net.packet.Packet;
+import net.minecraft.core.net.packet.Packet20NamedEntitySpawn;
+import net.minecraft.core.net.packet.Packet29DestroyEntity;
 import net.minecraft.core.net.packet.Packet3Chat;
 import net.minecraft.core.net.packet.Packet72UpdatePlayerProfile;
 import net.minecraft.server.MinecraftServer;
@@ -43,8 +45,10 @@ public class Vanish extends Command {
 				if (originalVanish != vanishState){
 					if (vanishState){
 						sendPacketToAllNonOps(new Packet3Chat(player.getDisplayName() + TextFormatting.YELLOW + " left the game."));
+						sendPacketToAllNonOps(new Packet29DestroyEntity(player.id));
 					} else {
 						sendPacketToAllNonOps(new Packet3Chat(TextFormatting.YELLOW + player.getDisplayName() + TextFormatting.YELLOW + " joined the game."));
+						sendPacketToAllNonOps(new Packet20NamedEntitySpawn(player));
 					}
 				}
 				return true;
