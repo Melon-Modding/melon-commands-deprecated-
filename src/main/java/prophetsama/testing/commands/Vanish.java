@@ -44,9 +44,13 @@ public class Vanish extends Command {
 
 				if (originalVanish != vanishState){
 					if (vanishState){
+						player.mcServer.log(player.getDisplayName() + "set vanished to true");
+						sendPacketToAllOps(new Packet3Chat(TextFormatting.LIGHT_GRAY + String.format("%s has vanished themselves.", player.getDisplayName())));
 						sendPacketToAllNonOps(new Packet3Chat(player.getDisplayName() + TextFormatting.YELLOW + " left the game."));
 						sendPacketToAllNonOps(new Packet29DestroyEntity(player.id));
 					} else {
+						player.mcServer.log(player.getDisplayName() + "set vanished to false");
+						sendPacketToAllOps(new Packet3Chat(TextFormatting.LIGHT_GRAY + String.format("%s has revealed themselves.", player.getDisplayName())));
 						sendPacketToAllNonOps(new Packet3Chat(TextFormatting.YELLOW + player.getDisplayName() + TextFormatting.YELLOW + " joined the game."));
 						sendPacketToAllNonOps(new Packet20NamedEntitySpawn(player));
 					}
