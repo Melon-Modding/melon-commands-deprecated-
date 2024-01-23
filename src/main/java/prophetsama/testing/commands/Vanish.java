@@ -6,7 +6,10 @@ import net.minecraft.core.net.command.CommandError;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 import net.minecraft.core.net.command.TextFormatting;
+import net.minecraft.core.net.packet.Packet;
+import net.minecraft.core.net.packet.Packet3Chat;
 import net.minecraft.core.net.packet.Packet72UpdatePlayerProfile;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 import prophetsama.testing.mixininterfaces.IVanish;
 
@@ -36,11 +39,14 @@ public class Vanish extends Command {
 				((IVanish)sender.getPlayer()).melonbta_commands$setVanished(vanishState);
 				sender.sendMessage(String.format("Vanish for player %s set to %s", sender.getName(), vanishState));
 				player.mcServer.playerList.sendPacketToAllPlayers(new Packet72UpdatePlayerProfile(player.username, player.nickname, player.score, player.chatColor, !vanishState, player.isOperator()));
-//				if (originalVanish != vanishState){
-//					if (vanishState){
-//						player.mcServer.playerList.sendPacketToAllPlayers(
-//					}
-//				}
+
+				if (originalVanish != vanishState){
+					if (vanishState){
+						sendPacketToAllNonOps(new Packet3Chat(player.getDisplayName() + TextFormatting.YELLOW + " left the game."));
+					} else {
+						sendPacketToAllNonOps(new Packet3Chat(TextFormatting.YELLOW + player.getDisplayName() + TextFormatting.YELLOW + " joined the game."));
+					}
+				}
 				return true;
 			} catch (Exception e){
 				sender.sendMessage(Arrays.toString(e.getStackTrace()));
@@ -63,5 +69,19 @@ public class Vanish extends Command {
 	@Override
 	public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
 		commandSender.sendMessage("/vanish <true/false>");
+	}
+	public static void sendPacketToAllOps(Packet packet){
+		MinecraftServer server = MinecraftServer.getInstance();
+		for (EntityPlayerMP entityplayermp : server.playerList.playerEntities) {
+			if (!entityplayermp.isOperator()) continue;
+			entityplayermp.playerNetServerHandler.sendPacket(packet);
+		}
+	}
+	public static void sendPacketToAllNonOps(Packet packet){
+		MinecraftServer server = MinecraftServer.getInstance();
+		for (EntityPlayerMP entityplayermp : server.playerList.playerEntities) {
+			if (entityplayermp.isOperator()) continue;
+			entityplayermp.playerNetServerHandler.sendPacket(packet);
+		}
 	}
 }

@@ -35,10 +35,7 @@ public class PlayerListMixin {
 			scores.add(String.valueOf(player.getScore()));
 		}
 		Packet packet = new Packet138PlayerList(players.size(), players.toArray(new String[0]), scores.toArray(new String[0]));
-        for (EntityPlayerMP entityplayermp : server.playerList.playerEntities) {
-            if (!entityplayermp.isOperator()) continue;
-            entityplayermp.playerNetServerHandler.sendPacket(packet);
-        }
+        Vanish.sendPacketToAllOps(packet);
 	}
 	@Unique
 	private static void sentToAllNonOps(){
@@ -53,9 +50,6 @@ public class PlayerListMixin {
 			scores.add(String.valueOf(player.getScore()));
 		}
 		Packet packet = new Packet138PlayerList(players.size(), players.toArray(new String[0]), scores.toArray(new String[0]));
-        for (EntityPlayerMP entityplayermp : server.playerList.playerEntities) {
-            if (entityplayermp.isOperator()) continue;
-            entityplayermp.playerNetServerHandler.sendPacket(packet);
-        }
+        Vanish.sendPacketToAllNonOps(packet);
 	}
 }
