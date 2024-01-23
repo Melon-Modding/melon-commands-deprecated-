@@ -96,7 +96,6 @@ public abstract class EntityTrackerMixin {
 		if (trackedEntity instanceof EntityPlayerMP){
 			EntityPlayerMP client = (EntityPlayerMP)trackedEntity;
 			if (((IVanish)client).melonbta_commands$isVanished()) {
-				ci.cancel();
 				List<EntityPlayer> ops = new ArrayList<>();
 				for (EntityPlayer player : players){
 					if (player instanceof EntityPlayerMP && ((EntityPlayerMP) player).isOperator()){
@@ -104,7 +103,7 @@ public abstract class EntityTrackerMixin {
 					}
 				}
 				updateOps(ops);
-//				sendPacketToTrackedPlayers(new Packet34EntityTeleport(this.trackedEntity.id, 0, -1000, 0, (byte)0, (byte)0));
+				ci.cancel();
 			}
 		}
 	}
