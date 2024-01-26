@@ -1,5 +1,6 @@
 package prophetsama.testing.commands;
 
+import com.google.common.hash.HashingInputStream;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.Command;
@@ -18,7 +19,7 @@ import java.util.regex.Pattern;
 public class Kit extends Command {
 	private final static String COMMAND = "kit";
 	private final static String NAME = "Kit";
-	public static HashMap<String, Long> cooldowns = new HashMap<>();
+	public static HashMap<String, HashMap<String, Long>> cooldowns = new HashMap<>();
 
 private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
@@ -149,12 +150,12 @@ public static String hmsConversion(long millis) {
 
 					String kit = args[1];
 					KitData kitdata = ConfigManager.getConfig(kit);
-					long kitCooldown = kitdata.kitCooldown * 1000L;
+					long cooldown = kitdata.kitCooldown * 1000L;
 
 					if (args.length > 2 && args[2].equals("true")) {
 
-						if (System.currentTimeMillis() - cooldowns.getOrDefault(sender.getPlayer().username, 0L) > kitCooldown) {
-							cooldowns.put(sender.getPlayer().username, System.currentTimeMillis());
+						if (System.currentTimeMillis() - cooldowns.getOrDefault(kit, new HashMap<>()).getOrDefault(sender.getPlayer().username, 0L) > cooldown) {
+							cooldowns.get(kit).put(sender.getPlayer().username, System.currentTimeMillis());
 
 							int counter = 0;
 
@@ -182,8 +183,9 @@ public static String hmsConversion(long millis) {
 						}
 					}
 
-					if (System.currentTimeMillis() - cooldowns.getOrDefault(sender.getPlayer().username, 0L) > kitCooldown) {
-						cooldowns.put(sender.getPlayer().username, System.currentTimeMillis());
+					if (System.currentTimeMillis() - cooldowns.getOrDefault(kit, new HashMap<>()).getOrDefault(sender.getPlayer().username, 0L) > cooldown) {
+						cooldowns.putIfAbsent(kit, new HashMap<>());
+						cooldowns.getOrDefault(kit, new HashMap<>()).put(sender.getPlayer().username, System.currentTimeMillis());
 
 						int counter = 0;
 
@@ -220,7 +222,7 @@ public static String hmsConversion(long millis) {
 						sender.sendMessage("");
 					} else {
 						sender.sendMessage("§1You've already used this kit... time left until next kit: ");
-						sender.sendMessage("§1" + hmsConversion(kitCooldown - (System.currentTimeMillis() - cooldowns.getOrDefault(sender.getPlayer().username, 0L))));
+						sender.sendMessage("§1" + hmsConversion(cooldown - (System.currentTimeMillis() - cooldowns.getOrDefault(kit, new HashMap<>()).getOrDefault(sender.getPlayer().username, 0L))));
 						return true;
 					}
 				}
@@ -235,7 +237,7 @@ public static String hmsConversion(long millis) {
 					String kit = args[1];
 					String player = args[2];
 					if (handler.playerExists(player)) {
-						cooldowns.put(handler.getPlayer(player).username, 0L);
+						cooldowns.getOrDefault(kit, new HashMap<>()).put(handler.getPlayer(player).username, 0L);
 						sender.sendMessage("§5" + handler.getPlayer(player).username + "'s Kit: '" + kit + "' Cooldown Reset");
 						return true;
 					} else {
@@ -246,7 +248,7 @@ public static String hmsConversion(long millis) {
 				}
 				String kit = args[1];
 				if (ConfigManager.configHashMap.containsKey(kit)) {
-					cooldowns.put(sender.getPlayer().username, 0L);
+					cooldowns.getOrDefault(kit, new HashMap<>()).put(sender.getPlayer().username, 0L);
 					sender.sendMessage("§5Kit: '" + kit + "' Cooldown Reset!");
 					return true;
 				}
