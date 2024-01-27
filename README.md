@@ -18,8 +18,20 @@ Just a small mod I (Prophet/Master) started to accomplish a few things:
     │   ├── ConfigManager.java     Creates Config Files
     │   └── KitData.java     File Layout for Kit Files
     └── mixin/
-        └── gamerules/
-            └── MelonBTACommands.java     Injects the new commands
+    │   └── gamerules/
+    │   │   └── FireTickMixin
+    │   │   └── NetLoginHandlerMixin
+    │   │   └── WorldClientMixin
+    │   │   └── WorldDaylightCycleMixin
+    │   │   └── WorldServerDaylightCycle
+    │   └── vanish/
+    │       └── EntityPlayerMixin
+    │       └── EntityTrackerMixin
+    │       └── OtherPlayerMixin
+    │       └── PlayerListMixin
+    └── mixininterfaces/
+    │   └── IVanish
+    └── MelonBTACommands.java     Injects the new commands
 ```
 
 Shoutout to these communities and people 
