@@ -13,24 +13,25 @@ Just a small mod I (Prophet/Master) started to accomplish a few things:
     │   ├── Kit.java     Expansive Kit Creation
     │   ├── Kitten.java     50/50 Kitten Spawner lol
     │   ├── Spawn.java     Hardcoded Spawn Command to tp to MelonSurvival Spawn (DO NOT RELEASE)
+    │   ├── Vanish.java     Vanishes Opped Players from sight and mind
     │   └── WhereAmI.java     Shows players coords in chat
     └── config/
     │   ├── ConfigManager.java     Creates Config Files
     │   └── KitData.java     File Layout for Kit Files
     └── mixin/
     │   └── gamerules/
-    │   │   └── FireTickMixin
-    │   │   └── NetLoginHandlerMixin
-    │   │   └── WorldClientMixin
-    │   │   └── WorldDaylightCycleMixin
-    │   │   └── WorldServerDaylightCycle
+    │   │   └── FireTickMixin.java
+    │   │   └── NetLoginHandlerMixin.java
+    │   │   └── WorldClientMixin.java
+    │   │   └── WorldDaylightCycleMixin.java
+    │   │   └── WorldServerDaylightCycle.java
     │   └── vanish/
-    │       └── EntityPlayerMixin
-    │       └── EntityTrackerMixin
-    │       └── OtherPlayerMixin
-    │       └── PlayerListMixin
+    │       └── EntityPlayerMixin.java
+    │       └── EntityTrackerMixin.java
+    │       └── OtherPlayerMixin.java
+    │       └── PlayerListMixin.java
     └── mixininterfaces/
-    │   └── IVanish
+    │   └── IVanish.java
     └── MelonBTACommands.java     Injects the new commands
 ```
 
