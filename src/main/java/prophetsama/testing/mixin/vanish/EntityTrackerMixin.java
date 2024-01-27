@@ -1,4 +1,4 @@
-package prophetsama.testing.mixin.gamerules.vanish;
+package prophetsama.testing.mixin.vanish;
 
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;

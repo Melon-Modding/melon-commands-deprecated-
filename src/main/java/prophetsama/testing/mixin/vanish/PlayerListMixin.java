@@ -1,6 +1,5 @@
-package prophetsama.testing.mixin.gamerules.vanish;
+package prophetsama.testing.mixin.vanish;
 
-import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.net.packet.Packet138PlayerList;
 import net.minecraft.server.MinecraftServer;
