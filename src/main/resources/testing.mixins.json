@@ -4,6 +4,7 @@
   "package": "prophetsama.testing.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "gamerules.EntityLightningBoltMixin",
     "gamerules.FireTickMixin",
     "gamerules.NetLoginHandlerMixin",
     "gamerules.WorldClientDaylightCycleMixin",

@@ -14,11 +14,7 @@ import net.minecraft.core.net.command.Commands;
 import net.minecraft.core.net.command.commands.SpawnCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import prophetsama.testing.commands.Kitten;
-import prophetsama.testing.commands.Spawn;
-import prophetsama.testing.commands.Kit;
-import prophetsama.testing.commands.Vanish;
-import prophetsama.testing.commands.WhereAmI;
+import prophetsama.testing.commands.*;
 import turniplabs.halplibe.helper.CommandHelper;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.TomlConfigHandler;
@@ -66,5 +62,7 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 		CommandHelper.createCommand(new WhereAmI());
 		CommandHelper.createCommand(new Kitten());
 		CommandHelper.createCommand(new Vanish());
+		// For summoning dummy lightningBolt
+		// CommandHelper.createCommand(new Smite());
 	}
 }
