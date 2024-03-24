@@ -29,7 +29,6 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 	//
 
 	public static GameRuleBoolean FIRE_TICKS = GameRules.register(new GameRuleBoolean("doFireTick", true));
-	public static GameRuleBoolean DAYLIGHT_CYCLE = GameRules.register(new GameRuleBoolean("doDaylightCycle", true));
 
 	//
 	public static TomlConfigHandler config;
