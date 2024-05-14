@@ -2,7 +2,7 @@ package prophetsama.testing.mixin.vanish;
 
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
-import net.minecraft.core.entity.EntityTrackerEntry;
+import net.minecraft.server.entity.EntityTrackerEntry;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.net.packet.Packet;
 import net.minecraft.core.net.packet.Packet28EntityVelocity;
