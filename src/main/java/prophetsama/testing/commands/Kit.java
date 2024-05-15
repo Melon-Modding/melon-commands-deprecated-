@@ -1,6 +1,5 @@
 package prophetsama.testing.commands;
 
-import com.google.common.hash.HashingInputStream;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.Command;
@@ -9,6 +8,7 @@ import net.minecraft.core.net.command.CommandSender;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import prophetsama.testing.config.ConfigManager;
 import prophetsama.testing.config.KitData;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,6 +55,7 @@ public static String hmsConversion(long millis) {
 		* 2 = merge and split
 		* 3 = cannot go into slot
 		*/
+
 		for(int i=0; i < 36; i++){
 			ItemStack stackInSlot = inventory.getStackInSlot(i);
 

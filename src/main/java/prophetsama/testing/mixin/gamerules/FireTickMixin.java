@@ -16,13 +16,13 @@ public abstract class FireTickMixin {
 
 	@Inject(at = @At("HEAD"), cancellable = true, method = "setBurnResult(Lnet/minecraft/core/world/World;III)V")
 	private void checkFireTickRule(World world, int x, int y, int z, CallbackInfo ci) {
-		if(!(Boolean)world.getGameRule(MelonBTACommands.FIRE_TICKS)) {
+		if(!(Boolean)world.getGameRuleValue(MelonBTACommands.FIRE_TICKS)) {
 			ci.cancel();
 		}
 	}
 	@Inject(at = @At("HEAD"), cancellable = true, method = "canNeighborCatchFire(Lnet/minecraft/core/world/World;III)Z")
 	private void checkFireTickRuleForSpread(World world, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
-		if(!(Boolean)world.getGameRule(MelonBTACommands.FIRE_TICKS)) {
+		if(!(Boolean)world.getGameRuleValue(MelonBTACommands.FIRE_TICKS)) {
 			cir.setReturnValue(false);
 		}
 	}

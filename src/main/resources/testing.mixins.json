@@ -6,11 +6,7 @@
   "mixins": [
     "gamerules.EntityLightningBoltMixin",
     "gamerules.FireTickMixin",
-    "gamerules.NetLoginHandlerMixin",
-    "vanish.EntityPlayerMixin",
-    "vanish.EntityTrackerMixin",
-    "vanish.OtherPlayerListMixin",
-    "vanish.PlayerListMixin"
+    "gamerules.NetLoginHandlerMixin"
   ],
   "client": [
   ],

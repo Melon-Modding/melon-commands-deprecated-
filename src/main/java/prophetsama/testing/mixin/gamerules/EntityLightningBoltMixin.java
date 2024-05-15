@@ -17,11 +17,11 @@ public abstract class EntityLightningBoltMixin extends Entity{
 
 	@Redirect(method = "spawnInit()V",at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;areBlocksLoaded(IIII)Z"))
 	private boolean removeFire(World instance, int x, int y, int z, int range) {
-		return world.getGameRule(MelonBTACommands.FIRE_TICKS) && world.areBlocksLoaded(x, y, z, range);
+		return world.getGameRuleValue(MelonBTACommands.FIRE_TICKS) && world.areBlocksLoaded(x, y, z, range);
 	}
 
 	@Redirect(method = "tick",at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;areBlocksLoaded(IIII)Z"))
 	private boolean fixTick(World instance, int x, int y, int z, int range) {
-		return world.getGameRule(MelonBTACommands.FIRE_TICKS) && world.areBlocksLoaded(x, y, z, range);
+		return world.getGameRuleValue(MelonBTACommands.FIRE_TICKS) && world.areBlocksLoaded(x, y, z, range);
 	}
 }

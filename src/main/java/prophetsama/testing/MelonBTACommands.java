@@ -21,6 +21,19 @@ import turniplabs.halplibe.util.TomlConfigHandler;
 import turniplabs.halplibe.util.toml.Toml;
 
 
+    /*
+
+    "vanish.EntityPlayerMixin",
+	"vanish.EntityTrackerMixin",
+	"vanish.OtherPlayerListMixin",
+	"vanish.PlayerListMixin"
+
+	Mixins to add back to mixins json when vanish works
+
+	*/
+
+
+
 public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
     public static final String MOD_ID = "melonbtacommands";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -56,7 +69,6 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 				break;
 			}
 		}
-		CommandHelper.createCommand(new Spawn());
 		CommandHelper.createCommand(new Kit());
 		CommandHelper.createCommand(new WhereAmI());
 		CommandHelper.createCommand(new Kitten());

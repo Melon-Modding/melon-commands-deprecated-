@@ -1,3 +1,4 @@
+/*
 package prophetsama.testing.mixin.vanish;
 
 import net.minecraft.core.entity.Entity;
@@ -183,3 +184,4 @@ public abstract class EntityTrackerMixin {
 		}
 	}
 }
+*/
