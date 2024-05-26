@@ -20,19 +20,14 @@ public class ConfigManager {
 	private static final HashMap<String, File> fileHashMap = new HashMap<>();
 	public static final HashMap<String, KitData> configHashMap = new HashMap<>();
 	private static final Path filePath = Paths.get(FabricLoader.getInstance().getConfigDirectory() + "/" + MelonBTACommands.MOD_ID);
-
+	static{new File("./config/melonbtacommands").mkdirs();}
+	static{new File("./config/melonbtacommands/telechests").mkdirs();}
 	/**Prepares the config file for either saving or loading
 	 * @param id Config Config entry identifier
 	 */
 	private static void prepareKitFile(String id) {
 		if (fileHashMap.get(id) != null) {
 			return;
-		}
-
-		try {
-			Files.createDirectories(filePath);
-		} catch (IOException e) {
-			System.err.println("Failed to create directory!" + e.getMessage());
 		}
 		fileHashMap.put(id, new File(filePath.toFile(), id + ".json"));
 	}
