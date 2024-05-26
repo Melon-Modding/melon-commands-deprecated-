@@ -59,7 +59,6 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 		CommandHelper.createCommand(new Kit());
 		CommandHelper.createCommand(new WhereAmI());
 		CommandHelper.createCommand(new Kitten());
-		CommandHelper.createCommand(new Vanish());
 		// For summoning dummy lightningBolt
 		// CommandHelper.createCommand(new Smite());
 	}
