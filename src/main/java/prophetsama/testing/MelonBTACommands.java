@@ -14,7 +14,10 @@ import net.minecraft.core.net.command.Commands;
 import net.minecraft.core.net.command.commands.SpawnCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.useless.serverlibe.ServerLibe;
+import org.useless.serverlibe.api.ServerLibeEntrypoint;
 import prophetsama.testing.commands.*;
+import prophetsama.testing.listeners.TeleChestListener;
 import turniplabs.halplibe.helper.CommandHelper;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.TomlConfigHandler;
@@ -34,7 +37,7 @@ import turniplabs.halplibe.util.toml.Toml;
 
 
 
-public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
+public class MelonBTACommands implements ServerLibeEntrypoint, ModInitializer, GameStartEntrypoint{
     public static final String MOD_ID = "melonbtacommands";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final Gson GSON = (new GsonBuilder()).setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().registerTypeAdapter(ItemStack.class, new ItemStackJsonAdapter()).create();
@@ -49,11 +52,15 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 	public void updateConfig() {
 
 	}
+	@Override
+	public void serverlibeInit() {
+		ServerLibe.registerListener(new TeleChestListener());
+	}
 
 	@Override
 	public void onInitialize() {
 		updateConfig();
-		LOGGER.info("Testing Grounds initialized.");
+		LOGGER.info("MelonCommands initialized.");
 	}
 
 	@Override
@@ -73,6 +80,7 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 		CommandHelper.createCommand(new WhereAmI());
 		CommandHelper.createCommand(new Kitten());
 		CommandHelper.createCommand(new Vanish());
+		CommandHelper.createCommand(new TeleChest());
 		// For summoning dummy lightningBolt
 		// CommandHelper.createCommand(new Smite());
 	}
