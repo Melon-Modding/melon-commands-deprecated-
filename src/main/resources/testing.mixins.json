@@ -6,7 +6,8 @@
   "mixins": [
     "gamerules.EntityLightningBoltMixin",
     "gamerules.FireTickMixin",
-    "gamerules.NetLoginHandlerMixin"
+    "gamerules.NetLoginHandlerMixin",
+    "MinecraftServerMixin"
   ],
   "client": [
   ],

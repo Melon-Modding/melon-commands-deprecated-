@@ -18,7 +18,7 @@ import prophetsama.testing.commands.*;
 import turniplabs.halplibe.helper.CommandHelper;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.TomlConfigHandler;
-import turniplabs.halplibe.util.toml.Toml;
+
 
 
 public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
@@ -61,5 +61,8 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 		CommandHelper.createCommand(new Kitten());
 		// For summoning dummy lightningBolt
 		// CommandHelper.createCommand(new Smite());
+		CommandHelper.createCommand(new TPA());
+		CommandHelper.createCommand(new TPAccept());
+		CommandHelper.createCommand(new TPADeny());
 	}
 }
