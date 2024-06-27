@@ -1,10 +1,9 @@
-package prophetsama.testing.config;
+package meloncommands.config;
 
 
 import net.fabricmc.loader.api.FabricLoader;
 import org.jetbrains.annotations.ApiStatus;
-import prophetsama.testing.MelonBTACommands;
-import turniplabs.halplibe.HalpLibe;
+import meloncommands.MelonCommands;
 import turniplabs.halplibe.helper.RecipeBuilder;
 
 import java.io.*;
@@ -19,9 +18,10 @@ import java.util.stream.Stream;
 public class ConfigManager {
 	private static final HashMap<String, File> fileHashMap = new HashMap<>();
 	public static final HashMap<String, KitData> configHashMap = new HashMap<>();
-	private static final Path filePath = Paths.get(FabricLoader.getInstance().getConfigDirectory() + "/" + MelonBTACommands.MOD_ID);
-	static{new File("./config/melonbtacommands").mkdirs();}
-	static{new File("./config/melonbtacommands/telechests").mkdirs();}
+	private static final Path filePath = Paths.get(FabricLoader.getInstance().getConfigDirectory() + "/" + MelonCommands.MOD_ID);
+	static{new File("./config/meloncommands").mkdirs();}
+	static{new File("./config/meloncommands/kits").mkdirs();}
+	static{new File("./config/meloncommands/telechests").mkdirs();}
 	/**Prepares the config file for either saving or loading
 	 * @param id Config Config entry identifier
 	 */
@@ -40,11 +40,11 @@ public class ConfigManager {
 			}
 			if (fileHashMap.get(id).exists()) {
 				BufferedReader br = new BufferedReader(new FileReader(fileHashMap.get(id)));
-				configHashMap.put(id, MelonBTACommands.GSON.fromJson(br, KitData.class));
+				configHashMap.put(id, MelonCommands.GSON.fromJson(br, KitData.class));
 				save(id);
 			}
 		} catch (FileNotFoundException e) {
-			System.err.println("Couldn't load MelonBTACommands configuration file; reverting to defaults");
+			System.err.println("Couldn't load MelonCommands configuration file; reverting to defaults");
 			e.printStackTrace();
 		}
 	}
@@ -67,12 +67,12 @@ public class ConfigManager {
 		RecipeBuilder.isExporting = true;
 		prepareKitFile(id);
 
-		String jsonString = MelonBTACommands.GSON.toJson(configHashMap.get(id));
+		String jsonString = MelonCommands.GSON.toJson(configHashMap.get(id));
 
 		try (FileWriter fileWriter = new FileWriter(fileHashMap.get(id))) {
 			fileWriter.write(jsonString);
 		} catch (IOException e) {
-			System.err.println("Couldn't save MelonBTACommands configuration file");
+			System.err.println("Couldn't save MelonCommands configuration file");
 			e.printStackTrace();
 		}
 		RecipeBuilder.isExporting = false;

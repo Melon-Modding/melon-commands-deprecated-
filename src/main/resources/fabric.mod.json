@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "melonbtacommands",
+  "id": "meloncommands",
   "version": "${version}",
 
-	"name": "Testing Commands",
-	"description": "Attempting to figure out how commands work.",
+	"name": "MelonCommands",
+	"description": "Command Utility for BTA! Servers",
 	"authors": [
 		"Prophet_Sama",
 		"WatermelonMojito",
@@ -21,17 +21,17 @@
   "environment": "*",
   "entrypoints": {
 		"beforeGameStart": [
-			"prophetsama.testing.MelonBTACommands"
+			"meloncommands.MelonCommands"
 		],
     "afterGameStart": [
-			"prophetsama.testing.MelonBTACommands"
+			"meloncommands.MelonCommands"
     ],
 		"main": [
-			"prophetsama.testing.MelonBTACommands"
+			"meloncommands.MelonCommands"
 		]
 	},
   "mixins": [
-		"testing.mixins.json"
+		"meloncommands.mixins.json"
   ],
 
   "depends": {

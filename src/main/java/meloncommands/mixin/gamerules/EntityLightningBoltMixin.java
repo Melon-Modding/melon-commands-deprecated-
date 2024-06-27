@@ -1,13 +1,12 @@
-package prophetsama.testing.mixin.gamerules;
+package meloncommands.mixin.gamerules;
 
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLightningBolt;
-import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import prophetsama.testing.MelonBTACommands;
+import meloncommands.MelonCommands;
 
 @Mixin(value = EntityLightningBolt.class, remap = false)
 public abstract class EntityLightningBoltMixin extends Entity{
@@ -17,11 +16,11 @@ public abstract class EntityLightningBoltMixin extends Entity{
 
 	@Redirect(method = "spawnInit()V",at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;areBlocksLoaded(IIII)Z"))
 	private boolean removeFire(World instance, int x, int y, int z, int range) {
-		return world.getGameRuleValue(MelonBTACommands.FIRE_TICKS) && world.areBlocksLoaded(x, y, z, range);
+		return world.getGameRuleValue(MelonCommands.FIRE_TICKS) && world.areBlocksLoaded(x, y, z, range);
 	}
 
 	@Redirect(method = "tick",at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/World;areBlocksLoaded(IIII)Z"))
 	private boolean fixTick(World instance, int x, int y, int z, int range) {
-		return world.getGameRuleValue(MelonBTACommands.FIRE_TICKS) && world.areBlocksLoaded(x, y, z, range);
+		return world.getGameRuleValue(MelonCommands.FIRE_TICKS) && world.areBlocksLoaded(x, y, z, range);
 	}
 }

@@ -1,4 +1,4 @@
-package prophetsama.testing.mixin.gamerules;
+package meloncommands.mixin.gamerules;
 
 import net.minecraft.core.net.NetworkManager;
 import net.minecraft.core.net.packet.Packet1Login;

@@ -1,28 +1,27 @@
-package prophetsama.testing;
+package meloncommands;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import meloncommands.commands.*;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.data.gamerule.GameRuleBoolean;
 import net.minecraft.core.data.gamerule.GameRules;
 import net.minecraft.core.data.registry.recipe.adapter.ItemStackJsonAdapter;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.Commands;
 import net.minecraft.core.net.command.commands.SpawnCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import prophetsama.testing.commands.*;
 import turniplabs.halplibe.helper.CommandHelper;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.TomlConfigHandler;
 
 
 
-public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
-    public static final String MOD_ID = "melonbtacommands";
+public class MelonCommands implements ModInitializer, GameStartEntrypoint{
+    public static final String MOD_ID = "meloncommands";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final Gson GSON = (new GsonBuilder()).setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().registerTypeAdapter(ItemStack.class, new ItemStackJsonAdapter()).create();
 
@@ -40,7 +39,7 @@ public class MelonBTACommands implements ModInitializer, GameStartEntrypoint{
 	@Override
 	public void onInitialize() {
 		updateConfig();
-		LOGGER.info("Testing Grounds initialized.");
+		LOGGER.info("MelonCommands initialized");
 	}
 
 	@Override

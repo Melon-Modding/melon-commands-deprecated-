@@ -1,4 +1,4 @@
-package prophetsama.testing;
+package meloncommands;
 
 import net.minecraft.core.net.command.TextFormatting;
 import net.minecraft.core.net.packet.Packet3Chat;

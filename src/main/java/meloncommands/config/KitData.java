@@ -1,4 +1,4 @@
-package prophetsama.testing.config;
+package meloncommands.config;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

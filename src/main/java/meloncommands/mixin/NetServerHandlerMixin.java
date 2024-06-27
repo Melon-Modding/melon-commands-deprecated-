@@ -1,4 +1,4 @@
-package prophetsama.testing.mixin;
+package meloncommands.mixin;
 
 import net.minecraft.core.net.packet.Packet3Chat;
 import net.minecraft.server.net.handler.NetServerHandler;

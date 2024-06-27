@@ -1,4 +1,4 @@
-package prophetsama.testing.commands;
+package meloncommands.commands;
 
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
@@ -24,7 +24,7 @@ public class WhereAmI extends Command {
 		EntityPlayerMP player = (EntityPlayerMP) commandSender.getPlayer();
 
 		// Get the players coords
-		// casted to int to shorten them
+		// cast to int to shorten them
 		int px = (int) player.x;
 		int py = (int) player.y;
 		int pz = (int) player.z;
