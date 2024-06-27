@@ -1,13 +1,13 @@
-package prophetsama.testing.commands;
+package meloncommands.commands;
 
+import meloncommands.config.ConfigManager;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 import net.minecraft.core.player.inventory.InventoryPlayer;
-import prophetsama.testing.config.ConfigManager;
-import prophetsama.testing.config.KitData;
+import meloncommands.config.KitData;
 
 import java.time.Duration;
 import java.util.ArrayList;

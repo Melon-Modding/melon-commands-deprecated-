@@ -1,4 +1,4 @@
-package prophetsama.testing.commands;
+package meloncommands.commands;
 
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;

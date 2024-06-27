@@ -1,13 +1,14 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "prophetsama.testing.mixin",
+  "package": "meloncommands.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "gamerules.EntityLightningBoltMixin",
     "gamerules.FireTickMixin",
     "gamerules.NetLoginHandlerMixin",
-    "MinecraftServerMixin"
+    "MinecraftServerMixin",
+    "NetServerHandlerMixin"
   ],
   "client": [
   ],

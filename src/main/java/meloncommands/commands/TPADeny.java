@@ -1,21 +1,21 @@
-package prophetsama.testing.commands;
+package meloncommands.commands;
 
+import meloncommands.TpaManager;
 import net.minecraft.core.net.command.*;
 import net.minecraft.server.entity.player.EntityPlayerMP;
-import prophetsama.testing.TpaManager;
 
-public class TPAccept extends Command {
-	private final static String COMMAND = "tpaccept";
+public class TPADeny extends Command {
+	private final static String COMMAND = "tpadeny";
 
-	public TPAccept() {
+	public TPADeny() {
 		super(COMMAND);
 	}
 
 	@Override
 	public boolean execute(CommandHandler handler, CommandSender sender, String[] args) {
 		if (!sender.isPlayer()) throw new CommandError("Must be used by a player!");
-		if (!TpaManager.accept((EntityPlayerMP) sender.getPlayer())) {
-			sender.sendMessage(TextFormatting.RED + "Failed to tpa, are you sure there is a pending request?");
+		if (!TpaManager.deny((EntityPlayerMP) sender.getPlayer())) {
+			sender.sendMessage(TextFormatting.RED + "No pending request found to deny");
 		}
 		return true;
 	}
@@ -27,6 +27,6 @@ public class TPAccept extends Command {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
-		commandSender.sendMessage("/tpaccept");
+		commandSender.sendMessage("/tpadeny");
 	}
 }

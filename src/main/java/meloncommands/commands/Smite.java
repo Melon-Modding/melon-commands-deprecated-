@@ -1,4 +1,4 @@
-package prophetsama.testing.commands;
+package meloncommands.commands;
 
 import net.minecraft.core.entity.EntityLightningBolt;
 import net.minecraft.core.net.command.Command;
