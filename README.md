@@ -1,4 +1,4 @@
-# MelonBTA Command Utilities
+# Melon Command Utilities
 
 Just a small mod I (Prophet/Master) started to accomplish a few things:
 
