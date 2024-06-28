@@ -280,6 +280,13 @@ public class Role extends Command {
 
 	private boolean displayBorderCustom(CommandSender sender, String[] args){
 		if(args.length == 5){
+			ConfigManager.loadAllRoles();
+			RoleData role = getRoleFromArg(args[1]);
+			role.isDisplayBracketBorder = false;
+			role.isDisplayCaretBorder = false;
+			role.isDisplayCurlyBracketBorder = false;
+			role.isDisplayCustomBorder = true;
+			ConfigManager.saveAllRoles();
 			sender.sendMessage("§5Set Border to ?Custom? for role " + getRoleFromArg(args[1]).displayName);
 			return true;
 		}
@@ -473,7 +480,6 @@ public class Role extends Command {
 			case "revoke" :
 				return revoke(sender, args);
 		}
-
 		return false;
 	}
 
