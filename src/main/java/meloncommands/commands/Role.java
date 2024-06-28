@@ -40,6 +40,29 @@ public class Role extends Command {
 			return true;
 		}
 
+		if (args[0].equals("delete")) {
+
+			if (args.length == 1) {
+				sender.sendMessage("§eFailed to Delete " + NAME + " (Invalid Syntax)");
+				sender.sendMessage("§8/" + COMMAND + " delete <" + COMMAND + ">");
+				return true;
+			}
+
+			String role = args[1];
+
+			switch (ConfigManager.removeRoleConfig(role)) {
+				case 0:
+					sender.sendMessage("§1Deleted " + NAME + ": '" + role + "'");
+					return true;
+				case 1:
+					sender.sendMessage("§eFailed to Delete " + NAME + ": '" + role + "' (" + NAME + " Doesn't Exist)");
+					return true;
+				case 2:
+					sender.sendMessage("§eFailed to Delete " + NAME + ": '" + role + "' (IO Error)");
+					return true;
+			}
+		}
+
 		return false;
 	}
 

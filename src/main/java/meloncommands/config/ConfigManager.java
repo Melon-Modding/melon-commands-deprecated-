@@ -23,8 +23,8 @@ public class ConfigManager {
 	public static final HashMap<String, KitData> kitHashMap = new HashMap<>();
 	public static final HashMap<String, RoleData> roleHashMap = new HashMap<>();
 
-	private static final Path kitFilePath = Paths.get(FabricLoader.getInstance().getConfigDirectory() + "/" + MelonCommands.MOD_ID + "/kits");
-	private static final Path roleFilePath = Paths.get(FabricLoader.getInstance().getConfigDirectory() + "/" + MelonCommands.MOD_ID + "/roles");
+	private static final Path roleFilePath = Paths.get(FabricLoader.getInstance().getConfigDir() + "/" + MelonCommands.MOD_ID + "/roles");
+	private static final Path kitFilePath = Paths.get(FabricLoader.getInstance().getConfigDir() + "/" + MelonCommands.MOD_ID + "/kits");
 
 	static{new File("./config/meloncommands").mkdirs();}
 	static{new File("./config/meloncommands/kits").mkdirs();}
@@ -197,6 +197,20 @@ public class ConfigManager {
 
 	public static int removeKitConfig(String id){
 		int error = 2;
+		if (!kitFileHashMap.containsKey(id)) {
+			error = 1;
+			return error;
+		}
+		if(kitFileHashMap.get(id).delete()){
+			error = 0;
+		}
+		kitFileHashMap.remove(id);
+		kitHashMap.remove(id);
+		return error;
+	}
+
+	public static int removeRoleConfig(String id){
+		int error = 2;
 		if (!roleFileHashMap.containsKey(id)) {
 			error = 1;
 			return error;
@@ -208,6 +222,8 @@ public class ConfigManager {
 		roleHashMap.remove(id);
 		return error;
 	}
+
+
 
 
 	static{
