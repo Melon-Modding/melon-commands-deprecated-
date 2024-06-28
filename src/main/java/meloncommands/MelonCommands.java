@@ -4,6 +4,8 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import meloncommands.commands.*;
+import meloncommands.commands.Kit;
+import meloncommands.commands.Role;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.data.gamerule.GameRuleBoolean;
 import net.minecraft.core.data.gamerule.GameRules;

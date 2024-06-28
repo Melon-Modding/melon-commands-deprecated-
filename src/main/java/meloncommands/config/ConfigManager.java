@@ -71,12 +71,12 @@ public class ConfigManager {
 
 		try {
 			if (!roleFileHashMap.get(id).exists()) {
-				saveKit(id);
+				saveRole(id);
 			}
 			if (roleFileHashMap.get(id).exists()) {
 				BufferedReader br = new BufferedReader(new FileReader(roleFileHashMap.get(id)));
 				roleHashMap.put(id, MelonCommands.GSON.fromJson(br, RoleData.class));
-				saveKit(id);
+				saveRole(id);
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("Couldn't load Role: [" + id + "]'s configuration file; reverting to defaults");

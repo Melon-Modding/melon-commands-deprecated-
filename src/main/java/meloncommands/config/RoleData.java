@@ -11,9 +11,6 @@ public class RoleData {
 
 	//Role Display Formatting
 
-	@SerializedName(value = "Role Display: ")
-	@Expose public String roleDisplay = "" + TextFormatting.RESET;
-
 		//Display General
 
 		@SerializedName(value = "Role Display Color:")
@@ -50,9 +47,6 @@ public class RoleData {
 
 	//Role Text Formatting
 
-	@SerializedName(value = "Role Text Formatting:")
-	@Expose public String roleTextFormatting = "";
-
 		@SerializedName(value = "Role Text Color:")
 		@Expose public String roleTextColor = "";
 
@@ -67,7 +61,7 @@ public class RoleData {
 
 	//Players Granted Role
 
-	@SerializedName(value = "Players Granted Role:")
-	@Expose public List<String> playersGrantedRole = new ArrayList<>();
+		@SerializedName(value = "Players Granted Role:")
+		@Expose public List<String> playersGrantedRole = new ArrayList<>();
 
 }

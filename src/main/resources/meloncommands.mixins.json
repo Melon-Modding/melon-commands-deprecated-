@@ -4,11 +4,12 @@
   "package": "meloncommands.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "MinecraftServerMixin",
+    "NetServerHandlerMixin",
+    "WorldMixin",
     "gamerules.EntityLightningBoltMixin",
     "gamerules.FireTickMixin",
-    "gamerules.NetLoginHandlerMixin",
-    "MinecraftServerMixin",
-    "NetServerHandlerMixin"
+    "gamerules.NetLoginHandlerMixin"
   ],
   "client": [
   ],
