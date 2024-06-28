@@ -20,12 +20,35 @@ import turniplabs.halplibe.helper.CommandHelper;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.TomlConfigHandler;
 
+import java.util.HashMap;
 
 
 public class MelonCommands implements ModInitializer, GameStartEntrypoint{
     public static final String MOD_ID = "meloncommands";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final Gson GSON = (new GsonBuilder()).setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().registerTypeAdapter(ItemStack.class, new ItemStackJsonAdapter()).create();
+	public static final HashMap<String, String> colorMap = new HashMap<>();
+	static{
+		colorMap.put("purple", "§a");
+		colorMap.put("blue", "§b");
+		colorMap.put("brown", "§c");
+		colorMap.put("green", "§d");
+		colorMap.put("red", "§e");
+		colorMap.put("black", "§f");
+		colorMap.put("orange", "§1");
+		colorMap.put("magenta", "§2");
+		colorMap.put("light blue", "§3");
+		colorMap.put("yellow", "§4");
+		colorMap.put("lime", "§5");
+		colorMap.put("pink", "§6");
+		colorMap.put("grey", "§7");
+		colorMap.put("gray", "§7");
+		colorMap.put("light grey", "§8");
+		colorMap.put("light gray", "§8");
+		colorMap.put("cyan", "§9");
+		colorMap.put("white", "§0");
+	}
+
 
 	//
 

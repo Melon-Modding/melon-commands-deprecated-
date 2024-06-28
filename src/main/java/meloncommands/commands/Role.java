@@ -6,6 +6,8 @@ import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 
+import java.util.Objects;
+
 public class Role extends Command {
 
 	private final static String COMMAND = "role";
@@ -98,13 +100,135 @@ public class Role extends Command {
     }
 
 	private boolean display(CommandHandler handler, CommandSender sender, String[] args){
+
+		if(args.length == 3){
+			sender.sendMessage("§eFailed to Edit Role Display (Invalid Syntax)");
+			sender.sendMessage("§8/role edit <role> display color/underline/bold/italics/border");
+			return true;
+		}
+
+		switch(args[3]){
+			case "color":
+				return displayColor(handler, sender, args);
+			case "underline":
+				return displayUnderline(handler, sender, args);
+			case "bold":
+				return displayBold(handler, sender, args);
+			case "italics":
+				return displayItalics(handler, sender, args);
+			case "border":
+				return displayBorder(handler, sender, args);
+		}
+
 		sender.sendMessage("§eFailed to Edit Role Display (Invalid Syntax)");
 		sender.sendMessage("§8/role edit <role> display color/underline/bold/italics/border");
 		return true;
 	}
 
+	private boolean displayColor(CommandHandler handler, CommandSender sender, String[] args){
+		ConfigManager.loadAllRoles();
+		getRoleFromArg(args[1]).displayColor = args[4];
+		ConfigManager.saveAllRoles();
+		sender.sendMessage("§5Edited Display Color for Role: '" + getRoleFromArg(args[1]) + "' to: '" + args[4] + "'");
+		return true;
+	}
+
+	private boolean displayUnderline(CommandHandler handler, CommandSender sender, String[] args){
+		if(args[4].equalsIgnoreCase("true")){
+			ConfigManager.loadAllRoles();
+			getRoleFromArg(args[1]).isDisplayUnderlined = true;
+			ConfigManager.saveAllRoles();
+			sender.sendMessage("§5Edited Display Underline for Role: '" + getRoleFromArg(args[1]) + "' to: '" + args[4] + "'");
+		} else if(args[4].equalsIgnoreCase("false")){
+			ConfigManager.loadAllRoles();
+			getRoleFromArg(args[1]).isDisplayUnderlined = false;
+			ConfigManager.saveAllRoles();
+			sender.sendMessage("§5Edited Display Underline for Role: '" + getRoleFromArg(args[1]) + "' to: '" + args[4] + "'");
+		}
+
+		sender.sendMessage("§eFailed to Edit Display Underline (Invalid Boolean)");
+		sender.sendMessage("§8(Tip: Use true/false)");
+		return true;
+	}
+
+	private boolean displayBold(CommandHandler handler, CommandSender sender, String[] args){
+		if(args[4].equalsIgnoreCase("true")){
+			ConfigManager.loadAllRoles();
+			getRoleFromArg(args[1]).isDisplayBold = true;
+			ConfigManager.saveAllRoles();
+			sender.sendMessage("§5Edited Display Bold for Role: '" + getRoleFromArg(args[1]) + "' to: '" + args[4] + "'");
+		} else if(args[4].equalsIgnoreCase("false")){
+			ConfigManager.loadAllRoles();
+			getRoleFromArg(args[1]).isDisplayBold = false;
+			ConfigManager.saveAllRoles();
+			sender.sendMessage("§5Edited Display Bold for Role: '" + getRoleFromArg(args[1]) + "' to: '" + args[4] + "'");
+		}
+
+		sender.sendMessage("§eFailed to Edit Display Bold (Invalid Boolean)");
+		sender.sendMessage("§8(Tip: Use true/false)");
+		return true;
+	}
+
+	private boolean displayItalics(CommandHandler handler, CommandSender sender, String[] args){
+		if(args[4].equalsIgnoreCase("true")){
+			ConfigManager.loadAllRoles();
+			getRoleFromArg(args[1]).isDisplayItalics = true;
+			ConfigManager.saveAllRoles();
+			sender.sendMessage("§5Edited Display Italics for Role: '" + getRoleFromArg(args[1]) + "' to: '" + args[4] + "'");
+		} else if(args[4].equalsIgnoreCase("false")){
+			ConfigManager.loadAllRoles();
+			getRoleFromArg(args[1]).isDisplayItalics = false;
+			ConfigManager.saveAllRoles();
+			sender.sendMessage("§5Edited Display Italics for Role: '" + getRoleFromArg(args[1]) + "' to: '" + args[4] + "'");
+		}
+
+		sender.sendMessage("§eFailed to Edit Display Italics (Invalid Boolean)");
+		sender.sendMessage("§8(Tip: Use true/false)");
+		return true;
+	}
+
+	private boolean displayBorder(CommandHandler handler, CommandSender sender, String[] args){
+		return true;
+	}
+
 	private boolean text(CommandHandler handler, CommandSender sender, String[] args){
-		return false;
+
+		if(args.length == 3){
+			sender.sendMessage("§eFailed to Edit Role Text (Invalid Syntax)");
+			sender.sendMessage("§8/role edit <role> text color/underline/bold/italics");
+			return true;
+		}
+
+		switch(args[3]){
+			case "color":
+				return textColor(handler, sender, args);
+			case "underline":
+				return textUnderline(handler, sender, args);
+			case "bold":
+				return textBold(handler, sender, args);
+			case "italics":
+				return textItalics(handler, sender, args);
+		}
+
+		sender.sendMessage("§eFailed to Edit Role Text (Invalid Syntax)");
+		sender.sendMessage("§8/role edit <role> text color/underline/bold/italics");
+		return true;
+	}
+
+	private boolean textColor(CommandHandler handler, CommandSender sender, String[] args){
+		return true;
+	}
+
+	private boolean textUnderline(CommandHandler handler, CommandSender sender, String[] args){
+		return true;
+	}
+
+	private boolean textBold(CommandHandler handler, CommandSender sender, String[] args){
+		return true;
+	}
+
+	private boolean textItalics(CommandHandler handler, CommandSender sender, String[] args){
+		return true;
 	}
 
 	private boolean grant(CommandHandler handler, CommandSender sender, String[] args){
@@ -126,7 +250,7 @@ public class Role extends Command {
 
 		if(args.length == 2 && !roleData.playersGrantedRole.contains(sender.getPlayer().username)){
 			ConfigManager.loadAllRoles();
-			roleData.playersGrantedRole.add(sender.getPlayer().username);
+			getRoleFromArg(args[1]).playersGrantedRole.add(sender.getPlayer().username);
 			ConfigManager.saveAllRoles();
 			sender.sendMessage("§5Granted Role: '" + args[1] + "' to player: §0" + sender.getPlayer().username);
 			return true;
