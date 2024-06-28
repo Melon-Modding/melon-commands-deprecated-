@@ -37,21 +37,30 @@ public class MelonCommands implements ModInitializer, GameStartEntrypoint{
 		colorMap.put("black", "§f");
 		colorMap.put("orange", "§1");
 		colorMap.put("magenta", "§2");
-		colorMap.put("light blue", "§3");
+		colorMap.put("light_blue", "§3");
 		colorMap.put("yellow", "§4");
 		colorMap.put("lime", "§5");
 		colorMap.put("pink", "§6");
 		colorMap.put("grey", "§7");
 		colorMap.put("gray", "§7");
-		colorMap.put("light grey", "§8");
-		colorMap.put("light gray", "§8");
+		colorMap.put("light_grey", "§8");
+		colorMap.put("light_gray", "§8");
 		colorMap.put("cyan", "§9");
 		colorMap.put("white", "§0");
 	}
 
 
-	//
+	public static String getCodeOrHex(String string){
+		string = string.toLowerCase();
+		if (MelonCommands.colorMap.containsKey(string)){
+			string = MelonCommands.colorMap.get(string);
+		} else{
+			string = "§<" + string + ">";
+		}
+		return string;
+	}
 
+	//
 	public static GameRuleBoolean FIRE_TICKS = GameRules.register(new GameRuleBoolean("doFireTick", true));
 
 	//

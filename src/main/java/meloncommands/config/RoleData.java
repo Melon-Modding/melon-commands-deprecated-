@@ -45,10 +45,10 @@ public class RoleData {
 		@Expose public boolean isDisplayCustomBorder = false;
 
 			@SerializedName(value = "Border Prefix:")
-			@Expose public String borderPrefix = "";
+			@Expose public String borderPrefix = "[";
 
 			@SerializedName(value = "Border Suffix:")
-			@Expose public String borderSuffix = "";
+			@Expose public String borderSuffix = "]";
 
 	//Role Text Formatting
 

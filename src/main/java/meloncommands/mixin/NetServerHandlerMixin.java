@@ -31,24 +31,16 @@ public class NetServerHandlerMixin {
 	public void handleChat(Packet3Chat packet, CallbackInfo ci, @Local String message) {
 
 		StringBuilder allRoleDisplays = new StringBuilder();
+
 		for(RoleData role : ConfigManager.roleHashMap.values()){
 			if(role.playersGrantedRole.contains(this.playerEntity.username)){
 
 				String roleDisplay = "";
 
-				String borderColor = role.displayBorderColor.toLowerCase();
-				if (MelonCommands.colorMap.containsKey(role.displayBorderColor.toLowerCase())){
-					borderColor = MelonCommands.colorMap.get(role.displayBorderColor.toLowerCase());
-				} else{
-					borderColor = "§<" + borderColor + ">" + role.displayName;
-				}
+				String borderColor = MelonCommands.getCodeOrHex(role.displayBorderColor);
+				String roleColor = MelonCommands.getCodeOrHex(role.displayColor);
 
-				String color = role.displayColor.toLowerCase();
-				if (MelonCommands.colorMap.containsKey(role.displayColor.toLowerCase())){
-					roleDisplay = MelonCommands.colorMap.get(role.displayColor.toLowerCase()) + role.displayName;
-				} else{
-					roleDisplay = "§<" + color + ">" + role.displayName;
-				}
+				roleDisplay = roleColor + role.displayName;
 
 				if(role.isDisplayUnderlined){
 					roleDisplay = TextFormatting.UNDERLINE + roleDisplay;
@@ -73,11 +65,10 @@ public class NetServerHandlerMixin {
 				roleDisplay = TextFormatting.RESET + roleDisplay + TextFormatting.RESET;
 				allRoleDisplays.append(roleDisplay);
 			}
-
-			message = allRoleDisplays + "<" + playerEntity.getDisplayName() + TextFormatting.RESET + "> " + TextFormatting.WHITE + message;
-			logger.info(message);
-			this.mcServer.playerList.sendEncryptedChatToAllPlayers(message);
-			ci.cancel();
 		}
+		message = allRoleDisplays + "<" + playerEntity.getDisplayName() + TextFormatting.RESET + "> " + TextFormatting.WHITE + message;
+		logger.info(message);
+		this.mcServer.playerList.sendEncryptedChatToAllPlayers(message);
+		ci.cancel();
 	}
 }
