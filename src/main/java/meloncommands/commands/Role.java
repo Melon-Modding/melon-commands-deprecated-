@@ -66,6 +66,44 @@ public class Role extends Command {
 	}
 
 	private boolean edit(CommandHandler handler, CommandSender sender, String[] args){
+
+		if(args.length == 1){
+			sender.sendMessage("§eFailed to Edit Role (Invalid Syntax)");
+			sender.sendMessage("§8/role edit <role> <mode>");
+			return true;
+		}
+
+		if(!ConfigManager.roleHashMap.containsKey(args[1])){
+			sender.sendMessage("§eFailed to Edit Role (Invalid Role)");
+			sender.sendMessage("§8/role edit <role> <mode>");
+			return true;
+		}
+
+		if(args.length == 2){
+			sender.sendMessage("§eFailed to Edit Role (Invalid Syntax)");
+			sender.sendMessage("§8/role edit <role> <mode>");
+			return true;
+		}
+
+		switch(args[2]){
+			case "display":
+				return display(handler, sender, args);
+			case "text":
+				return text(handler, sender, args);
+		}
+
+        sender.sendMessage("§eFailed to Edit Role (Invalid Mode or Syntax)");
+        sender.sendMessage("§8/role edit <role> <mode>");
+        return true;
+    }
+
+	private boolean display(CommandHandler handler, CommandSender sender, String[] args){
+		sender.sendMessage("§eFailed to Edit Role Display (Invalid Syntax)");
+		sender.sendMessage("§8/role edit <role> display color/underline/bold/italics/border");
+		return true;
+	}
+
+	private boolean text(CommandHandler handler, CommandSender sender, String[] args){
 		return false;
 	}
 
@@ -76,6 +114,7 @@ public class Role extends Command {
 			sender.sendMessage("§8/role grant <role> [<username>]");
 			return true;
 		}
+
 
 		if(!ConfigManager.roleHashMap.containsKey(args[1])){
 			sender.sendMessage("§eFailed to Grant Role (Role doesn't exist!)");
@@ -178,24 +217,26 @@ public class Role extends Command {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler handler, CommandSender sender) {
+		sender.sendMessage("");
 		sender.sendMessage("§8< Command Syntax >");
 		sender.sendMessage("§8  > /role create <role>");
 		sender.sendMessage("§8  > /role delete <role>");
 		sender.sendMessage("§8  > /role reload");
 		sender.sendMessage("§8  > /role edit <role> <mode>");
-		sender.sendMessage("§8    > display");
+		sender.sendMessage("§8    > display <style>");
 		sender.sendMessage("§8      > color <color/hex>");
 		sender.sendMessage("§8      > underline true/false");
 		sender.sendMessage("§8      > bold true/false");
 		sender.sendMessage("§8      > italics true/false");
-		sender.sendMessage("§8      > border bracket/caret/curly");
-		sender.sendMessage("§8      > border custom prefix/suffix <border>");
-		sender.sendMessage("§8    > text");
-		sender.sendMessage("§8      > color <color>");
+		sender.sendMessage("§8      > border <style>");
+		sender.sendMessage("§8        > bracket/caret/curly");
+		sender.sendMessage("§8        > custom prefix/suffix <custom pre/suffix>");
+		sender.sendMessage("§8    > text <style>");
+		sender.sendMessage("§8      > color <color/hex>");
 		sender.sendMessage("§8      > underline true/false");
 		sender.sendMessage("§8      > bold true/false");
 		sender.sendMessage("§8      > italics true/false");
-		sender.sendMessage("§8  > /role grant <role> <username>");
-		sender.sendMessage("§8  > /role revoke <role> <username>");
+		sender.sendMessage("§8  > /role grant <role> [<username>]");
+		sender.sendMessage("§8  > /role revoke <role> [<username>]");
 	}
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Mixin(value = World.class, remap = false)
-public class WorldMixin {
+public class VanillaFix_WorldMixin {
 	@Shadow
 	public List<EntityPlayer> players;
 
