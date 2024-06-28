@@ -130,7 +130,7 @@ public class Role extends Command {
 		ConfigManager.loadAllRoles();
 		getRoleFromArg(args[1]).displayName = args[4];
 		ConfigManager.saveAllRoles();
-		sender.sendMessage("§5Set Display Name for Role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
+		sender.sendMessage("§5Set Display Name for role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
 		return true;
 	}
 
@@ -138,7 +138,7 @@ public class Role extends Command {
 		ConfigManager.loadAllRoles();
 		getRoleFromArg(args[1]).displayColor = args[4];
 		ConfigManager.saveAllRoles();
-		sender.sendMessage("§5Set Display Color for Role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
+		sender.sendMessage("§5Set Display Color for role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
 		return true;
 	}
 
@@ -147,13 +147,13 @@ public class Role extends Command {
 			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).isDisplayUnderlined = true;
 			ConfigManager.saveAllRoles();
-			sender.sendMessage("§5Set Display Underline for Role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
+			sender.sendMessage("§5Set Display Underline for role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
 			return true;
 		} else if(args[4].equalsIgnoreCase("false")){
 			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).isDisplayUnderlined = false;
 			ConfigManager.saveAllRoles();
-			sender.sendMessage("§5Set Display Underline for Role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
+			sender.sendMessage("§5Set Display Underline for role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
 			return true;
 		}
 
@@ -167,13 +167,13 @@ public class Role extends Command {
 			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).isDisplayBold = true;
 			ConfigManager.saveAllRoles();
-			sender.sendMessage("§5Set Display Bold for Role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
+			sender.sendMessage("§5Set Display Bold for role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
 			return true;
 		} else if(args[4].equalsIgnoreCase("false")){
 			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).isDisplayBold = false;
 			ConfigManager.saveAllRoles();
-			sender.sendMessage("§5Set Display Bold for Role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
+			sender.sendMessage("§5Set Display Bold for role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
 			return true;
 		}
 
@@ -187,12 +187,12 @@ public class Role extends Command {
 			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).isDisplayItalics = true;
 			ConfigManager.saveAllRoles();
-			sender.sendMessage("§5Edited Display Italics for Role: " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
+			sender.sendMessage("§5Set Display Italics for role: " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
 		} else if(args[4].equalsIgnoreCase("false")){
 			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).isDisplayItalics = false;
 			ConfigManager.saveAllRoles();
-			sender.sendMessage("§5Edited Display Italics for Role: " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
+			sender.sendMessage("§5Set Display Italics for role: " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
 		}
 
 		sender.sendMessage("§eFailed to Edit Display Italics (Invalid Boolean)");
@@ -241,7 +241,7 @@ public class Role extends Command {
 		ConfigManager.loadAllRoles();
 		getRoleFromArg(args[1]).displayBorderColor = args[5];
 		ConfigManager.saveAllRoles();
-		sender.sendMessage("§5Edited Display Border Color for Role: " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
+		sender.sendMessage("§5Set Border Color for role " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
 		return true;
 	}
 
@@ -252,7 +252,7 @@ public class Role extends Command {
 		getRoleFromArg(args[1]).isDisplayCurlyBracketBorder = false;
 		getRoleFromArg(args[1]).isDisplayCustomBorder = false;
 		ConfigManager.saveAllRoles();
-		sender.sendMessage("§5Set Display to Bracket Border for Role: " + getRoleFromArg(args[1]).displayName);
+		sender.sendMessage("§5Set Border to [Bracket] for role " + getRoleFromArg(args[1]).displayName);
 		return true;
 	}
 
@@ -263,7 +263,7 @@ public class Role extends Command {
 		getRoleFromArg(args[1]).isDisplayCurlyBracketBorder = false;
 		getRoleFromArg(args[1]).isDisplayCustomBorder = false;
 		ConfigManager.saveAllRoles();
-		sender.sendMessage("§5Set Display to Caret Border for Role: " + getRoleFromArg(args[1]).displayName);
+		sender.sendMessage("§5Set Border to <Caret> for role " + getRoleFromArg(args[1]).displayName);
 		return true;
 	}
 
@@ -274,22 +274,15 @@ public class Role extends Command {
 		getRoleFromArg(args[1]).isDisplayCurlyBracketBorder = true;
 		getRoleFromArg(args[1]).isDisplayCustomBorder = false;
 		ConfigManager.saveAllRoles();
-		sender.sendMessage("§5Set Display to Curly Bracket Border for Role: " + getRoleFromArg(args[1]).displayName);
+		sender.sendMessage("§5Set Border to {Curly} for role " + getRoleFromArg(args[1]).displayName);
 		return true;
 	}
 
 	private boolean displayBorderCustom(CommandSender sender, String[] args){
 		if(args.length == 5){
-			sender.sendMessage("§eFailed to Edit Custom Display Border (Invalid Syntax)");
-			sender.sendMessage("§8  > /role edit <role> <mode>");
-			sender.sendMessage("§8    > display <style>");
-			sender.sendMessage("§8      > border <style>");
-			sender.sendMessage("§8        > custom <affix>");
-			sender.sendMessage("§8          > prefix/suffix <custom affix>");
+			sender.sendMessage("§5Set Border to ?Custom? for role " + getRoleFromArg(args[1]).displayName);
 			return true;
 		}
-
-		RoleData role = getRoleFromArg(args[1]);
 		if(args[5].equals("suffix")){
 			if(args.length == 6){
 				sender.sendMessage("§eFailed to Edit Custom Suffix (Invalid Syntax)");
@@ -301,6 +294,7 @@ public class Role extends Command {
 				return true;
 			}
 			ConfigManager.loadAllRoles();
+			RoleData role = getRoleFromArg(args[1]);
 			role.isDisplayBracketBorder = false;
 			role.isDisplayCaretBorder = false;
 			role.isDisplayCurlyBracketBorder = false;
@@ -320,6 +314,7 @@ public class Role extends Command {
 				return true;
 			}
 			ConfigManager.loadAllRoles();
+			RoleData role = getRoleFromArg(args[1]);
 			role.isDisplayBracketBorder = false;
 			role.isDisplayCaretBorder = false;
 			role.isDisplayCurlyBracketBorder = false;
@@ -330,7 +325,12 @@ public class Role extends Command {
 			return true;
 		}
 
-		ConfigManager.saveAllRoles();
+		sender.sendMessage("§eFailed to Edit Custom Display Border (Invalid Syntax)");
+		sender.sendMessage("§8  > /role edit <role> <mode>");
+		sender.sendMessage("§8    > display <style>");
+		sender.sendMessage("§8      > border <style>");
+		sender.sendMessage("§8        > custom <affix>");
+		sender.sendMessage("§8          > prefix/suffix <custom affix>");
 		return true;
 	}
 
@@ -423,7 +423,7 @@ public class Role extends Command {
 		}
 
 		if(!ConfigManager.roleHashMap.containsKey(args[1])){
-			sender.sendMessage("§eFailed to Revoke Role (Role doesnt exist!)");
+			sender.sendMessage("§eFailed to Revoke Role (Role doesn't exist!)");
 			sender.sendMessage("§8/role revoke <role> [<username>]");
 			return true;
 		}
