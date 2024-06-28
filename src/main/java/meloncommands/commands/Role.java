@@ -142,7 +142,17 @@ public class Role extends Command {
 		return true;
 	}
 
+	@SuppressWarnings("SameReturnValue")
 	private boolean displayUnderline(CommandSender sender, String[] args){
+
+		if(args.length == 4){
+			sender.sendMessage("§eFailed to Edit Display Underline (Invalid Syntax)");
+			sender.sendMessage("§8  > /role edit <role> <mode>");
+			sender.sendMessage("§8    > display <style>");
+			sender.sendMessage("§8      > underline true/false");
+			return true;
+		}
+
 		if(args[4].equalsIgnoreCase("true")){
 			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).isDisplayUnderlined = true;
@@ -162,7 +172,17 @@ public class Role extends Command {
 		return true;
 	}
 
+	@SuppressWarnings("SameReturnValue")
 	private boolean displayBold(CommandSender sender, String[] args){
+
+		if(args.length == 4){
+			sender.sendMessage("§eFailed to Edit Display Bold (Invalid Syntax)");
+			sender.sendMessage("§8  > /role edit <role> <mode>");
+			sender.sendMessage("§8    > display <style>");
+			sender.sendMessage("§8      > bold true/false");
+			return true;
+		}
+
 		if(args[4].equalsIgnoreCase("true")){
 			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).isDisplayBold = true;
@@ -182,17 +202,29 @@ public class Role extends Command {
 		return true;
 	}
 
+	@SuppressWarnings("SameReturnValue")
 	private boolean displayItalics(CommandSender sender, String[] args){
+
+		if(args.length == 4){
+			sender.sendMessage("§eFailed to Edit Display Italics (Invalid Syntax)");
+			sender.sendMessage("§8  > /role edit <role> <mode>");
+			sender.sendMessage("§8    > display <style>");
+			sender.sendMessage("§8      > italics true/false");
+			return true;
+		}
+
 		if(args[4].equalsIgnoreCase("true")){
 			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).isDisplayItalics = true;
 			ConfigManager.saveAllRoles();
 			sender.sendMessage("§5Set Display Italics for role: " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
+			return true;
 		} else if(args[4].equalsIgnoreCase("false")){
 			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).isDisplayItalics = false;
 			ConfigManager.saveAllRoles();
 			sender.sendMessage("§5Set Display Italics for role: " + getRoleFromArg(args[1]).displayName + " to: " + args[4]);
+			return true;
 		}
 
 		sender.sendMessage("§eFailed to Edit Display Italics (Invalid Boolean)");
@@ -278,6 +310,7 @@ public class Role extends Command {
 		return true;
 	}
 
+	@SuppressWarnings("SameReturnValue")
 	private boolean displayBorderCustom(CommandSender sender, String[] args){
 		if(args.length == 5){
 			ConfigManager.loadAllRoles();
