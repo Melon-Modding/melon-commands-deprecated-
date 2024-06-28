@@ -146,10 +146,10 @@ public static String hmsConversion(long millis) {
                     return true;
                 }
 
-                if (ConfigManager.configHashMap.containsKey(args[1])) {
+                if (ConfigManager.kitHashMap.containsKey(args[1])) {
 
                     String kit = args[1];
-                    KitData kitdata = ConfigManager.getConfig(kit);
+                    KitData kitdata = ConfigManager.getKitConfig(kit);
                     long cooldown = kitdata.kitCooldown * 1000L;
 
                     if (args.length > 2 && args[2].equals("true")) {
@@ -177,7 +177,7 @@ public static String hmsConversion(long millis) {
                             }
                             //give armor ^
 
-                            ConfigManager.saveAll();
+                            ConfigManager.saveAllKits();
                             sender.sendMessage("§5Given Kit: '" + kit + "' to " + sender.getPlayer().username);
                             return true;
                         }
@@ -213,11 +213,11 @@ public static String hmsConversion(long millis) {
                         }
                         //give armor ^
 
-                        ConfigManager.saveAll();
+                        ConfigManager.saveAllKits();
                         sender.sendMessage("§5Given Kit: '" + kit + "' to " + sender.getPlayer().username);
                         return true;
                     }
-                    if (!ConfigManager.configHashMap.containsKey(kit)) {
+                    if (!ConfigManager.kitHashMap.containsKey(kit)) {
                         sender.sendMessage("§eFailed to Give Kit: '" + kit + "' to " + sender.getPlayer().username + " (Kit Doesn't Exist)");
                         sender.sendMessage("");
                     } else {
@@ -247,7 +247,7 @@ public static String hmsConversion(long millis) {
                     }
                 }
                 String kit = args[1];
-                if (ConfigManager.configHashMap.containsKey(kit)) {
+                if (ConfigManager.kitHashMap.containsKey(kit)) {
                     cooldowns.getOrDefault(kit, new HashMap<>()).put(sender.getPlayer().username, 0L);
                     sender.sendMessage("§5Kit: '" + kit + "' Cooldown Reset!");
                     return true;
@@ -258,8 +258,8 @@ public static String hmsConversion(long millis) {
 
 
             if (args[0].equals("reload")) {
-                ConfigManager.loadAll();
-                sender.sendMessage("§5Reloaded " + ConfigManager.configHashMap.size() + " Kit(s)!");
+                ConfigManager.loadAllKits();
+                sender.sendMessage("§5Reloaded " + ConfigManager.kitHashMap.size() + " Kit(s)!");
                 return true;
             }
 
@@ -274,10 +274,10 @@ public static String hmsConversion(long millis) {
 
                 String kit = args[1];
 
-                if (args.length > 2 && ConfigManager.configHashMap.containsKey(kit) && isNumeric(args[2])) {
-                    KitData kitdata = ConfigManager.getConfig(kit);
+                if (args.length > 2 && ConfigManager.kitHashMap.containsKey(kit) && isNumeric(args[2])) {
+                    KitData kitdata = ConfigManager.getKitConfig(kit);
                     kitdata.kitCooldown = Long.parseLong(args[2]);
-                    ConfigManager.saveAll();
+                    ConfigManager.saveAllKits();
                     sender.sendMessage("§5Set Cooldown for Kit: '" + kit + "' to: " + args[2]);
                     return true;
                 }
@@ -288,9 +288,9 @@ public static String hmsConversion(long millis) {
 
             if (args[0].equals("list")) {
 
-                if (args.length > 1 && ConfigManager.configHashMap.containsKey(args[1])) {
+                if (args.length > 1 && ConfigManager.kitHashMap.containsKey(args[1])) {
 
-                    KitData kitdata = ConfigManager.getConfig(args[1]);
+                    KitData kitdata = ConfigManager.getKitConfig(args[1]);
 
                     sender.sendMessage("§8< Kit: '" + args[1] + "' List >");
                     sender.sendMessage("§8  < Cooldown: " + hmsConversion(kitdata.kitCooldown * 1000) + " >");
@@ -308,7 +308,7 @@ public static String hmsConversion(long millis) {
 
                 }
 
-                if (ConfigManager.configHashMap.isEmpty()) {
+                if (ConfigManager.kitHashMap.isEmpty()) {
                     sender.sendMessage("§8< Kits: >");
                     sender.sendMessage("§8  -No Kits Created-");
                     return true;
@@ -316,7 +316,7 @@ public static String hmsConversion(long millis) {
 
                 sender.sendMessage("§8< Kits: >");
 
-                for (String kit : ConfigManager.configHashMap.keySet()) {
+                for (String kit : ConfigManager.kitHashMap.keySet()) {
                     sender.sendMessage("§8  > " + kit);
                 }
 
@@ -333,7 +333,7 @@ public static String hmsConversion(long millis) {
 
                 String kit = args[1];
 
-                if (ConfigManager.configHashMap.containsKey(kit)) {
+                if (ConfigManager.kitHashMap.containsKey(kit)) {
                     sender.sendMessage("§eFailed to Create Kit: '" + kit + "' (Kit Already Exists)");
                     return true;
                 }
@@ -345,15 +345,15 @@ public static String hmsConversion(long millis) {
                         return true;
                     }
 
-                    KitData kitdata = ConfigManager.getConfig(kit);
+                    KitData kitdata = ConfigManager.getKitConfig(kit);
                     kitdata.kitCooldown = Long.parseLong(args[2]);
-                    ConfigManager.saveAll();
+                    ConfigManager.saveAllKits();
                     sender.sendMessage("§5Created Kit: '" + kit + "' with Cooldown: " + args[2]);
                     return true;
                 }
 
-                ConfigManager.getConfig(kit);
-                ConfigManager.saveAll();
+                ConfigManager.getKitConfig(kit);
+                ConfigManager.saveAllKits();
                 sender.sendMessage("§5Created Kit: '" + kit + "' with Cooldown: 0");
                 return true;
             }
@@ -362,20 +362,20 @@ public static String hmsConversion(long millis) {
 
                 if (args.length == 1) {
                     sender.sendMessage("§eFailed to Add To Kit (Invalid Syntax)");
-                    sender.sendMessage("§8/kit addto <kit> item/row/all/armor ->");
-                    sender.sendMessage("§8(if armor) [head/chest/legs/boots/all]");
+                    sender.sendMessage("§8/kit addto <kit> item/row/all/armor -");
+					sender.sendMessage("§8- [head/chest/legs/boots/all]");
                     return true;
                 }
 
                 String kit = args[1];
 
-                if (!ConfigManager.configHashMap.containsKey(kit)) {
+                if (!ConfigManager.kitHashMap.containsKey(kit)) {
                     sender.sendMessage("§eFailed to Add To Kit: '" + kit + "' (Kit Doesn't Exist)");
                     sender.sendMessage("§8*Tip: Double Check your Spelling*");
                     return true;
                 }
 
-                KitData kitdata = ConfigManager.getConfig(kit);
+                KitData kitdata = ConfigManager.getKitConfig(kit);
 
                 if (args[2].equals("item")) {
 
@@ -387,7 +387,7 @@ public static String hmsConversion(long millis) {
 
                     kitdata.additem(new ItemStack(sender.getPlayer().getHeldItem()), listIndexOf(sender.getPlayer().inventory.mainInventory, sender.getPlayer().getHeldItem()));
                     sender.sendMessage("§5Added [" + sender.getPlayer().getHeldItem() + "] to Kit: '" + kit + "'");
-                    ConfigManager.saveAll();
+                    ConfigManager.saveAllKits();
                     return true;
                 }
                 if (args[2].equals("row")) {
@@ -402,7 +402,7 @@ public static String hmsConversion(long millis) {
 
                     }
 
-                    ConfigManager.saveAll();
+                    ConfigManager.saveAllKits();
                     sender.sendMessage("§5Added Row to Kit: '" + kit + "'");
 
                     return true;
@@ -493,7 +493,7 @@ public static String hmsConversion(long millis) {
                     }
 
                     sender.sendMessage("§5Added All Items and Armor to Kit: " + kit);
-                    ConfigManager.saveAll();
+                    ConfigManager.saveAllKits();
                     return true;
                 }
                 return true;
@@ -509,7 +509,7 @@ public static String hmsConversion(long millis) {
 
                 String kit = args[1];
 
-                switch (ConfigManager.removeKit(kit)) {
+                switch (ConfigManager.removeKitConfig(kit)) {
                     case 0:
                         sender.sendMessage("§1Deleted Kit: '" + kit + "'");
                         return true;
@@ -522,7 +522,7 @@ public static String hmsConversion(long millis) {
                 }
             }
         }
-		sender.sendMessage("§e Kit Error: (Invalid Syntax)");
+		sender.sendMessage("§e " + NAME + " Error: (Invalid Syntax)");
 		return false;
 	}
 
@@ -554,9 +554,9 @@ public static String hmsConversion(long millis) {
 			sender.sendMessage("§8  > /kit create <kit> [<cooldown>]");
 			sender.sendMessage("§8  > /kit delete <kit>");
 			sender.sendMessage("§8  > /kit setcooldown <kit> <cooldown>");
-			sender.sendMessage("§8  > /kit addto <kit> item/row/all/armor ->");
-			sender.sendMessage("§8    (if armor) [head/chest/legs/boots/all]");
-			sender.sendMessage("§8  > /kit reset <kit> [<player>]");
+			sender.sendMessage("§8  > /kit addto <kit> item/row/all/armor -");
+			sender.sendMessage("§8   - [head/chest/legs/boots/all]");
+			sender.sendMessage("§8  > /kit reset <kit> [<username>]");
 			sender.sendMessage("§8  > /kit list [<kit>]");
 			sender.sendMessage("§8  > /kit reload");
 		} else {

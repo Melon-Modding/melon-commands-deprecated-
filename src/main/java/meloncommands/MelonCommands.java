@@ -63,5 +63,7 @@ public class MelonCommands implements ModInitializer, GameStartEntrypoint{
 		CommandHelper.createCommand(new TPA());
 		CommandHelper.createCommand(new TPAccept());
 		CommandHelper.createCommand(new TPADeny());
+		CommandHelper.createCommand(new Role());
+		CommandHelper.createCommand(new meloncommands.commands.MelonCommands());
 	}
 }

@@ -11,9 +11,7 @@ import net.minecraft.server.entity.player.EntityPlayerMP;
 public class TPA extends Command {
 	private final static String COMMAND = "tpa";
 
-	public TPA() {
-		super(COMMAND);
-	}
+	public TPA() {super(COMMAND);}
 
 	@Override
 	public boolean execute(CommandHandler handler, CommandSender sender, String[] args) {
