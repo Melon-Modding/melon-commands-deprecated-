@@ -326,15 +326,15 @@ public static String hmsConversion(long millis) {
             if (args[0].equals("create")) {
 
                 if (args.length == 1) {
-                    sender.sendMessage("§eFailed to Create Kit (Invalid Syntax)");
-                    sender.sendMessage("§8/kit create <kit> [<cooldown>]");
+					sender.sendMessage("§eFailed to Create " + NAME + " (Invalid Syntax)");
+					sender.sendMessage("§8/" + COMMAND + " create <kit> [<cooldown>]");
                     return true;
                 }
 
                 String kit = args[1];
 
                 if (ConfigManager.kitHashMap.containsKey(kit)) {
-                    sender.sendMessage("§eFailed to Create Kit: '" + kit + "' (Kit Already Exists)");
+                    sender.sendMessage("§eFailed to Create " + NAME + ": '" + kit + "' (" + NAME + " Already Exists)");
                     return true;
                 }
 
@@ -348,21 +348,21 @@ public static String hmsConversion(long millis) {
                     KitData kitdata = ConfigManager.getKitConfig(kit);
                     kitdata.kitCooldown = Long.parseLong(args[2]);
                     ConfigManager.saveAllKits();
-                    sender.sendMessage("§5Created Kit: '" + kit + "' with Cooldown: " + args[2]);
+                    sender.sendMessage("§5Created " + NAME + ": '" + kit + "' with Cooldown: " + args[2]);
                     return true;
                 }
 
                 ConfigManager.getKitConfig(kit);
                 ConfigManager.saveAllKits();
-                sender.sendMessage("§5Created Kit: '" + kit + "' with Cooldown: 0");
+                sender.sendMessage("§5Created " + NAME + ": '" + kit + "' with Cooldown: 0");
                 return true;
             }
 
             if (args[0].equals("addto")) {
 
                 if (args.length == 1) {
-                    sender.sendMessage("§eFailed to Add To Kit (Invalid Syntax)");
-                    sender.sendMessage("§8/kit addto <kit> item/row/all/armor -");
+                    sender.sendMessage("§eFailed to Add To " + NAME + " (Invalid Syntax)");
+                    sender.sendMessage("§8/" + COMMAND + " addto <" + COMMAND + "> item/row/all/armor -");
 					sender.sendMessage("§8- [head/chest/legs/boots/all]");
                     return true;
                 }
@@ -370,7 +370,7 @@ public static String hmsConversion(long millis) {
                 String kit = args[1];
 
                 if (!ConfigManager.kitHashMap.containsKey(kit)) {
-                    sender.sendMessage("§eFailed to Add To Kit: '" + kit + "' (Kit Doesn't Exist)");
+                    sender.sendMessage("§eFailed to Add To " + NAME + ": '" + kit + "' (" + NAME + " Doesn't Exist)");
                     sender.sendMessage("§8*Tip: Double Check your Spelling*");
                     return true;
                 }
@@ -380,13 +380,13 @@ public static String hmsConversion(long millis) {
                 if (args[2].equals("item")) {
 
                     if (sender.getPlayer().getHeldItem() == null) {
-                        sender.sendMessage("§eFailed to Add To Kit: '" + kit + "' (Held Item is Null)");
+                        sender.sendMessage("§eFailed to Add To " + NAME + ": '" + kit + "' (Held Item is Null)");
                         sender.sendMessage("§8*Tip: Hold an item in your hand*");
                         return true;
                     }
 
                     kitdata.additem(new ItemStack(sender.getPlayer().getHeldItem()), listIndexOf(sender.getPlayer().inventory.mainInventory, sender.getPlayer().getHeldItem()));
-                    sender.sendMessage("§5Added [" + sender.getPlayer().getHeldItem() + "] to Kit: '" + kit + "'");
+                    sender.sendMessage("§5Added [" + sender.getPlayer().getHeldItem() + "] to " + NAME + ": '" + kit + "'");
                     ConfigManager.saveAllKits();
                     return true;
                 }
@@ -403,24 +403,24 @@ public static String hmsConversion(long millis) {
                     }
 
                     ConfigManager.saveAllKits();
-                    sender.sendMessage("§5Added Row to Kit: '" + kit + "'");
+                    sender.sendMessage("§5Added Row to " + NAME + ": '" + kit + "'");
 
                     return true;
                 }
                 if (args[2].equals("armor")) {
                     if (args[3].equals("head")) {
                         if (sender.getPlayer().inventory.getStackInSlot(39) == null) {
-                            sender.sendMessage("§eFailed to Add To Kit: '" + kit + "' (Equipped Armor is Null)");
+                            sender.sendMessage("§eFailed to Add To " + NAME + ": '" + kit + "' (Equipped Armor is Null)");
                             sender.sendMessage("§8*Tip: Equip armor in your " + args[3] + " slot*");
                             return true;
                         }
                         kitdata.addarmor(sender.getPlayer().inventory.getStackInSlot(39), 39);
-                        sender.sendMessage("§5Added " + sender.getPlayer().inventory.getStackInSlot(39) + " to Kit: '" + kit + "'");
+                        sender.sendMessage("§5Added " + sender.getPlayer().inventory.getStackInSlot(39) + " to " + NAME + ": '" + kit + "'");
                         return true;
                     }
                     if (args[3].equals("chest")) {
                         if (sender.getPlayer().inventory.getStackInSlot(38) == null) {
-                            sender.sendMessage("§eFailed to Add To Kit: '" + kit + "' (Equipped Armor is Null)");
+                            sender.sendMessage("§eFailed to Add To " + NAME + ": '" + kit + "' (Equipped Armor is Null)");
                             sender.sendMessage("§8*Tip: Equip armor in your " + args[3] + " slot*");
                             return true;
                         }
@@ -430,7 +430,7 @@ public static String hmsConversion(long millis) {
                     }
                     if (args[3].equals("legs")) {
                         if (sender.getPlayer().inventory.getStackInSlot(37) == null) {
-                            sender.sendMessage("§eFailed to Add To Kit: '" + kit + "' (Equipped Armor is Null)");
+                            sender.sendMessage("§eFailed to Add To " + NAME + ": '" + kit + "' (Equipped Armor is Null)");
                             sender.sendMessage("§8*Tip: Equip armor in your " + args[3] + " slot*");
                             return true;
                         }
@@ -440,12 +440,12 @@ public static String hmsConversion(long millis) {
                     }
                     if (args[3].equals("boots")) {
                         if (sender.getPlayer().inventory.getStackInSlot(36) == null) {
-                            sender.sendMessage("§eFailed to Add To Kit: '" + kit + "' (Equipped Armor is Null)");
+                            sender.sendMessage("§eFailed to Add To " + NAME + ": '" + kit + "' (Equipped Armor is Null)");
                             sender.sendMessage("§8*Tip: Equip armor in your " + args[3] + " slot*");
                             return true;
                         }
                         kitdata.addarmor(sender.getPlayer().inventory.getStackInSlot(36), 36);
-                        sender.sendMessage("§5Added " + sender.getPlayer().inventory.getStackInSlot(36) + " to Kit: '" + kit + "'");
+                        sender.sendMessage("§5Added " + sender.getPlayer().inventory.getStackInSlot(36) + " to " + NAME + ": '" + kit + "'");
                         return true;
                     }
                     if (args[3].equals("all")) {
@@ -461,7 +461,7 @@ public static String hmsConversion(long millis) {
                         if (sender.getPlayer().inventory.getStackInSlot(36) != null) {
                             kitdata.addarmor(sender.getPlayer().inventory.getStackInSlot(36), 36);
                         }
-                        sender.sendMessage("§5Added All Armor to Kit: '" + kit + "'");
+                        sender.sendMessage("§5Added All Armor to " + NAME + ": '" + kit + "'");
                         return true;
                     }
                     return true;
@@ -492,7 +492,7 @@ public static String hmsConversion(long millis) {
                         kitdata.addarmor(sender.getPlayer().inventory.getStackInSlot(36), 36);
                     }
 
-                    sender.sendMessage("§5Added All Items and Armor to Kit: " + kit);
+                    sender.sendMessage("§5Added All Items and Armor to " + NAME + ": " + kit);
                     ConfigManager.saveAllKits();
                     return true;
                 }
@@ -502,8 +502,8 @@ public static String hmsConversion(long millis) {
             if (args[0].equals("delete")) {
 
                 if (args.length == 1) {
-                    sender.sendMessage("§eFailed to Delete Kit (Invalid Syntax)");
-                    sender.sendMessage("§8/kit delete <kit>");
+                    sender.sendMessage("§eFailed to Delete " + NAME + " (Invalid Syntax)");
+                    sender.sendMessage("§8/" + COMMAND + " delete <" + COMMAND + ">");
                     return true;
                 }
 
@@ -511,13 +511,13 @@ public static String hmsConversion(long millis) {
 
                 switch (ConfigManager.removeKitConfig(kit)) {
                     case 0:
-                        sender.sendMessage("§1Deleted Kit: '" + kit + "'");
+                        sender.sendMessage("§1Deleted " + NAME + ": '" + kit + "'");
                         return true;
                     case 1:
-                        sender.sendMessage("§eFailed to Delete Kit: '" + kit + "' (Kit Doesn't Exist)");
+                        sender.sendMessage("§eFailed to Delete " + NAME + ": '" + kit + "' (" + NAME + " Doesn't Exist)");
                         return true;
                     case 2:
-                        sender.sendMessage("§eFailed to Delete Kit: '" + kit + "' (IO Error)");
+                        sender.sendMessage("§eFailed to Delete " + NAME + ": '" + kit + "' (IO Error)");
                         return true;
                 }
             }
@@ -550,19 +550,19 @@ public static String hmsConversion(long millis) {
 
 		if (sender.isAdmin()) {
 			sender.sendMessage("§8< Command Syntax >");
-			sender.sendMessage("§8  > /kit give <kit> [<overwrite?>]");
-			sender.sendMessage("§8  > /kit create <kit> [<cooldown>]");
-			sender.sendMessage("§8  > /kit delete <kit>");
-			sender.sendMessage("§8  > /kit setcooldown <kit> <cooldown>");
-			sender.sendMessage("§8  > /kit addto <kit> item/row/all/armor -");
+			sender.sendMessage("§8  > /" + COMMAND + " give <" + COMMAND + "> [<overwrite?>]");
+			sender.sendMessage("§8  > /" + COMMAND + " create <" + COMMAND + "> [<cooldown>]");
+			sender.sendMessage("§8  > /" + COMMAND + " delete <" + COMMAND + ">");
+			sender.sendMessage("§8  > /" + COMMAND + " setcooldown <" + COMMAND + "> <cooldown>");
+			sender.sendMessage("§8  > /" + COMMAND + " addto <" + COMMAND + "> item/row/all/armor -");
 			sender.sendMessage("§8   - [head/chest/legs/boots/all]");
-			sender.sendMessage("§8  > /kit reset <kit> [<username>]");
-			sender.sendMessage("§8  > /kit list [<kit>]");
-			sender.sendMessage("§8  > /kit reload");
+			sender.sendMessage("§8  > /" + COMMAND + " reset <" + COMMAND + "> [<username>]");
+			sender.sendMessage("§8  > /" + COMMAND + " list [<" + COMMAND + ">]");
+			sender.sendMessage("§8  > /" + COMMAND + " reload");
 		} else {
 			sender.sendMessage("§8< Command Syntax >");
-			sender.sendMessage("§8  > /kit give <kit> [<overwrite?>]");
-			sender.sendMessage("§8  > /kit list [<kit>]");
+			sender.sendMessage("§8  > /" + COMMAND + " give <" + COMMAND + "> [<overwrite?>]");
+			sender.sendMessage("§8  > /" + COMMAND + " list [<" + COMMAND + ">]");
 			}
 	}
 }
