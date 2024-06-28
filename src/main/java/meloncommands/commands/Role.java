@@ -86,11 +86,13 @@ public class Role extends Command {
 		RoleData roleData = getRoleFromArg(args[1]);
 
 		if(args.length == 2 && !roleData.playersGrantedRole.contains(sender.getPlayer().username)){
+			ConfigManager.loadAllRoles();
 			roleData.playersGrantedRole.add(sender.getPlayer().username);
 			ConfigManager.saveAllRoles();
 			sender.sendMessage("§5Granted Role: '" + args[1] + "' to player: §0" + sender.getPlayer().username);
 			return true;
-		} else if (args.length == 3 && !roleData.playersGrantedRole.contains(args[2])) {
+		} else if (args.length == 3 && !roleData.playersGrantedRole.contains(args[2])){
+			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).playersGrantedRole.add(args[2]);
 			ConfigManager.saveAllRoles();
 			sender.sendMessage("§5Granted Role: '" + args[1] + "' to player: §0" + args[2]);
@@ -123,11 +125,13 @@ public class Role extends Command {
 		RoleData roleData = getRoleFromArg(args[1]);
 
 		if(args.length == 2 && roleData.playersGrantedRole.contains(sender.getPlayer().username)){
+			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).playersGrantedRole.remove(sender.getPlayer().username);
 			ConfigManager.saveAllRoles();
 			sender.sendMessage("§1Revoked Role: '" + args[1] + "' from player: §0" + sender.getPlayer().username);
 			return true;
-		} else if (args.length == 3 && roleData.playersGrantedRole.contains(sender.getPlayer().username)) {
+		} else if (args.length == 3 && roleData.playersGrantedRole.contains(sender.getPlayer().username)){
+			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).playersGrantedRole.remove(args[2]);
 			ConfigManager.saveAllRoles();
 			sender.sendMessage("§1Revoked Role: '" + args[1] + "' from player: §0" + args[2]);
