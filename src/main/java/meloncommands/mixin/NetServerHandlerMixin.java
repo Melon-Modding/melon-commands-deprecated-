@@ -40,20 +40,20 @@ public class NetServerHandlerMixin {
 				String borderColor = MelonCommands.getCodeOrHex(role.displayBorderColor);
 				String roleColor = MelonCommands.getCodeOrHex(role.displayColor);
 
-				roleDisplay = roleColor + role.displayName;
-
 				if(role.isDisplayUnderlined){
-					roleDisplay = TextFormatting.UNDERLINE + roleDisplay;
+					roleDisplay = roleDisplay + TextFormatting.UNDERLINE.toString();
 				}
 				if(role.isDisplayBold){
-					roleDisplay = TextFormatting.BOLD + roleDisplay;
+					roleDisplay = roleDisplay + TextFormatting.BOLD.toString();
 				}
 				if(role.isDisplayItalics){
-					roleDisplay = TextFormatting.ITALIC + roleDisplay;
+					roleDisplay = roleDisplay + TextFormatting.ITALIC.toString();
 				}
 
+				roleDisplay = roleColor + roleDisplay + role.displayName;
+
 				if(role.isDisplayCustomBorder){
-					roleDisplay = borderColor + role.borderPrefix + TextFormatting.RESET + roleDisplay + TextFormatting.RESET + borderColor + role.borderSuffix;
+					roleDisplay = borderColor + role.customBorderPrefix + TextFormatting.RESET + roleDisplay + TextFormatting.RESET + borderColor + role.customBorderSuffix;
 				} else if (role.isDisplayBracketBorder) {
 					roleDisplay = borderColor + "[" + TextFormatting.RESET + roleDisplay + TextFormatting.RESET + borderColor + "]";
 				} else if (role.isDisplayCaretBorder) {
