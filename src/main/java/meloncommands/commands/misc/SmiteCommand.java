@@ -1,4 +1,4 @@
-package meloncommands.commands;
+package meloncommands.commands.misc;
 
 import net.minecraft.core.entity.EntityLightningBolt;
 import net.minecraft.core.net.command.Command;
@@ -6,10 +6,10 @@ import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 import net.minecraft.core.net.command.LocationTarget;
 
-public class Smite extends Command {
+public class SmiteCommand extends Command {
 	private final static String COMMAND = "smite";
 
-	public Smite() {
+	public SmiteCommand() {
 		super(COMMAND);
 	}
 

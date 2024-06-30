@@ -1,16 +1,16 @@
-package meloncommands.commands;
+package meloncommands.commands.utility;
 
 import meloncommands.config.ConfigManager;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 
-public class MelonCommands extends Command {
+public class MelonCommandsCommand extends Command {
 
 	private final static String COMMAND = "meloncommands";
 	private final static String NAME = "MelonCommands";
 
-	public MelonCommands(){super(COMMAND);}
+	public MelonCommandsCommand(){super(COMMAND);}
 
 	@Override
 	public boolean execute(CommandHandler handler, CommandSender sender, String[] args) {

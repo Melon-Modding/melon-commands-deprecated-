@@ -1,13 +1,13 @@
-package meloncommands.commands;
+package meloncommands.commands.tpa;
 
 import meloncommands.TpaManager;
 import net.minecraft.core.net.command.*;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 
-public class TPADeny extends Command {
+public class TPADenyCommand extends Command {
 	private final static String COMMAND = "tpadeny";
 
-	public TPADeny() {
+	public TPADenyCommand() {
 		super(COMMAND);
 	}
 

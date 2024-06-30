@@ -1,4 +1,4 @@
-package meloncommands.commands;
+package meloncommands.commands.misc;
 
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -6,17 +6,15 @@ import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 
-import javax.naming.Name;
-
 /**
  * This command gives the player a compass.
  ***********************************************************************************/
 
-public class Compass extends Command {
+public class CompassCommand extends Command {
 	private final static String COMMAND = "compass";
 	private final static String NAME = "Compass";
 
-	public Compass() {
+	public CompassCommand() {
         super(COMMAND);
     }
 

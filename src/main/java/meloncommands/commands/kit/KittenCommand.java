@@ -1,14 +1,14 @@
-package meloncommands.commands;
+package meloncommands.commands.kit;
 
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 
-public class Kitten extends Command {
+public class KittenCommand extends Command {
 	private final static String COMMAND = "kitten";
 	private final static String NAME = "Kitten";
 
-	public Kitten() {
+	public KittenCommand() {
 		super(COMMAND);
 	}
 

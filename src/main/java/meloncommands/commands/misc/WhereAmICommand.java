@@ -1,9 +1,5 @@
-package meloncommands.commands;
+package meloncommands.commands.misc;
 
-import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.Item;
-import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.net.command.ClientPlayerCommandSender;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
@@ -13,8 +9,8 @@ import net.minecraft.server.entity.player.EntityPlayerMP;
  * This command when run prints out information of the players current coordinates.
  ***********************************************************************************/
 
-public class WhereAmI extends Command {
-	public WhereAmI() {
+public class WhereAmICommand extends Command {
+	public WhereAmICommand() {
 		super("whereami");
 	}
 

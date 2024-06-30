@@ -3,9 +3,14 @@ package meloncommands;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import meloncommands.commands.*;
-import meloncommands.commands.Kit;
-import meloncommands.commands.Role;
+import meloncommands.commands.kit.KitCommand;
+import meloncommands.commands.kit.KittenCommand;
+import meloncommands.commands.misc.WhereAmICommand;
+import meloncommands.commands.role.RoleCommand;
+import meloncommands.commands.tpa.TPACommand;
+import meloncommands.commands.tpa.TPADenyCommand;
+import meloncommands.commands.tpa.TPAcceptCommand;
+import meloncommands.commands.utility.MelonCommandsCommand;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.data.gamerule.GameRuleBoolean;
 import net.minecraft.core.data.gamerule.GameRules;
@@ -24,9 +29,13 @@ import java.util.HashMap;
 
 
 public class MelonCommands implements ModInitializer, GameStartEntrypoint{
-    public static final String MOD_ID = "meloncommands";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+	public static final String MOD_ID = "meloncommands";
+
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
 	public static final Gson GSON = (new GsonBuilder()).setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().registerTypeAdapter(ItemStack.class, new ItemStackJsonAdapter()).create();
+
 	public static final HashMap<String, String> colorMap = new HashMap<>();
 	static{
 		colorMap.put("purple", "§a");
@@ -47,17 +56,6 @@ public class MelonCommands implements ModInitializer, GameStartEntrypoint{
 		colorMap.put("light_gray", "§8");
 		colorMap.put("cyan", "§9");
 		colorMap.put("white", "§0");
-	}
-
-
-	public static String getCodeOrHex(String string){
-		string = string.toLowerCase();
-		if (MelonCommands.colorMap.containsKey(string)){
-			string = MelonCommands.colorMap.get(string);
-		} else{
-			string = "§<" + string + ">";
-		}
-		return string;
 	}
 
 	//
@@ -89,15 +87,15 @@ public class MelonCommands implements ModInitializer, GameStartEntrypoint{
 				break;
 			}
 		}
-		CommandHelper.createCommand(new Kit());
-		CommandHelper.createCommand(new WhereAmI());
-		CommandHelper.createCommand(new Kitten());
+		CommandHelper.createCommand(new KitCommand());
+		CommandHelper.createCommand(new WhereAmICommand());
+		CommandHelper.createCommand(new KittenCommand());
 		// For summoning dummy lightningBolt
 		// CommandHelper.createCommand(new Smite());
-		CommandHelper.createCommand(new TPA());
-		CommandHelper.createCommand(new TPAccept());
-		CommandHelper.createCommand(new TPADeny());
-		CommandHelper.createCommand(new Role());
-		CommandHelper.createCommand(new meloncommands.commands.MelonCommands());
+		CommandHelper.createCommand(new TPACommand());
+		CommandHelper.createCommand(new TPAcceptCommand());
+		CommandHelper.createCommand(new TPADenyCommand());
+		CommandHelper.createCommand(new RoleCommand());
+		CommandHelper.createCommand(new MelonCommandsCommand());
 	}
 }

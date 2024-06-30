@@ -1,4 +1,4 @@
-package meloncommands.commands;
+package meloncommands.commands.tpa;
 
 import meloncommands.TpaManager;
 
@@ -8,10 +8,10 @@ import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 
-public class TPA extends Command {
+public class TPACommand extends Command {
 	private final static String COMMAND = "tpa";
 
-	public TPA() {super(COMMAND);}
+	public TPACommand() {super(COMMAND);}
 
 	@Override
 	public boolean execute(CommandHandler handler, CommandSender sender, String[] args) {

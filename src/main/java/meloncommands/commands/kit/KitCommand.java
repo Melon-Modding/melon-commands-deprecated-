@@ -1,4 +1,4 @@
-package meloncommands.commands;
+package meloncommands.commands.kit;
 
 import meloncommands.config.ConfigManager;
 import net.minecraft.core.entity.EntityItem;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class Kit extends Command {
+public class KitCommand extends Command {
 	private final static String COMMAND = "kit";
 	private final static String NAME = "Kit";
 	public static HashMap<String, HashMap<String, Long>> cooldowns = new HashMap<>();
@@ -41,7 +41,7 @@ public static String hmsConversion(long millis) {
     return String.format("%02d:%02d:%02d [h:m:s]", h, m, s);
 }
 
-	public Kit() {
+	public KitCommand() {
 		super(COMMAND);
 	}
 

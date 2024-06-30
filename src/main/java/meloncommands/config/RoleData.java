@@ -10,7 +10,7 @@ public class RoleData {
 
 	//Role Display Formatting
 
-		//Display General
+		//Display
 
 		@SerializedName(value = "Role Display Color:")
 		@Expose public String displayColor = "white";
@@ -29,28 +29,75 @@ public class RoleData {
 
 		//Display Border
 
-		@SerializedName(value = "Bracket Border Color:")
+		@SerializedName(value = "Display Border Color:")
 		@Expose public String displayBorderColor = "white";
 
-		@SerializedName(value = "Bracket Border:")
-		@Expose public boolean isDisplayBracketBorder = true;
+		@SerializedName(value = "No Display Border:")
+		@Expose public boolean isDisplayBorderNone = false;
 
-		@SerializedName(value = "Curly Bracket Border:")
-		@Expose public boolean isDisplayCurlyBracketBorder = false;
+		@SerializedName(value = "Bracket Display Border:")
+		@Expose public boolean isDisplayBorderBracket = true;
 
-		@SerializedName(value = "Caret Border:")
-		@Expose public boolean isDisplayCaretBorder = false;
+		@SerializedName(value = "Curly Bracket Display Border:")
+		@Expose public boolean isDisplayBorderCurly = false;
 
-		@SerializedName(value = "Custom Border:")
-		@Expose public boolean isDisplayCustomBorder = false;
+		@SerializedName(value = "Caret Display Border:")
+		@Expose public boolean isDisplayBorderCaret = false;
 
-		@SerializedName(value = "Custom Border Prefix:")
-		@Expose public String customBorderPrefix = "";
+		@SerializedName(value = "Custom Display Border:")
+		@Expose public boolean isDisplayBorderCustom = false;
 
-		@SerializedName(value = "Custom Border Suffix:")
-		@Expose public String customBorderSuffix = "";
+		@SerializedName(value = "Custom Display Border Prefix:")
+		@Expose public String customDisplayBorderPrefix = "";
+
+		@SerializedName(value = "Custom Display Border Suffix:")
+		@Expose public String customDisplayBorderSuffix = "";
+
+	//Role Username Formatting
+
+		//Username
+
+		@SerializedName(value = "Role Username Color:")
+		@Expose public String usernameColor = "white";
+
+		@SerializedName(value = "Role Username Underlined:")
+		@Expose public boolean isUsernameUnderlined = false;
+
+		@SerializedName(value = "Role Username Bold:")
+		@Expose public boolean isUsernameBold = false;
+
+		@SerializedName(value = "Role Username Italics:")
+		@Expose public boolean isUsernameItalics = false;
+
+		//Username Border
+
+		@SerializedName(value = "Username Border Color:")
+		@Expose public String usernameBorderColor = "white";
+
+		@SerializedName(value = "No Username Border:")
+		@Expose public boolean isUsernameBorderNone = false;
+
+		@SerializedName(value = "Bracket Username Border:")
+		@Expose public boolean isUsernameBorderBracket = false;
+
+		@SerializedName(value = "Curly Bracket Username Border:")
+		@Expose public boolean isUsernameBorderCurly = false;
+
+		@SerializedName(value = "Caret Username Border:")
+		@Expose public boolean isUsernameBorderCaret = true;
+
+		@SerializedName(value = "Custom Username Border:")
+		@Expose public boolean isUsernameBorderCustom = false;
+
+		@SerializedName(value = "Custom Username Border Prefix:")
+		@Expose public String customUsernameBorderPrefix = "";
+
+		@SerializedName(value = "Custom Username Border Suffix:")
+		@Expose public String customUsernameBorderSuffix = "";
 
 	//Role Text Formatting
+
+		//Text
 
 		@SerializedName(value = "Role Text Color:")
 		@Expose public String textColor = "§0";
@@ -68,6 +115,8 @@ public class RoleData {
 
 		@SerializedName(value = "Players Granted Role:")
 		@Expose public List<String> playersGrantedRole = new ArrayList<>();
+
+	//Role Priority (UNUSED)
 
 		@SerializedName(value = "Role Priority: (Highest - 0..1..2.. - Lowest)")
 		@Expose public int priority = 0;

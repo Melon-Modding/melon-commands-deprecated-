@@ -1,13 +1,13 @@
-package meloncommands.commands;
+package meloncommands.commands.tpa;
 
 import meloncommands.TpaManager;
 import net.minecraft.core.net.command.*;
 import net.minecraft.server.entity.player.EntityPlayerMP;
 
-public class TPAccept extends Command {
+public class TPAcceptCommand extends Command {
 	private final static String COMMAND = "tpaccept";
 
-	public TPAccept() {
+	public TPAcceptCommand() {
 		super(COMMAND);
 	}
 
