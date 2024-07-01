@@ -1,5 +1,6 @@
 package meloncommands.commands.kit;
 
+import meloncommands.CommandSyntaxBuilder;
 import meloncommands.config.ConfigManager;
 import net.minecraft.core.entity.EntityItem;
 import net.minecraft.core.item.ItemStack;
@@ -132,6 +133,23 @@ public static String hmsConversion(long millis) {
 		List<ItemStack> list = Arrays.asList(items);
 		return list.indexOf(target);
 	}
+
+	static CommandSyntaxBuilder syntax = new CommandSyntaxBuilder();
+
+	public static void buildKitSyntax(){
+		syntax.clear();
+		syntax.append("title",              "§8< Command Syntax >");
+		syntax.append("give",               "§8  > /kit give <kit> [<overwrite?>]");
+		syntax.append("create",             "§8  > /kit create <kit> [<cooldown>]");
+		syntax.append("delete",             "§8  > /kit delete <kit>");
+		syntax.append("setcooldown",        "§8  > /kit setcooldown <kit> <cooldown>");
+		syntax.append("addto",              "§8  > /kit addto <kit> item/row/all/armor -");
+		syntax.append("addto2",             "§8   - [head/chest/legs/boots/all]");
+		syntax.append("reset",              "§8  > /kit reset <kit> [<username>]");
+		syntax.append("list",               "§8  > /kit list [<kit>]");
+		syntax.append("reload",             "§8  > /kit reload");
+	}
+
 	@Override
 	public boolean execute(CommandHandler handler, CommandSender sender, String[] args) {
         {

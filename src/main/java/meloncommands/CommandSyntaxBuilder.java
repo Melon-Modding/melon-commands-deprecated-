@@ -157,35 +157,6 @@ public class CommandSyntaxBuilder {
 		}
 	}
 
-	ArrayList<String> layerOwnerMessages = new ArrayList<>();
-
-	String insideLayersOwner;
-	CommandSyntaxLine insideLayer;
-	private void printLayerOwners(CommandSyntaxLine syntaxLine, CommandSender sender){
-		insideLayer = syntaxLine;
-		for(int i = syntaxLines.size() - 1; i >= 0; i--){
-			if(insideLayer.owner.equals("none")) {
-				break;
-			}
-			if(syntaxLines.get(i).name.equals(syntaxLine.name)){
-				insideLayer = syntaxLine;
-				for(int j = i-1; j >= 0; j--){
-					assert insideLayer != null;
-					if(syntaxLines.get(j).name.equals(insideLayer.owner)){
-						layerOwnerMessages.add(0, syntaxLines.get(j).message);
-						insideLayer = syntaxLines.get(j);
-						printLayerOwners(insideLayer, sender);
-					}
-				}
-			}
-		}
-		for(String message : layerOwnerMessages) {
-			sender.sendMessage(message);
-		}
-		layerOwnerMessages.clear();
-		insideLayersOwner = null;
-	}
-
 	String thisLayerOwner = null;
 	public void printLayerUnderOwner(String name, CommandSender sender){
 		for(int i = 0; i < syntaxLines.size(); i++){
@@ -226,6 +197,34 @@ public class CommandSyntaxBuilder {
 		}
 		thisLayerOwner = null;
 		printedLayerOwners = false;
+	}
+
+	ArrayList<String> layerOwnerMessages = new ArrayList<>();
+	String insideLayersOwner;
+	CommandSyntaxLine insideLayer;
+	private void printLayerOwners(CommandSyntaxLine syntaxLine, CommandSender sender){
+		insideLayer = syntaxLine;
+		for(int i = syntaxLines.size() - 1; i >= 0; i--){
+			if(insideLayer.owner.equals("none")) {
+				break;
+			}
+			if(syntaxLines.get(i).name.equals(syntaxLine.name)){
+				insideLayer = syntaxLine;
+				for(int j = i-1; j >= 0; j--){
+					assert insideLayer != null;
+					if(syntaxLines.get(j).name.equals(insideLayer.owner)){
+						layerOwnerMessages.add(0, syntaxLines.get(j).message);
+						insideLayer = syntaxLines.get(j);
+						printLayerOwners(insideLayer, sender);
+					}
+				}
+			}
+		}
+		for(String message : layerOwnerMessages) {
+			sender.sendMessage(message);
+		}
+		layerOwnerMessages.clear();
+		insideLayersOwner = null;
 	}
 
 	public void clear(){
