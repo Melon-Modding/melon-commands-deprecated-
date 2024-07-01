@@ -8,6 +8,8 @@ import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
 
+//TODO finish /role set default, /role set displayMode, and /role edit priority
+
 @SuppressWarnings("SameReturnValue")
 public class RoleCommand extends Command {
 
