@@ -7,8 +7,7 @@ import java.util.*;
 public class CmdSyntaxBuilder {
 
 	ArrayList<CmdSyntaxLine> syntaxLines = new ArrayList<>();
-	String thisLayerOwner = null;
-	boolean printedLayerOwners = false;
+
 
 	public void append(CmdSyntaxLine syntaxLine){
 		if(syntaxLine.owner.equals("none")){
@@ -103,12 +102,11 @@ public class CmdSyntaxBuilder {
 				if (syntaxLines.get(i).name.equals(syntaxLine.owner)) {
 					if (syntaxLines.size() - 1 == i) {
 						syntaxLines.add(syntaxLine);
-						break;
-					} else {
+                    } else {
 						syntaxLines.add(i + 1, syntaxLine);
-						break;
-					}
-				}
+                    }
+                    break;
+                }
 			}
 		}
 	}
@@ -124,12 +122,11 @@ public class CmdSyntaxBuilder {
 				if (syntaxLines.get(i).name.equals(syntaxLine.owner)) {
 					if (syntaxLines.size() - 1 == i) {
 						syntaxLines.add(syntaxLine);
-						break;
-					} else {
+                    } else {
 						syntaxLines.add(i + 1, syntaxLine);
-						break;
-					}
-				}
+                    }
+                    break;
+                }
 			}
 		}
 	}
@@ -145,12 +142,11 @@ public class CmdSyntaxBuilder {
 				if (syntaxLines.get(i).name.equals(syntaxLine.owner)) {
 					if (syntaxLines.size() - 1 == i) {
 						syntaxLines.add(syntaxLine);
-						break;
-					} else {
+                    } else {
 						syntaxLines.add(i + 1, syntaxLine);
-						break;
-					}
-				}
+                    }
+                    break;
+                }
 			}
 		}
 	}
@@ -161,22 +157,36 @@ public class CmdSyntaxBuilder {
 		}
 	}
 
+	ArrayList<String> layerOwnerMessages = new ArrayList<>();
+
+	String insideLayersOwner;
+	CmdSyntaxLine insideLayer;
 	private void printLayerOwners(CmdSyntaxLine syntaxLine, CommandSender sender){
+		insideLayer = syntaxLine;
 		for(int i = syntaxLines.size() - 1; i >= 0; i--){
+			if(insideLayer.owner.equals("none")) {
+				break;
+			}
 			if(syntaxLines.get(i).name.equals(syntaxLine.name)){
-				CmdSyntaxLine insideLayer = syntaxLine;
+				insideLayer = syntaxLine;
 				for(int j = i-1; j >= 0; j--){
-                    assert insideLayer != null;
-                    if(syntaxLines.get(j).name.equals(insideLayer.owner)){
-						sender.sendMessage(syntaxLines.get(j).message);
+					assert insideLayer != null;
+					if(syntaxLines.get(j).name.equals(insideLayer.owner)){
+						layerOwnerMessages.add(0, syntaxLines.get(j).message);
 						insideLayer = syntaxLines.get(j);
 						printLayerOwners(insideLayer, sender);
 					}
 				}
 			}
 		}
+		for(String message : layerOwnerMessages) {
+			sender.sendMessage(message);
+		}
+		layerOwnerMessages.clear();
+		insideLayersOwner = null;
 	}
 
+	String thisLayerOwner = null;
 	public void printLayerUnderOwner(String name, CommandSender sender){
 		for(int i = 0; i < syntaxLines.size(); i++){
 			if(syntaxLines.get(i).name.equals(name)){
@@ -193,6 +203,7 @@ public class CmdSyntaxBuilder {
 		thisLayerOwner = null;
 	}
 
+	boolean printedLayerOwners = false;
 	public void printAllLayersUnderOwner(String name, CommandSender sender){
 
 		for(int i = 0; i < syntaxLines.size(); i++){
