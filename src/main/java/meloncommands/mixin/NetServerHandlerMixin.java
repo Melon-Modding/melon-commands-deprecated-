@@ -55,7 +55,11 @@ public class NetServerHandlerMixin {
 			}
         }
 
-		for(RoleData role : rolesGranted){if(role != null){roleDisplays.append(RoleBuilder.buildRoleDisplay(role));}}
+		for(int i = rolesGranted.size()-1; i >= 0; i--){
+			if(rolesGranted.get(i) != null){
+				roleDisplays.append(RoleBuilder.buildRoleDisplay(rolesGranted.get(i)));
+			}
+		}
 
 		message = roleDisplays + roleUsername + roleTextFormatting + message;
 		logger.info(message);

@@ -72,6 +72,8 @@ public class MelonCommands implements ModInitializer, GameStartEntrypoint{
 	public void onInitialize() {
 		updateConfig();
 		LOGGER.info("MelonCommands initialized");
+		RoleCommand.buildRoleSyntax();
+		LOGGER.info("MelonCommands Role Syntax Built");
 	}
 
 	@Override
@@ -88,6 +90,7 @@ public class MelonCommands implements ModInitializer, GameStartEntrypoint{
 			}
 		}
 		CommandHelper.createCommand(new KitCommand());
+		CommandHelper.createCommand(new RoleCommand());
 		CommandHelper.createCommand(new WhereAmICommand());
 		CommandHelper.createCommand(new KittenCommand());
 		// For summoning dummy lightningBolt
@@ -95,7 +98,8 @@ public class MelonCommands implements ModInitializer, GameStartEntrypoint{
 		CommandHelper.createCommand(new TPACommand());
 		CommandHelper.createCommand(new TPAcceptCommand());
 		CommandHelper.createCommand(new TPADenyCommand());
-		CommandHelper.createCommand(new RoleCommand());
 		CommandHelper.createCommand(new MelonCommandsCommand());
+
+
 	}
 }

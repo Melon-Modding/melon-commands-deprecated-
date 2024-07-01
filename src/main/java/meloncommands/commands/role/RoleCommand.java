@@ -1,6 +1,7 @@
 package meloncommands.commands.role;
 
 import meloncommands.RoleBuilder;
+import meloncommands.CmdSyntaxBuilder;
 import meloncommands.config.ConfigManager;
 import meloncommands.config.RoleData;
 import net.minecraft.core.net.command.Command;
@@ -15,12 +16,52 @@ public class RoleCommand extends Command {
 	public RoleCommand(){super(COMMAND);}
 
 	public static RoleData getRoleFromArg(String arg){return ConfigManager.getRoleConfig(arg);}
+	static CmdSyntaxBuilder syntax = new CmdSyntaxBuilder();
+
+	public static void buildRoleSyntax(){
+		syntax.clear();
+		syntax.append("title",                                                  "§8< Command Syntax >");
+		syntax.append("create",                                                 "§8  > /role create <role id> [<priority>]");
+		syntax.append("delete",                                                 "§8  > /role delete <role id>");
+		syntax.append("reload",                                                 "§8  > /role reload");
+		syntax.append("edit",                                                   "§8  > /role edit <role id> <mode>");
+		syntax.append("priority", "edit",                                 "§8    > priority <priority value>");
+		syntax.append("display", "edit",                                  "§8    > display <style>");
+		syntax.append("displayColor", "display",                          "§8      > color <color/hex>");
+		syntax.append("displayUnderline", "display",                      "§8      > underline true/false");
+		syntax.append("displayBold", "display",                           "§8      > bold true/false");
+		syntax.append("displayItalics", "display",                        "§8      > italics true/false");
+		syntax.append("displayBorder", "display",                         "§8      > border <style>");
+		syntax.append("displayBorderColor", "displayBorder",              "§8        > color <color/hex>");
+		syntax.append("displayBorderType", "displayBorder",               "§8        > none/bracket/caret/curly");
+		syntax.append("displayBorderCustom", "displayBorder",             "§8        > custom <affix>");
+		syntax.append("displayBorderCustomAffix", "displayBorderCustom",  "§8          > prefix/suffix <custom affix>");
+		syntax.append("username", "edit",                                 "§8    > username <style>");
+		syntax.append("usernameColor", "username",                        "§8      > color <color/hex>");
+		syntax.append("usernameUnderline", "username",                    "§8      > underline true/false");
+		syntax.append("usernameBold", "username",                         "§8      > bold true/false");
+		syntax.append("usernameItalics", "username",                      "§8      > italics true/false");
+		syntax.append("usernameBorder", "username",                       "§8      > border <style>");
+		syntax.append("usernameBorderColor", "usernameBorder",            "§8        > color <color/hex>");
+		syntax.append("usernameBorderType", "usernameBorder",             "§8        > none/bracket/caret/curly");
+		syntax.append("usernameBorderCustom", "usernameBorder",           "§8        > custom <affix>");
+		syntax.append("usernameBorderCustomAffix", "usernameBorderCustom","§8          > prefix/suffix <custom affix>");
+		syntax.append("text", "edit",                                     "§8    > text <style>");
+		syntax.append("textColor", "text",                                "§8      > color <color/hex>");
+		syntax.append("textUnderline", "text",                            "§8      > underline true/false");
+		syntax.append("textBold", "text",                                 "§8      > bold true/false");
+		syntax.append("textItalics", "text",                              "§8      > italics true/false");
+		syntax.append("grant",                                                  "§8  > /role grant <role id> [<username>]");
+		syntax.append("revoke",                                                 "§8  > /role revoke <role id> [<username>]");
+		syntax.append("list",                                                   "§8  > /role list");
+	}
+
 
 	private boolean create(CommandSender sender, String[] args){
 
 		if (args.length == 1) {
 			sender.sendMessage("§eFailed to Create Role (Invalid Syntax)");
-			sender.sendMessage("§8/role create <role id>");
+			syntax.printAllLayersUnderOwner("create", sender);
 			return true;
 		}
 
@@ -111,17 +152,7 @@ public class RoleCommand extends Command {
 
 		if(args.length == 3){
 			sender.sendMessage("§eFailed to Edit Role Display (Invalid Syntax)");
-			sender.sendMessage("§8  > /role edit <role id> <mode>");
-			sender.sendMessage("§8    > display <style>");
-			sender.sendMessage("§8      > color <color/hex>");
-			sender.sendMessage("§8      > underline true/false");
-			sender.sendMessage("§8      > bold true/false");
-			sender.sendMessage("§8      > italics true/false");
-			sender.sendMessage("§8      > border <style>");
-			sender.sendMessage("§8        > color <color/hex>");
-			sender.sendMessage("§8        > none/bracket/caret/curly");
-			sender.sendMessage("§8        > custom <affix>");
-			sender.sendMessage("§8          > prefix/suffix <custom affix>");
+			syntax.printLayerUnderOwner("display", sender);
 			return true;
 		}
 
@@ -378,40 +409,6 @@ public class RoleCommand extends Command {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler handler, CommandSender sender) {
-		sender.sendMessage("");
-		sender.sendMessage("§8< Command Syntax >");
-		sender.sendMessage("§8  > /role create <role id> [<priority>]");
-		sender.sendMessage("§8  > /role delete <role id>");
-		sender.sendMessage("§8  > /role reload");
-		sender.sendMessage("§8  > /role edit <role id> <mode>");
-		sender.sendMessage("§8    > priority <priority value>");
-		sender.sendMessage("§8    > display <style>");
-		sender.sendMessage("§8      > color <color/hex>");
-		sender.sendMessage("§8      > underline true/false");
-		sender.sendMessage("§8      > bold true/false");
-		sender.sendMessage("§8      > italics true/false");
-		sender.sendMessage("§8      > border <style>");
-		sender.sendMessage("§8        > color <color/hex>");
-		sender.sendMessage("§8        > none/bracket/caret/curly");
-		sender.sendMessage("§8        > custom <affix>");
-		sender.sendMessage("§8          > prefix/suffix <custom affix>");
-		sender.sendMessage("§8    > username <style>");
-		sender.sendMessage("§8      > color <color/hex>");
-		sender.sendMessage("§8      > underline true/false");
-		sender.sendMessage("§8      > bold true/false");
-		sender.sendMessage("§8      > italics true/false");
-		sender.sendMessage("§8      > border <style>");
-		sender.sendMessage("§8        > color <color/hex>");
-		sender.sendMessage("§8        > none/bracket/caret/curly");
-		sender.sendMessage("§8        > custom <affix>");
-		sender.sendMessage("§8          > prefix/suffix <custom affix>");
-		sender.sendMessage("§8    > text <style>");
-		sender.sendMessage("§8      > color <color/hex>");
-		sender.sendMessage("§8      > underline true/false");
-		sender.sendMessage("§8      > bold true/false");
-		sender.sendMessage("§8      > italics true/false");
-		sender.sendMessage("§8  > /role grant <role id> [<username>]");
-		sender.sendMessage("§8  > /role revoke <role id> [<username>]");
-		sender.sendMessage("§8  > /role list");
+		syntax.printAll(sender);
 	}
 }
