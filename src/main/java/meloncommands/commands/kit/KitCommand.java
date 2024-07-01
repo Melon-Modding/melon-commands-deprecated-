@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+//TODO Needs a complete rewrite, Switch Statements into separate classes similar to Roles and Integration with CommandSyntaxBuilder
+
 public class KitCommand extends Command {
 	private final static String COMMAND = "kit";
 	private final static String NAME = "Kit";
