@@ -1,7 +1,7 @@
 package meloncommands.commands.role;
 
 import meloncommands.RoleBuilder;
-import meloncommands.CmdSyntaxBuilder;
+import meloncommands.CommandSyntaxBuilder;
 import meloncommands.config.ConfigManager;
 import meloncommands.config.RoleData;
 import net.minecraft.core.net.command.Command;
@@ -16,7 +16,7 @@ public class RoleCommand extends Command {
 	public RoleCommand(){super(COMMAND);}
 
 	public static RoleData getRoleFromArg(String arg){return ConfigManager.getRoleConfig(arg);}
-	static CmdSyntaxBuilder syntax = new CmdSyntaxBuilder();
+	static CommandSyntaxBuilder syntax = new CommandSyntaxBuilder();
 
 	public static void buildRoleSyntax(){
 		syntax.clear();
@@ -125,13 +125,13 @@ public class RoleCommand extends Command {
 
 		if(!ConfigManager.roleHashMap.containsKey(args[1])){
 			sender.sendMessage("§eFailed to Edit Role (Invalid Role)");
-			syntax.printAllLayersUnderOwner("edit", sender);
+			syntax.printLayerUnderOwner("edit", sender);
 			return true;
 		}
 
 		if(args.length == 2){
 			sender.sendMessage("§eFailed to Edit Role (Invalid Syntax)");
-			syntax.printAllLayersUnderOwner("edit", sender);
+			syntax.printLayerUnderOwner("edit", sender);
 			return true;
 		}
 
@@ -145,7 +145,7 @@ public class RoleCommand extends Command {
 		}
 
         sender.sendMessage("§eFailed to Edit Role (Invalid Mode or Syntax)");
-		syntax.printAllLayersUnderOwner("edit", sender);
+		syntax.printLayerUnderOwner("edit", sender);
         return true;
     }
 

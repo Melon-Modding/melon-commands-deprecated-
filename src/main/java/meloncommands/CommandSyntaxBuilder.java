@@ -4,12 +4,12 @@ import net.minecraft.core.net.command.CommandSender;
 
 import java.util.*;
 
-public class CmdSyntaxBuilder {
+public class CommandSyntaxBuilder {
 
-	ArrayList<CmdSyntaxLine> syntaxLines = new ArrayList<>();
+	ArrayList<CommandSyntaxLine> syntaxLines = new ArrayList<>();
 
 
-	public void append(CmdSyntaxLine syntaxLine){
+	public void append(CommandSyntaxLine syntaxLine){
 		if(syntaxLine.owner.equals("none")){
 			syntaxLines.add(syntaxLine);
 		} else {
@@ -37,7 +37,7 @@ public class CmdSyntaxBuilder {
 	}
 
 	public void append(String name, String message){
-		CmdSyntaxLine syntaxLine = new CmdSyntaxLine(name, message);
+		CommandSyntaxLine syntaxLine = new CommandSyntaxLine(name, message);
 		if(syntaxLine.owner.equals("none")){
 			syntaxLines.add(syntaxLine);
 		} else {
@@ -65,7 +65,7 @@ public class CmdSyntaxBuilder {
 	}
 
 	public void append(String name, String owner, String message){
-		CmdSyntaxLine syntaxLine = new CmdSyntaxLine(name, owner, message);
+		CommandSyntaxLine syntaxLine = new CommandSyntaxLine(name, owner, message);
 		if(syntaxLine.owner.equals("none")){
 			syntaxLines.add(syntaxLine);
 		} else {
@@ -92,7 +92,7 @@ public class CmdSyntaxBuilder {
 		}
 	}
 
-	public void prepend(CmdSyntaxLine syntaxLine){
+	public void prepend(CommandSyntaxLine syntaxLine){
 		if(syntaxLines.isEmpty()){
 			syntaxLines.add(syntaxLine);
 		} else if (syntaxLine.owner.equals("none")){
@@ -112,7 +112,7 @@ public class CmdSyntaxBuilder {
 	}
 
 	public void prepend(String name, String message){
-		CmdSyntaxLine syntaxLine = new CmdSyntaxLine(name, message);
+		CommandSyntaxLine syntaxLine = new CommandSyntaxLine(name, message);
 		if(syntaxLines.isEmpty()){
 			syntaxLines.add(syntaxLine);
 		} else if (syntaxLine.owner.equals("none")){
@@ -132,7 +132,7 @@ public class CmdSyntaxBuilder {
 	}
 
 	public void prepend(String name, String owner, String message){
-		CmdSyntaxLine syntaxLine = new CmdSyntaxLine(name, owner, message);
+		CommandSyntaxLine syntaxLine = new CommandSyntaxLine(name, owner, message);
 		if(syntaxLines.isEmpty()){
 			syntaxLines.add(syntaxLine);
 		} else if (syntaxLine.owner.equals("none")){
@@ -152,7 +152,7 @@ public class CmdSyntaxBuilder {
 	}
 
 	public void printAll(CommandSender sender){
-		for(CmdSyntaxLine syntaxLine : syntaxLines){
+		for(CommandSyntaxLine syntaxLine : syntaxLines){
 			sender.sendMessage(syntaxLine.message);
 		}
 	}
@@ -160,8 +160,8 @@ public class CmdSyntaxBuilder {
 	ArrayList<String> layerOwnerMessages = new ArrayList<>();
 
 	String insideLayersOwner;
-	CmdSyntaxLine insideLayer;
-	private void printLayerOwners(CmdSyntaxLine syntaxLine, CommandSender sender){
+	CommandSyntaxLine insideLayer;
+	private void printLayerOwners(CommandSyntaxLine syntaxLine, CommandSender sender){
 		insideLayer = syntaxLine;
 		for(int i = syntaxLines.size() - 1; i >= 0; i--){
 			if(insideLayer.owner.equals("none")) {

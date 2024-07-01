@@ -1,17 +1,17 @@
 package meloncommands;
 
-public class CmdSyntaxLine {
+public class CommandSyntaxLine {
 
 	public String name;
 	public String owner;
 	public String message;
 
-	public CmdSyntaxLine(String name, String owner, String message){
+	public CommandSyntaxLine(String name, String owner, String message){
 		this.name = name;
 		this.owner = owner;
 		this.message = message;
 	}
-	public CmdSyntaxLine(String name, String message){
+	public CommandSyntaxLine(String name, String message){
 		this.name = name;
 		this.owner = "none";
 		this.message = message;
