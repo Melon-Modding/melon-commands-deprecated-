@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-//TODO Needs a complete rewrite, Switch Statements into separate classes similar to Roles and Integration with CommandSyntaxBuilder
+//TODO Needs a complete rewrite: Switch Statements need put into separate classes similar to Roles, as well as Integration with CommandSyntaxBuilder
 
 public class KitCommand extends Command {
 	private final static String COMMAND = "kit";
