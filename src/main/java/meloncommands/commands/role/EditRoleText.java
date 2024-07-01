@@ -3,6 +3,7 @@ package meloncommands.commands.role;
 import meloncommands.config.ConfigManager;
 import net.minecraft.core.net.command.CommandSender;
 
+@SuppressWarnings("SameReturnValue")
 public class EditRoleText {
 	public static boolean textColor(CommandSender sender, String[] args){
 		ConfigManager.loadAllRoles();
@@ -12,14 +13,11 @@ public class EditRoleText {
 		return true;
 	}
 
-	@SuppressWarnings("SameReturnValue")
 	public static boolean textUnderline(CommandSender sender, String[] args){
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Text Underline (Invalid Syntax)");
-			sender.sendMessage("§8  > /role edit <role id> <mode>");
-			sender.sendMessage("§8    > text <style>");
-			sender.sendMessage("§8      > underline true/false");
+			RoleCommand.syntax.printAllLayersUnderOwner("textUnderline", sender);
 			return true;
 		}
 
@@ -47,9 +45,7 @@ public class EditRoleText {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Text Bold (Invalid Syntax)");
-			sender.sendMessage("§8  > /role edit <role id> <mode>");
-			sender.sendMessage("§8    > text <style>");
-			sender.sendMessage("§8      > bold true/false");
+			RoleCommand.syntax.printAllLayersUnderOwner("textBold", sender);
 			return true;
 		}
 
@@ -77,9 +73,7 @@ public class EditRoleText {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Text Italics (Invalid Syntax)");
-			sender.sendMessage("§8  > /role edit <role id> <mode>");
-			sender.sendMessage("§8    > text <style>");
-			sender.sendMessage("§8      > italics true/false");
+			RoleCommand.syntax.printAllLayersUnderOwner("textItalics", sender);
 			return true;
 		}
 
