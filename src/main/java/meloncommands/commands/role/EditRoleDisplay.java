@@ -91,7 +91,6 @@ public class EditRoleDisplay {
 		return true;
 	}
 
-	@SuppressWarnings("SameReturnValue")
 	public static boolean displayItalics(CommandSender sender, String[] args){
 
 		if(args.length == 4){

@@ -69,7 +69,6 @@ public class EditRoleUsername {
 		return true;
 	}
 
-	@SuppressWarnings("SameReturnValue")
 	public static boolean usernameItalics(CommandSender sender, String[] args){
 
 		if(args.length == 4){

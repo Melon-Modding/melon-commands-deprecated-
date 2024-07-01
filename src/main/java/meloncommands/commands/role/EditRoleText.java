@@ -40,7 +40,6 @@ public class EditRoleText {
 		return true;
 	}
 
-	@SuppressWarnings("SameReturnValue")
 	public static boolean textBold(CommandSender sender, String[] args){
 
 		if(args.length == 4){
@@ -68,7 +67,6 @@ public class EditRoleText {
 		return true;
 	}
 
-	@SuppressWarnings("SameReturnValue")
 	public static boolean textItalics(CommandSender sender, String[] args){
 
 		if(args.length == 4){
