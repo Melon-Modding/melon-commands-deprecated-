@@ -23,7 +23,6 @@ public class RoleCommand extends Command {
 		syntax.append("title",                                                  "§8< Command Syntax >");
 		syntax.append("create",                                                 "§8  > /role create <role id> [<priority>]");
 		syntax.append("delete",                                                 "§8  > /role delete <role id>");
-		syntax.append("reload",                                                 "§8  > /role reload");
 		syntax.append("edit",                                                   "§8  > /role edit <role id> <mode>");
 		syntax.append("priority", "edit",                                 "§8    > priority <priority value>");
 		syntax.append("display", "edit",                                  "§8    > display <style>");
@@ -53,7 +52,11 @@ public class RoleCommand extends Command {
 		syntax.append("textItalics", "text",                              "§8      > italics true/false");
 		syntax.append("grant",                                                  "§8  > /role grant <role id> [<username>]");
 		syntax.append("revoke",                                                 "§8  > /role revoke <role id> [<username>]");
+		syntax.append("set",                                                    "§8  > /role set <set type>");
+		syntax.append("set", "default",                                   "§8    > default <role id>");
+		syntax.append("set", "displayMode",                               "§8    > displayMode single/multi");
 		syntax.append("list",                                                   "§8  > /role list");
+		syntax.append("reload",                                                 "§8  > /role reload");
 	}
 
 
