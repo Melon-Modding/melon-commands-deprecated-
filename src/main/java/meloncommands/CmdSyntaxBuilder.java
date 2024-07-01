@@ -7,7 +7,8 @@ import java.util.*;
 public class CmdSyntaxBuilder {
 
 	ArrayList<CmdSyntaxLine> syntaxLines = new ArrayList<>();
-
+	String thisLayerOwner = null;
+	boolean printedLayerOwners = false;
 
 	public void append(CmdSyntaxLine syntaxLine){
 		if(syntaxLine.owner.equals("none")){
@@ -185,30 +186,35 @@ public class CmdSyntaxBuilder {
 					if(syntaxLines.get(j).owner.equals(name)){
 						sender.sendMessage(syntaxLines.get(j).message);
 						thisLayerOwner = syntaxLines.get(j).name;
-					} else if (syntaxLines.get(j).owner.equals(thisLayerOwner)) {
-						break;
 					}
 				}
 			}
 		}
+		thisLayerOwner = null;
 	}
 
-	String thisLayerOwner = null;
 	public void printAllLayersUnderOwner(String name, CommandSender sender){
+
 		for(int i = 0; i < syntaxLines.size(); i++){
 			if(syntaxLines.get(i).name.equals(name)){
-				printLayerOwners(syntaxLines.get(i), sender);
-				sender.sendMessage(syntaxLines.get(i).message);
+				if(!printedLayerOwners) {
+					printLayerOwners(syntaxLines.get(i), sender);
+					sender.sendMessage(syntaxLines.get(i).message);
+					printedLayerOwners = true;
+				}
 				for(int j = i+1; j < syntaxLines.size(); j++){
 					if(syntaxLines.get(j).owner.equals(name)){
 						sender.sendMessage(syntaxLines.get(j).message);
 						thisLayerOwner = syntaxLines.get(j).name;
 					} else if (syntaxLines.get(j).owner.equals(thisLayerOwner)) {
+						printedLayerOwners = true;
 						printAllLayersUnderOwner(thisLayerOwner, sender);
 					}
 				}
 			}
 		}
+		thisLayerOwner = null;
+		printedLayerOwners = false;
 	}
 
 	public void clear(){

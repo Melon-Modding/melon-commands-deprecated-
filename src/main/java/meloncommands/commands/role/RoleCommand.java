@@ -88,7 +88,7 @@ public class RoleCommand extends Command {
 	private boolean delete(CommandSender sender, String[] args){
 		if (args.length == 1) {
 			sender.sendMessage("§eFailed to Delete Role (Invalid Syntax)");
-			sender.sendMessage("§8/role delete <role id>");
+			syntax.printAllLayersUnderOwner("delete", sender);
 			return true;
 		}
 
@@ -100,6 +100,7 @@ public class RoleCommand extends Command {
 				return true;
 			case 1:
 				sender.sendMessage("§eFailed to Delete Role: " + role + " (Role Doesn't Exist)");
+				syntax.printAllLayersUnderOwner("delete", sender);
 				return true;
 			case 2:
 				sender.sendMessage("§eFailed to Delete Role: " + role + " (IO Error)");
@@ -118,19 +119,19 @@ public class RoleCommand extends Command {
 
 		if(args.length == 1){
 			sender.sendMessage("§eFailed to Edit Role (Invalid Syntax)");
-			sender.sendMessage("§8/role edit <role id> <mode>");
+			syntax.printAllLayersUnderOwner("edit", sender);
 			return true;
 		}
 
 		if(!ConfigManager.roleHashMap.containsKey(args[1])){
 			sender.sendMessage("§eFailed to Edit Role (Invalid Role)");
-			sender.sendMessage("§8/role edit <role id> <mode>");
+			syntax.printAllLayersUnderOwner("edit", sender);
 			return true;
 		}
 
 		if(args.length == 2){
 			sender.sendMessage("§eFailed to Edit Role (Invalid Syntax)");
-			sender.sendMessage("§8/role edit <role id> <mode>");
+			syntax.printAllLayersUnderOwner("edit", sender);
 			return true;
 		}
 
@@ -144,7 +145,7 @@ public class RoleCommand extends Command {
 		}
 
         sender.sendMessage("§eFailed to Edit Role (Invalid Mode or Syntax)");
-        sender.sendMessage("§8/role edit <role id> <mode>");
+		syntax.printAllLayersUnderOwner("edit", sender);
         return true;
     }
 
@@ -172,17 +173,7 @@ public class RoleCommand extends Command {
 		}
 
 		sender.sendMessage("§eFailed to Edit Role Display (Invalid Syntax)");
-		sender.sendMessage("§8  > /role edit <role id> <mode>");
-		sender.sendMessage("§8    > display <style>");
-		sender.sendMessage("§8      > color <color/hex>");
-		sender.sendMessage("§8      > underline true/false");
-		sender.sendMessage("§8      > bold true/false");
-		sender.sendMessage("§8      > italics true/false");
-		sender.sendMessage("§8      > border <style>");
-		sender.sendMessage("§8        > color <color/hex>");
-		sender.sendMessage("§8        > none/bracket/caret/curly");
-		sender.sendMessage("§8        > custom <affix>");
-		sender.sendMessage("§8          > prefix/suffix <custom affix>");
+		syntax.printAllLayersUnderOwner("display", sender);
 		return true;
 	}
 
@@ -190,17 +181,7 @@ public class RoleCommand extends Command {
 
 		if(args.length == 3){
 			sender.sendMessage("§eFailed to Edit Role Username (Invalid Syntax)");
-			sender.sendMessage("§8  > /role edit <role id> <mode>");
-			sender.sendMessage("§8    > username <style>");
-			sender.sendMessage("§8      > color <color/hex>");
-			sender.sendMessage("§8      > underline true/false");
-			sender.sendMessage("§8      > bold true/false");
-			sender.sendMessage("§8      > italics true/false");
-			sender.sendMessage("§8      > border <style>");
-			sender.sendMessage("§8        > color <color/hex>");
-			sender.sendMessage("§8        > none/bracket/caret/curly");
-			sender.sendMessage("§8        > custom <affix>");
-			sender.sendMessage("§8          > prefix/suffix <custom affix>");
+			syntax.printAllLayersUnderOwner("username", sender);
 			return true;
 		}
 
@@ -218,17 +199,7 @@ public class RoleCommand extends Command {
 		}
 
 		sender.sendMessage("§eFailed to Edit Role Username (Invalid Syntax)");
-		sender.sendMessage("§8  > /role edit <role id> <mode>");
-		sender.sendMessage("§8    > username <style>");
-		sender.sendMessage("§8      > color <color/hex>");
-		sender.sendMessage("§8      > underline true/false");
-		sender.sendMessage("§8      > bold true/false");
-		sender.sendMessage("§8      > italics true/false");
-		sender.sendMessage("§8      > border <style>");
-		sender.sendMessage("§8        > color <color/hex>");
-		sender.sendMessage("§8        > none/bracket/caret/curly");
-		sender.sendMessage("§8        > custom <affix>");
-		sender.sendMessage("§8          > prefix/suffix <custom affix>");
+		syntax.printAllLayersUnderOwner("username", sender);
 		return true;
 	}
 
@@ -236,12 +207,7 @@ public class RoleCommand extends Command {
 
 		if(args.length == 3){
 			sender.sendMessage("§eFailed to Edit Role Text (Invalid Syntax)");
-			sender.sendMessage("§8  > /role edit <role id> <mode>");
-			sender.sendMessage("§8    > text <style>");
-			sender.sendMessage("§8      > color <color/hex>");
-			sender.sendMessage("§8      > underline true/false");
-			sender.sendMessage("§8      > bold true/false");
-			sender.sendMessage("§8      > italics true/false");
+			syntax.printAllLayersUnderOwner("text", sender);
 			return true;
 		}
 
@@ -257,12 +223,7 @@ public class RoleCommand extends Command {
 		}
 
 		sender.sendMessage("§eFailed to Edit Role Text (Invalid Syntax)");
-		sender.sendMessage("§8  > /role edit <role id> <mode>");
-		sender.sendMessage("§8    > text <style>");
-		sender.sendMessage("§8      > color <color/hex>");
-		sender.sendMessage("§8      > underline true/false");
-		sender.sendMessage("§8      > bold true/false");
-		sender.sendMessage("§8      > italics true/false");
+		syntax.printAllLayersUnderOwner("text", sender);
 		return true;
 	}
 
@@ -270,14 +231,14 @@ public class RoleCommand extends Command {
 
 		if(args.length == 1){
 			sender.sendMessage("§eFailed to Grant Role (Invalid Syntax)");
-			sender.sendMessage("§8/role grant <role id> [<username>]");
+			syntax.printAllLayersUnderOwner("grant", sender);
 			return true;
 		}
 
 
 		if(!ConfigManager.roleHashMap.containsKey(args[1])){
-			sender.sendMessage("§eFailed to Grant Role (Role doesnt exist!)");
-			sender.sendMessage("§8/role grant <role id> [<username>]");
+			sender.sendMessage("§eFailed to Grant Role (Role doesn't exist!)");
+			syntax.printAllLayersUnderOwner("grant", sender);
 			return true;
 		}
 
@@ -297,26 +258,26 @@ public class RoleCommand extends Command {
 			return true;
 		} else if (roleData.playersGrantedRole.contains(sender.getPlayer().username) || roleData.playersGrantedRole.contains(args[2])) {
 			sender.sendMessage("§eFailed to Grant Role (Player already has Role!)");
-			sender.sendMessage("§8/role grant <role id> [<username>]");
 			return true;
 		}
 
 
-		sender.sendMessage("§eFailed to Grant Role (Error)");
-		return false;
+		sender.sendMessage("§eFailed to Grant Role (Invalid Syntax)");
+		syntax.printAllLayersUnderOwner("grant", sender);
+		return true;
 	}
 
 	private boolean revoke(CommandSender sender, String[] args){
 
 		if(args.length == 1){
 			sender.sendMessage("§eFailed to Revoke Role (Invalid Syntax)");
-			sender.sendMessage("§8/role revoke <role id> [<username>]");
+			syntax.printAllLayersUnderOwner("revoke", sender);
 			return true;
 		}
 
 		if(!ConfigManager.roleHashMap.containsKey(args[1])){
 			sender.sendMessage("§eFailed to Revoke Role (Role doesn't exist!)");
-			sender.sendMessage("§8/role revoke <role id> [<username>]");
+			syntax.printAllLayersUnderOwner("revoke", sender);
 			return true;
 		}
 
@@ -336,12 +297,12 @@ public class RoleCommand extends Command {
 			return true;
 		} else if (!roleData.playersGrantedRole.contains(sender.getPlayer().username) || !roleData.playersGrantedRole.contains(args[2])) {
 			sender.sendMessage("§eFailed to Revoke Role (Player does not have Role!)");
-			sender.sendMessage("§8/role revoke <role id> [<username>]");
 			return true;
 		}
 
-		sender.sendMessage("§eFailed to Revoke Role (Error)");
-		return false;
+		sender.sendMessage("§eFailed to Revoke Role (Invalid Syntax)");
+		syntax.printAllLayersUnderOwner("revoke", sender);
+		return true;
 	}
 
 	private boolean list(CommandSender sender) {
@@ -392,13 +353,7 @@ public class RoleCommand extends Command {
 
 
 		sender.sendMessage("§eRole Command Failed (Invalid Syntax)");
-		sender.sendMessage("§8  > /role create <role id>");
-		sender.sendMessage("§8  > /role delete <role id>");
-		sender.sendMessage("§8  > /role reload");
-		sender.sendMessage("§8  > /role edit <role id> <mode>");
-		sender.sendMessage("§8  > /role grant <role id> [<username>]");
-		sender.sendMessage("§8  > /role revoke <role id> [<username>]");
-		sender.sendMessage("§8  > /role list");
+		syntax.printLayerUnderOwner("none", sender);
 		return true;
 	}
 
