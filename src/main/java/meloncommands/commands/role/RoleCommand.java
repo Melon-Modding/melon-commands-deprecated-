@@ -1,5 +1,6 @@
 package meloncommands.commands.role;
 
+import meloncommands.MelonCommands;
 import meloncommands.RoleBuilder;
 import meloncommands.CommandSyntaxBuilder;
 import meloncommands.config.ConfigManager;
@@ -54,7 +55,7 @@ public class RoleCommand extends Command {
 		syntax.append("textItalics", "text",                              "§8      > italics true/false");
 		syntax.append("grant",                                                  "§8  > /role grant <role id> [<username>]");
 		syntax.append("revoke",                                                 "§8  > /role revoke <role id> [<username>]");
-		syntax.append("set",                                                    "§8  > /role set <set type>");
+		syntax.append("set",                                                    "§8  > /role set <mode>");
 		syntax.append("setDefaultRole", "set",                            "§8    > defaultRole <role id>");
 		syntax.append("setDisplayMode", "set",                            "§8    > displayMode single/multi");
 		syntax.append("list",                                                   "§8  > /role list");
@@ -341,13 +342,16 @@ public class RoleCommand extends Command {
 		if (args.length == 1) {
 			sender.sendMessage("§eFailed to Set Role Value (Invalid Syntax)");
 			syntax.printLayerAndSubLayers("set", sender);
+			return true;
 		}
 
-		switch(args[2]){
-			case "defaultRole" :
-				return setDefaultRole(sender, args);
-			case "displayMode" :
-				return setDisplayMode(sender, args);
+		if (args.length >= 2) {
+			switch(args[1]){
+				case "defaultRole" :
+					return setDefaultRole(sender, args);
+				case "displayMode" :
+					return setDisplayMode(sender, args);
+			}
 		}
 
 		sender.sendMessage("§eFailed to Set Role Value (Default Error) (Invalid Syntax?)");
@@ -357,6 +361,25 @@ public class RoleCommand extends Command {
 
 	private boolean setDefaultRole(CommandSender sender, String[] args){
 
+		if(args.length == 2){
+			sender.sendMessage("§eFailed to Set Default Role (Invalid Syntax)");
+			syntax.printLayerAndSubLayers("setDefaultRole", sender);
+			return true;
+		}
+
+		if(args.length == 3) {
+			for (String role : ConfigManager.roleHashMap.keySet()) {
+				if (args[2].equals(role)) {
+					ConfigManager.loadConfig();
+					ConfigManager.getConfig().defaultRole = args[2];
+					ConfigManager.saveConfig();
+					sender.sendMessage("§5Set defaultRole to: " + args[2]);
+				}
+			}
+			sender.sendMessage("§eFailed to Set Default Role (Invalid Role)");
+			syntax.printLayerAndSubLayers("setDefaultRole", sender);
+			return true;
+		}
 
 		sender.sendMessage("§eFailed to Set Default Role (Default Error) (Invalid Syntax?)");
 		syntax.printLayerAndSubLayers("setDefaultRole", sender);
@@ -393,11 +416,13 @@ public class RoleCommand extends Command {
 				return revoke(sender, args);
 			case "list" :
 				return list(sender);
+			case "set" :
+				return set(sender, args);
 		}
 
 
 		sender.sendMessage("§eRole Command Failed (Invalid Syntax)");
-		syntax.printLayer("none", sender);
+		syntax.printAllLines(sender);
 		return true;
 	}
 

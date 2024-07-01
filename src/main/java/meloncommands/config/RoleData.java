@@ -121,14 +121,4 @@ public class RoleData {
 		@SerializedName(value = "Role Priority: (Highest - 0..1..2.. - Lowest)")
 		@Expose public int priority = 0;
 
-	//Default Role
-
-		@SerializedName(value = "Default Role: ")
-		@Expose public RoleData defaultRole = null;
-
-	//Display Mode
-
-		@SerializedName(value = "Display Mode: ")
-		@Expose public String displayMode = "multi";
-
 }

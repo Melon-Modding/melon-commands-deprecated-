@@ -19,12 +19,15 @@ public class ConfigManager {
 
 	private static final HashMap<String, File> kitFileHashMap = new HashMap<>();
 	private static final HashMap<String, File> roleFileHashMap = new HashMap<>();
+	private static final HashMap<String, File> configFileHashMap = new HashMap<>();
 
 	public static final HashMap<String, KitData> kitHashMap = new HashMap<>();
 	public static final HashMap<String, RoleData> roleHashMap = new HashMap<>();
+	public static final HashMap<String, ConfigData> configHashMap = new HashMap<>();
 
 	private static final Path roleFilePath = Paths.get(FabricLoader.getInstance().getConfigDir() + "/" + MelonCommands.MOD_ID + "/roles");
 	private static final Path kitFilePath = Paths.get(FabricLoader.getInstance().getConfigDir() + "/" + MelonCommands.MOD_ID + "/kits");
+	private static final Path configFilePath = Paths.get(FabricLoader.getInstance().getConfigDir() + "/" + MelonCommands.MOD_ID);
 
 	static{new File("./config/meloncommands").mkdirs();}
 	static{new File("./config/meloncommands/kits").mkdirs();}
@@ -46,6 +49,13 @@ public class ConfigManager {
 			return;
 		}
 		roleFileHashMap.put(id, new File(roleFilePath.toFile(), id + ".json"));
+	}
+
+	private static void prepareConfigFile() {
+		if (configFileHashMap.get("config") != null) {
+			return;
+		}
+		configFileHashMap.put("config", new File(configFilePath.toFile(), "config" + ".json"));
 	}
 
 	private static void loadKit(String id) {
@@ -80,6 +90,24 @@ public class ConfigManager {
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("Couldn't load Role: [" + id + "]'s configuration file; reverting to defaults");
+			e.printStackTrace();
+		}
+	}
+
+	public static void loadConfig() {
+		prepareConfigFile();
+
+		try {
+			if (!configFileHashMap.get("config").exists()) {
+				saveConfig();
+			}
+			if (configFileHashMap.get("config").exists()) {
+				BufferedReader br = new BufferedReader(new FileReader(configFileHashMap.get("config")));
+				configHashMap.put("config", MelonCommands.GSON.fromJson(br, ConfigData.class));
+				saveConfig();
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Couldn't load Config configuration file; reverting to defaults");
 			e.printStackTrace();
 		}
 	}
@@ -141,6 +169,21 @@ public class ConfigManager {
 		RecipeBuilder.isExporting = false;
 	}
 
+	public static void saveConfig() {
+		RecipeBuilder.isExporting = true;
+		prepareConfigFile();
+
+		String jsonString = MelonCommands.GSON.toJson(configHashMap.get("config"));
+
+		try (FileWriter fileWriter = new FileWriter(configFileHashMap.get("config"))) {
+			fileWriter.write(jsonString);
+		} catch (IOException e) {
+			System.err.println("Couldn't save Config configuration file");
+			e.printStackTrace();
+		}
+		RecipeBuilder.isExporting = false;
+	}
+
 	/**
 	 * Saves every config entry
 	 */
@@ -195,6 +238,18 @@ public class ConfigManager {
 		return roleHashMap.get(id);
 	}
 
+	public static ConfigData getConfig() {
+		if (configHashMap.get("config") == null){
+			{
+				configHashMap.put("config", new ConfigData());
+				loadConfig();
+
+				return configHashMap.get("config");
+			}
+		}
+		return configHashMap.get("config");
+	}
+
 	public static int removeKitConfig(String id){
 		int error = 2;
 		if (!kitFileHashMap.containsKey(id)) {
@@ -229,5 +284,6 @@ public class ConfigManager {
 	static{
 		loadAllKits();
 		loadAllRoles();
+		loadConfig();
 	}
 }

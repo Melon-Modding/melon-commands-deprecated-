@@ -11,6 +11,7 @@ import meloncommands.commands.tpa.TPACommand;
 import meloncommands.commands.tpa.TPADenyCommand;
 import meloncommands.commands.tpa.TPAcceptCommand;
 import meloncommands.commands.utility.MelonCommandsCommand;
+import meloncommands.config.ConfigData;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.data.gamerule.GameRuleBoolean;
 import net.minecraft.core.data.gamerule.GameRules;
