@@ -11,6 +11,9 @@ public class CommandSyntaxLine {
 		this.owner = owner;
 		this.message = message;
 	}
+
+	//TODO change "none" when a CommandSyntaxLine has no owner to null. DO NOT DO THIS UNLESS ALL STATEMENTS HAVE BEEN PROPERLY ADJUSTED
+
 	public CommandSyntaxLine(String name, String message){
 		this.name = name;
 		this.owner = "none";
