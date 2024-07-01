@@ -19,7 +19,7 @@ public class EditRoleUsername {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Username Underline (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("usernameUnderline", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("usernameUnderline", sender);
 			return true;
 		}
 
@@ -46,7 +46,7 @@ public class EditRoleUsername {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Username Bold (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("usernameBold", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("usernameBold", sender);
 			return true;
 		}
 
@@ -73,7 +73,7 @@ public class EditRoleUsername {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Username Italics (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("usernameItalics", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("usernameItalics", sender);
 			return true;
 		}
 
@@ -100,7 +100,7 @@ public class EditRoleUsername {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Username Border (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("usernameBorder", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("usernameBorder", sender);
 			return true;
 		}
 
@@ -119,7 +119,7 @@ public class EditRoleUsername {
 				return usernameBorderCustom(sender, args);
 		}
 		sender.sendMessage("§eFailed to Edit Username Border (Invalid Syntax)");
-		RoleCommand.syntax.printAllLayersUnderOwner("usernameBorder", sender);
+		RoleCommand.syntax.printLayerAndSubLayers("usernameBorder", sender);
 		return true;
 	}
 
@@ -127,7 +127,7 @@ public class EditRoleUsername {
 
 		if(args.length == 5){
 			sender.sendMessage("§eFailed to Edit Username Border Color (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("usernameBorderColor", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("usernameBorderColor", sender);
 			return true;
 		}
 
@@ -142,7 +142,7 @@ public class EditRoleUsername {
 
 		if(args.length == 6){
 			sender.sendMessage("§eFailed to Edit Username Border Type (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("usernameBorderType", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("usernameBorderType", sender);
 			return true;
 		}
 
@@ -161,7 +161,7 @@ public class EditRoleUsername {
 
 		if(args.length == 6){
 			sender.sendMessage("§eFailed to Edit Username Border Type (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("usernameBorderType", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("usernameBorderType", sender);
 			return true;
 		}
 
@@ -180,7 +180,7 @@ public class EditRoleUsername {
 
 		if(args.length == 6){
 			sender.sendMessage("§eFailed to Edit Username Border Type (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("usernameBorderType", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("usernameBorderType", sender);
 			return true;
 		}
 
@@ -199,7 +199,7 @@ public class EditRoleUsername {
 
 		if(args.length == 6){
 			sender.sendMessage("§eFailed to Edit Username Border Type (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("usernameBorderType", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("usernameBorderType", sender);
 			return true;
 		}
 
@@ -230,7 +230,7 @@ public class EditRoleUsername {
 		if(args[5].equals("suffix")){
 			if(args.length == 6){
 				sender.sendMessage("§eFailed to Edit Custom Suffix (Invalid Syntax)");
-				RoleCommand.syntax.printAllLayersUnderOwner("usernameBorderCustomAffix", sender);
+				RoleCommand.syntax.printLayerAndSubLayers("usernameBorderCustomAffix", sender);
 				return true;
 			}
 			ConfigManager.loadAllRoles();
@@ -246,7 +246,7 @@ public class EditRoleUsername {
 		} else if(args[5].equals("prefix")){
 			if(args.length == 6){
 				sender.sendMessage("§eFailed to Edit Custom Prefix (Invalid Syntax)");
-				RoleCommand.syntax.printAllLayersUnderOwner("usernameBorderCustomAffix", sender);
+				RoleCommand.syntax.printLayerAndSubLayers("usernameBorderCustomAffix", sender);
 				return true;
 			}
 			ConfigManager.loadAllRoles();
@@ -262,7 +262,7 @@ public class EditRoleUsername {
 		}
 
 		sender.sendMessage("§eFailed to Edit Custom Username Border (Invalid Syntax)");
-		RoleCommand.syntax.printAllLayersUnderOwner("usernameBorderCustom", sender);
+		RoleCommand.syntax.printLayerAndSubLayers("usernameBorderCustom", sender);
 		return true;
 	}
 }

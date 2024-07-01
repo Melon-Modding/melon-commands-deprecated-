@@ -17,7 +17,7 @@ public class EditRoleText {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Text Underline (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("textUnderline", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("textUnderline", sender);
 			return true;
 		}
 
@@ -44,7 +44,7 @@ public class EditRoleText {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Text Bold (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("textBold", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("textBold", sender);
 			return true;
 		}
 
@@ -71,7 +71,7 @@ public class EditRoleText {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Text Italics (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("textItalics", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("textItalics", sender);
 			return true;
 		}
 

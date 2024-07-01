@@ -116,9 +116,19 @@ public class RoleData {
 		@SerializedName(value = "Players Granted Role:")
 		@Expose public List<String> playersGrantedRole = new ArrayList<>();
 
-	//Role Priority (UNUSED)
+	//Role Priority
 
 		@SerializedName(value = "Role Priority: (Highest - 0..1..2.. - Lowest)")
 		@Expose public int priority = 0;
+
+	//Default Role
+
+		@SerializedName(value = "Default Role: ")
+		@Expose public RoleData defaultRole = null;
+
+	//Display Mode
+
+		@SerializedName(value = "Display Mode: ")
+		@Expose public String displayMode = "multi";
 
 }

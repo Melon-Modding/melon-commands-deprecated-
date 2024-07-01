@@ -151,14 +151,14 @@ public class CommandSyntaxBuilder {
 		}
 	}
 
-	public void printAll(CommandSender sender){
+	public void printAllLines(CommandSender sender){
 		for(CommandSyntaxLine syntaxLine : syntaxLines){
 			sender.sendMessage(syntaxLine.message);
 		}
 	}
 
 	String thisLayerOwner = null;
-	public void printLayerUnderOwner(String name, CommandSender sender){
+	public void printLayer(String name, CommandSender sender){
 		for(int i = 0; i < syntaxLines.size(); i++){
 			if(syntaxLines.get(i).name.equals(name)){
 				printLayerOwners(syntaxLines.get(i), sender);
@@ -175,7 +175,7 @@ public class CommandSyntaxBuilder {
 	}
 
 	boolean printedLayerOwners = false;
-	public void printAllLayersUnderOwner(String name, CommandSender sender){
+	public void printLayerAndSubLayers(String name, CommandSender sender){
 
 		for(int i = 0; i < syntaxLines.size(); i++){
 			if(syntaxLines.get(i).name.equals(name)){
@@ -190,7 +190,7 @@ public class CommandSyntaxBuilder {
 						thisLayerOwner = syntaxLines.get(j).name;
 					} else if (syntaxLines.get(j).owner.equals(thisLayerOwner)) {
 						printedLayerOwners = true;
-						printAllLayersUnderOwner(thisLayerOwner, sender);
+						printLayerAndSubLayers(thisLayerOwner, sender);
 					}
 				}
 			}

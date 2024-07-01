@@ -11,7 +11,7 @@ public class EditRoleDisplay {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Display Name (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("displayName", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("displayName", sender);
 			return true;
 		}
 
@@ -26,7 +26,7 @@ public class EditRoleDisplay {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Display Color (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("displayColor", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("displayColor", sender);
 			return true;
 		}
 
@@ -41,7 +41,7 @@ public class EditRoleDisplay {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Display Underline (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("displayUnderline", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("displayUnderline", sender);
 			return true;
 		}
 
@@ -68,7 +68,7 @@ public class EditRoleDisplay {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Display Bold (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("displayBold", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("displayBold", sender);
 			return true;
 		}
 
@@ -95,7 +95,7 @@ public class EditRoleDisplay {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Display Italics (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("displayItalics", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("displayItalics", sender);
 			return true;
 		}
 
@@ -122,7 +122,7 @@ public class EditRoleDisplay {
 
 		if(args.length == 4){
 			sender.sendMessage("§eFailed to Edit Display Border (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("displayBorder", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("displayBorder", sender);
 			return true;
 		}
 
@@ -141,7 +141,7 @@ public class EditRoleDisplay {
 				return displayBorderCustom(sender, args);
 		}
 		sender.sendMessage("§eFailed to Edit Display Border (Invalid Syntax)");
-		RoleCommand.syntax.printAllLayersUnderOwner("displayBorder", sender);
+		RoleCommand.syntax.printLayerAndSubLayers("displayBorder", sender);
 		return true;
 	}
 
@@ -149,7 +149,7 @@ public class EditRoleDisplay {
 
 		if(args.length == 5){
 			sender.sendMessage("§eFailed to Edit Display Border Color (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("displayBorderColor", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("displayBorderColor", sender);
 			return true;
 		}
 
@@ -164,7 +164,7 @@ public class EditRoleDisplay {
 
 		if(args.length == 6){
 			sender.sendMessage("§eFailed to Edit Display Border Type (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("displayBorderType", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("displayBorderType", sender);
 			return true;
 		}
 
@@ -183,7 +183,7 @@ public class EditRoleDisplay {
 
 		if(args.length == 6){
 			sender.sendMessage("§eFailed to Edit Display Border Type (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("displayBorderType", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("displayBorderType", sender);
 			return true;
 		}
 
@@ -202,7 +202,7 @@ public class EditRoleDisplay {
 
 		if(args.length == 6){
 			sender.sendMessage("§eFailed to Edit Display Border Type (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("displayBorderType", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("displayBorderType", sender);
 			return true;
 		}
 
@@ -221,7 +221,7 @@ public class EditRoleDisplay {
 
 		if(args.length == 6){
 			sender.sendMessage("§eFailed to Edit Display Border Type (Invalid Syntax)");
-			RoleCommand.syntax.printAllLayersUnderOwner("displayBorderType", sender);
+			RoleCommand.syntax.printLayerAndSubLayers("displayBorderType", sender);
 			return true;
 		}
 
@@ -253,7 +253,7 @@ public class EditRoleDisplay {
 		if(args[5].equals("suffix")){
 			if(args.length == 6){
 				sender.sendMessage("§eFailed to Edit Custom Suffix (Invalid Syntax)");
-				RoleCommand.syntax.printAllLayersUnderOwner("displayBorderCustomAffix", sender);
+				RoleCommand.syntax.printLayerAndSubLayers("displayBorderCustomAffix", sender);
 				return true;
 			}
 			ConfigManager.loadAllRoles();
@@ -269,7 +269,7 @@ public class EditRoleDisplay {
 		} else if(args[5].equals("prefix")){
 			if(args.length == 6){
 				sender.sendMessage("§eFailed to Edit Custom Prefix (Invalid Syntax)");
-				RoleCommand.syntax.printAllLayersUnderOwner("displayBorderCustomAffix", sender);
+				RoleCommand.syntax.printLayerAndSubLayers("displayBorderCustomAffix", sender);
 				return true;
 			}
 			ConfigManager.loadAllRoles();
@@ -285,7 +285,7 @@ public class EditRoleDisplay {
 		}
 
 		sender.sendMessage("§eFailed to Edit Custom Display Border (Invalid Syntax)");
-		RoleCommand.syntax.printAllLayersUnderOwner("displayBorderCustom", sender);
+		RoleCommand.syntax.printLayerAndSubLayers("displayBorderCustom", sender);
 		return true;
 	}
 }

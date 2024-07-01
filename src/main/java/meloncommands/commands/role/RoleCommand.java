@@ -55,8 +55,8 @@ public class RoleCommand extends Command {
 		syntax.append("grant",                                                  "§8  > /role grant <role id> [<username>]");
 		syntax.append("revoke",                                                 "§8  > /role revoke <role id> [<username>]");
 		syntax.append("set",                                                    "§8  > /role set <set type>");
-		syntax.append("set", "default",                                   "§8    > default <role id>");
-		syntax.append("set", "displayMode",                               "§8    > displayMode single/multi");
+		syntax.append("setDefaultRole", "set",                            "§8    > defaultRole <role id>");
+		syntax.append("setDisplayMode", "set",                            "§8    > displayMode single/multi");
 		syntax.append("list",                                                   "§8  > /role list");
 		syntax.append("reload",                                                 "§8  > /role reload");
 	}
@@ -66,7 +66,7 @@ public class RoleCommand extends Command {
 
 		if (args.length == 1) {
 			sender.sendMessage("§eFailed to Create Role (Invalid Syntax)");
-			syntax.printAllLayersUnderOwner("create", sender);
+			syntax.printLayerAndSubLayers("create", sender);
 			return true;
 		}
 
@@ -93,7 +93,7 @@ public class RoleCommand extends Command {
 	private boolean delete(CommandSender sender, String[] args){
 		if (args.length == 1) {
 			sender.sendMessage("§eFailed to Delete Role (Invalid Syntax)");
-			syntax.printAllLayersUnderOwner("delete", sender);
+			syntax.printLayerAndSubLayers("delete", sender);
 			return true;
 		}
 
@@ -105,13 +105,16 @@ public class RoleCommand extends Command {
 				return true;
 			case 1:
 				sender.sendMessage("§eFailed to Delete Role: " + role + " (Role Doesn't Exist)");
-				syntax.printAllLayersUnderOwner("delete", sender);
+				syntax.printLayerAndSubLayers("delete", sender);
 				return true;
 			case 2:
 				sender.sendMessage("§eFailed to Delete Role: " + role + " (IO Error)");
 				return true;
 		}
-        return false;
+
+		sender.sendMessage("§eFailed to Delete Role (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("delete", sender);
+		return true;
     }
 
 	private boolean reload(CommandSender sender){
@@ -124,19 +127,19 @@ public class RoleCommand extends Command {
 
 		if(args.length == 1){
 			sender.sendMessage("§eFailed to Edit Role (Invalid Syntax)");
-			syntax.printAllLayersUnderOwner("edit", sender);
+			syntax.printLayerAndSubLayers("edit", sender);
 			return true;
 		}
 
 		if(!ConfigManager.roleHashMap.containsKey(args[1])){
 			sender.sendMessage("§eFailed to Edit Role (Invalid Role)");
-			syntax.printLayerUnderOwner("edit", sender);
+			syntax.printLayer("edit", sender);
 			return true;
 		}
 
 		if(args.length == 2){
 			sender.sendMessage("§eFailed to Edit Role (Invalid Syntax)");
-			syntax.printLayerUnderOwner("edit", sender);
+			syntax.printLayer("edit", sender);
 			return true;
 		}
 
@@ -149,16 +152,16 @@ public class RoleCommand extends Command {
 				return text(sender, args);
 		}
 
-        sender.sendMessage("§eFailed to Edit Role (Invalid Mode or Syntax)");
-		syntax.printLayerUnderOwner("edit", sender);
-        return true;
+		sender.sendMessage("§eFailed to Edit Role (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("edit", sender);
+		return true;
     }
 
 	private boolean display(CommandSender sender, String[] args){
 
 		if(args.length == 3){
 			sender.sendMessage("§eFailed to Edit Role Display (Invalid Syntax)");
-			syntax.printLayerUnderOwner("display", sender);
+			syntax.printLayer("display", sender);
 			return true;
 		}
 
@@ -177,8 +180,8 @@ public class RoleCommand extends Command {
 				return EditRoleDisplay.displayBorder(sender, args);
 		}
 
-		sender.sendMessage("§eFailed to Edit Role Display (Invalid Syntax)");
-		syntax.printAllLayersUnderOwner("display", sender);
+		sender.sendMessage("§eFailed to Edit Role Display (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("display", sender);
 		return true;
 	}
 
@@ -186,7 +189,7 @@ public class RoleCommand extends Command {
 
 		if(args.length == 3){
 			sender.sendMessage("§eFailed to Edit Role Username (Invalid Syntax)");
-			syntax.printAllLayersUnderOwner("username", sender);
+			syntax.printLayerAndSubLayers("username", sender);
 			return true;
 		}
 
@@ -203,8 +206,8 @@ public class RoleCommand extends Command {
 				return EditRoleUsername.usernameBorder(sender, args);
 		}
 
-		sender.sendMessage("§eFailed to Edit Role Username (Invalid Syntax)");
-		syntax.printAllLayersUnderOwner("username", sender);
+		sender.sendMessage("§eFailed to Edit Role Username (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("username", sender);
 		return true;
 	}
 
@@ -212,7 +215,7 @@ public class RoleCommand extends Command {
 
 		if(args.length == 3){
 			sender.sendMessage("§eFailed to Edit Role Text (Invalid Syntax)");
-			syntax.printAllLayersUnderOwner("text", sender);
+			syntax.printLayerAndSubLayers("text", sender);
 			return true;
 		}
 
@@ -227,8 +230,8 @@ public class RoleCommand extends Command {
 				return EditRoleText.textItalics(sender, args);
 		}
 
-		sender.sendMessage("§eFailed to Edit Role Text (Invalid Syntax)");
-		syntax.printAllLayersUnderOwner("text", sender);
+		sender.sendMessage("§eFailed to Edit Role Text (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("text", sender);
 		return true;
 	}
 
@@ -236,14 +239,14 @@ public class RoleCommand extends Command {
 
 		if(args.length == 1){
 			sender.sendMessage("§eFailed to Grant Role (Invalid Syntax)");
-			syntax.printAllLayersUnderOwner("grant", sender);
+			syntax.printLayerAndSubLayers("grant", sender);
 			return true;
 		}
 
 
 		if(!ConfigManager.roleHashMap.containsKey(args[1])){
 			sender.sendMessage("§eFailed to Grant Role (Role doesn't exist!)");
-			syntax.printAllLayersUnderOwner("grant", sender);
+			syntax.printLayerAndSubLayers("grant", sender);
 			return true;
 		}
 
@@ -267,8 +270,8 @@ public class RoleCommand extends Command {
 		}
 
 
-		sender.sendMessage("§eFailed to Grant Role (Invalid Syntax)");
-		syntax.printAllLayersUnderOwner("grant", sender);
+		sender.sendMessage("§eFailed to Grant Role (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("grant", sender);
 		return true;
 	}
 
@@ -276,13 +279,13 @@ public class RoleCommand extends Command {
 
 		if(args.length == 1){
 			sender.sendMessage("§eFailed to Revoke Role (Invalid Syntax)");
-			syntax.printAllLayersUnderOwner("revoke", sender);
+			syntax.printLayerAndSubLayers("revoke", sender);
 			return true;
 		}
 
 		if(!ConfigManager.roleHashMap.containsKey(args[1])){
 			sender.sendMessage("§eFailed to Revoke Role (Role doesn't exist!)");
-			syntax.printAllLayersUnderOwner("revoke", sender);
+			syntax.printLayerAndSubLayers("revoke", sender);
 			return true;
 		}
 
@@ -305,8 +308,8 @@ public class RoleCommand extends Command {
 			return true;
 		}
 
-		sender.sendMessage("§eFailed to Revoke Role (Invalid Syntax)");
-		syntax.printAllLayersUnderOwner("revoke", sender);
+		sender.sendMessage("§eFailed to Revoke Role (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("revoke", sender);
 		return true;
 	}
 
@@ -329,6 +332,42 @@ public class RoleCommand extends Command {
 			sender.sendMessage("§8      > " + RoleBuilder.buildRoleTextFormat(ConfigManager.roleHashMap.get(role)) + "text");
 		}
 
+		sender.sendMessage("§eFailed to Show Role List (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("list", sender);
+		return true;
+	}
+
+	private boolean set(CommandSender sender, String[] args) {
+		if (args.length == 1) {
+			sender.sendMessage("§eFailed to Set Role Value (Invalid Syntax)");
+			syntax.printLayerAndSubLayers("set", sender);
+		}
+
+		switch(args[2]){
+			case "defaultRole" :
+				return setDefaultRole(sender, args);
+			case "displayMode" :
+				return setDisplayMode(sender, args);
+		}
+
+		sender.sendMessage("§eFailed to Set Role Value (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("set", sender);
+		return true;
+	}
+
+	private boolean setDefaultRole(CommandSender sender, String[] args){
+
+
+		sender.sendMessage("§eFailed to Set Default Role (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("setDefaultRole", sender);
+		return true;
+	}
+
+	private boolean setDisplayMode(CommandSender sender, String[] args){
+
+
+		sender.sendMessage("§eFailed to Set Display Mode (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("setDisplayMode", sender);
 		return true;
 	}
 
@@ -358,7 +397,7 @@ public class RoleCommand extends Command {
 
 
 		sender.sendMessage("§eRole Command Failed (Invalid Syntax)");
-		syntax.printLayerUnderOwner("none", sender);
+		syntax.printLayer("none", sender);
 		return true;
 	}
 
@@ -369,6 +408,6 @@ public class RoleCommand extends Command {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler handler, CommandSender sender) {
-		syntax.printAll(sender);
+		syntax.printAllLines(sender);
 	}
 }
