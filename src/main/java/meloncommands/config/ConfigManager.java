@@ -51,11 +51,11 @@ public class ConfigManager {
 		roleFileHashMap.put(id, new File(roleFilePath.toFile(), id + ".json"));
 	}
 
-	private static void prepareConfigFile() {
-		if (configFileHashMap.get("config") != null) {
+	private static void prepareConfigFile(String id) {
+		if (configFileHashMap.get(id) != null) {
 			return;
 		}
-		configFileHashMap.put("config", new File(configFilePath.toFile(), "config.json"));
+		configFileHashMap.put(id, new File(configFilePath.toFile(), id + ".json"));
 	}
 
 	private static void loadKit(String id) {
@@ -94,17 +94,17 @@ public class ConfigManager {
 		}
 	}
 
-	public static void loadConfig() {
-		prepareConfigFile();
+	public static void loadConfig(String id) {
+		prepareConfigFile(id);
 
 		try {
-			if (!configFileHashMap.get("config").exists()) {
-				saveConfig();
+			if (!configFileHashMap.get(id).exists()) {
+				saveConfig(id);
 			}
-			if (configFileHashMap.get("config").exists()) {
-				BufferedReader br = new BufferedReader(new FileReader(configFileHashMap.get("config")));
-				configHashMap.put("config", MelonCommands.GSON.fromJson(br, ConfigData.class));
-				saveConfig();
+			if (configFileHashMap.get(id).exists()) {
+				BufferedReader br = new BufferedReader(new FileReader(configFileHashMap.get(id)));
+				configHashMap.put(id, MelonCommands.GSON.fromJson(br, ConfigData.class));
+				saveConfig(id);
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("Couldn't load Config configuration file; reverting to defaults");
@@ -130,6 +130,18 @@ public class ConfigManager {
 			roleHashMap.clear();
 			for (String file : files){
 				loadRole(file.replace(".json", ""));
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static void loadAllConfigs(){
+		try {
+			Set<String> files = listFilesUsingFilesList(configFilePath.toString());
+			configHashMap.clear();
+			for (String file : files){
+				loadConfig(file.replace(".json", ""));
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -169,13 +181,13 @@ public class ConfigManager {
 		RecipeBuilder.isExporting = false;
 	}
 
-	public static void saveConfig() {
+	public static void saveConfig(String id) {
 		RecipeBuilder.isExporting = true;
-		prepareConfigFile();
+		prepareConfigFile(id);
 
-		String jsonString = MelonCommands.GSON.toJson(configHashMap.get("config"));
+		String jsonString = MelonCommands.GSON.toJson(configHashMap.get(id));
 
-		try (FileWriter fileWriter = new FileWriter(configFileHashMap.get("config"))) {
+		try (FileWriter fileWriter = new FileWriter(configFileHashMap.get(id))) {
 			fileWriter.write(jsonString);
 		} catch (IOException e) {
 			System.err.println("Couldn't save Config configuration file");
@@ -197,6 +209,12 @@ public class ConfigManager {
 	public static void saveAllRoles(){
 		for (String id: roleHashMap.keySet()) {
 			saveRole(id);
+		}
+	}
+
+	public static void saveAllConfigs(){
+		for (String id: configHashMap.keySet()) {
+			saveConfig(id);
 		}
 	}
 
@@ -238,16 +256,16 @@ public class ConfigManager {
 		return roleHashMap.get(id);
 	}
 
-	public static ConfigData getConfig() {
-		if (configHashMap.get("config") == null){
+	public static ConfigData getConfig(String id) {
+		if (configHashMap.get(id) == null){
 			{
-				configHashMap.put("config", new ConfigData());
-				loadConfig();
+				configHashMap.put(id, new ConfigData());
+				loadConfig(id);
 
-				return configHashMap.get("config");
+				return configHashMap.get(id);
 			}
 		}
-		return configHashMap.get("config");
+		return configHashMap.get(id);
 	}
 
 	public static int removeKitConfig(String id){
@@ -284,6 +302,6 @@ public class ConfigManager {
 	static{
 		loadAllKits();
 		loadAllRoles();
-		loadConfig();
+		loadAllConfigs();
 	}
 }

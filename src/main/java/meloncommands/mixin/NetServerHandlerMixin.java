@@ -33,27 +33,38 @@ public class NetServerHandlerMixin {
 	@Inject(at = @At(shift = At.Shift.AFTER, value = "INVOKE", target = "Lnet/minecraft/core/net/ChatEmotes;process(Ljava/lang/String;)Ljava/lang/String;"), method = "handleChat", cancellable = true)
 	public void handleChat(Packet3Chat packet, CallbackInfo ci, @Local String message) {
 
+		String defaultRoleDisplay = RoleBuilder.buildRoleDisplay(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole));
+		String defaultRoleUsername = RoleBuilder.buildRoleUsername(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole), this.playerEntity.username);
+		String defaultRoleTextFormatting = RoleBuilder.buildRoleTextFormat(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole));
+
 		StringBuilder roleDisplays = new StringBuilder();
 		String roleUsername = "" + TextFormatting.RESET + TextFormatting.WHITE + "<" + this.playerEntity.username + "> ";
 		String roleTextFormatting = "" + TextFormatting.WHITE;
+
 		ArrayList<RoleData> rolesGranted = new ArrayList<>();
 		for (int i = 0; i < 20; i++) {
 			rolesGranted.add(null);
 		}
 
+		boolean hasBeenGrantedRole = false;
 		for(RoleData role : ConfigManager.roleHashMap.values()){
 			if(role.playersGrantedRole.contains(this.playerEntity.username)){
 				rolesGranted.add(role.priority, role);
+				hasBeenGrantedRole = true;
 			}
 		}
 
+		String highestPriorityRoleDisplay = "";
+		int tempPriority = Integer.MAX_VALUE;
 		for(RoleData role : rolesGranted){
-            if (role != null) {
+			if (role != null && role.priority < tempPriority) {
+				tempPriority = role.priority;
+				highestPriorityRoleDisplay = RoleBuilder.buildRoleDisplay(role);
 				roleUsername = RoleBuilder.buildRoleUsername(role, this.playerEntity.username);
 				roleTextFormatting = RoleBuilder.buildRoleTextFormat(role);
-				break;
 			}
         }
+
 
 		for(int i = rolesGranted.size()-1; i >= 0; i--){
 			if(rolesGranted.get(i) != null){
@@ -61,7 +72,17 @@ public class NetServerHandlerMixin {
 			}
 		}
 
-		message = roleDisplays + roleUsername + roleTextFormatting + message;
+		if(hasBeenGrantedRole){
+			if (ConfigManager.getConfig("config").displayMode.equals("multi")) {
+				message = defaultRoleDisplay + roleDisplays + roleUsername + roleTextFormatting + message;
+
+			} else if (ConfigManager.getConfig("config").displayMode.equals("single")) {
+                message = highestPriorityRoleDisplay + roleUsername + roleTextFormatting + message;
+			}
+		} else {
+			message = defaultRoleDisplay + defaultRoleUsername + defaultRoleTextFormatting + message;
+		}
+
 		logger.info(message);
 		this.mcServer.playerList.sendEncryptedChatToAllPlayers(message);
 		ci.cancel();

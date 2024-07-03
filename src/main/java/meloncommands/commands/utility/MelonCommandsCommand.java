@@ -30,7 +30,7 @@ public class MelonCommandsCommand extends Command {
 			sender.sendMessage("§5Reloaded " + ConfigManager.roleHashMap.size() + " Role(s)!");
 			RoleCommand.buildRoleSyntax();
 			sender.sendMessage("§5Built Role Syntax!");
-			ConfigManager.loadConfig();
+			ConfigManager.loadAllConfigs();
 			sender.sendMessage("§5Reloaded Config!");
 			return true;
 		}

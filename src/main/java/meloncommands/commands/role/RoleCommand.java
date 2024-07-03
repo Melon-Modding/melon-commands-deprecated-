@@ -123,7 +123,7 @@ public class RoleCommand extends Command {
 		sender.sendMessage("§5Reloaded " + ConfigManager.roleHashMap.size() + " Role(s)!");
 		RoleCommand.buildRoleSyntax();
 		sender.sendMessage("§5Built Role Syntax!");
-		ConfigManager.loadConfig();
+		ConfigManager.loadAllConfigs();
 		sender.sendMessage("§5Reloaded Config!");
 		return true;
 	}
@@ -149,6 +149,8 @@ public class RoleCommand extends Command {
 		}
 
 		switch(args[2]){
+			case "priority":
+				return priority(sender, args);
 			case "display":
 				return display(sender, args);
 			case "username":
@@ -161,6 +163,27 @@ public class RoleCommand extends Command {
 		syntax.printLayerAndSubLayers("edit", sender);
 		return true;
     }
+
+	private boolean priority(CommandSender sender, String[] args){
+
+		if(args.length == 3){
+			sender.sendMessage("§eFailed to Edit Role Priority (Invalid Syntax)");
+			syntax.printLayer("priority", sender);
+			return true;
+		}
+
+		if(args.length == 4){
+			ConfigManager.loadAllRoles();
+			getRoleFromArg(args[1]).priority = Integer.parseInt(args[3]);
+			ConfigManager.saveAllRoles();
+			sender.sendMessage("§5Set Priority for Role " + args[1] + " to: §0" + args[3]);
+			return true;
+		}
+
+		sender.sendMessage("§eFailed to Edit Role Priority (Default Error) (Invalid Syntax?)");
+		syntax.printLayerAndSubLayers("priority", sender);
+		return true;
+	}
 
 	private boolean display(CommandSender sender, String[] args){
 
@@ -374,10 +397,11 @@ public class RoleCommand extends Command {
 		if(args.length == 3) {
 			for (String role : ConfigManager.roleHashMap.keySet()) {
 				if (args[2].equals(role)) {
-					ConfigManager.loadConfig();
-					ConfigManager.getConfig().defaultRole = args[2];
-					ConfigManager.saveConfig();
+					ConfigManager.loadAllConfigs();
+					ConfigManager.getConfig("config").defaultRole = args[2];
+					ConfigManager.saveAllConfigs();
 					sender.sendMessage("§5Set defaultRole to: " + args[2]);
+					return true;
 				}
 			}
 			sender.sendMessage("§eFailed to Set Default Role (Invalid Role)");
@@ -392,6 +416,25 @@ public class RoleCommand extends Command {
 
 	private boolean setDisplayMode(CommandSender sender, String[] args){
 
+		if(args.length == 2){
+			sender.sendMessage("§eFailed to Set Display Mode (Invalid Syntax)");
+			syntax.printLayerAndSubLayers("setDisplayMode", sender);
+			return true;
+		}
+
+		if(args.length == 3 && args[2].equals("single")) {
+			ConfigManager.loadAllConfigs();
+			ConfigManager.getConfig("config").displayMode = "single";
+			ConfigManager.saveAllConfigs();
+			sender.sendMessage("§5Set displayMode to: single");
+			return true;
+		} else if (args.length == 3 && args[2].equals("multi")) {
+			ConfigManager.loadAllConfigs();
+			ConfigManager.getConfig("config").displayMode = "multi";
+			ConfigManager.saveAllConfigs();
+			sender.sendMessage("§5Set displayMode to: multi");
+			return true;
+		}
 
 		sender.sendMessage("§eFailed to Set Display Mode (Default Error) (Invalid Syntax?)");
 		syntax.printLayerAndSubLayers("setDisplayMode", sender);
