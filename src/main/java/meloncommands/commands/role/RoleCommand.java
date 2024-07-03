@@ -37,7 +37,7 @@ public class RoleCommand extends Command {
 		syntax.append("displayBorder", "display",                         "§8      > border <style>");
 		syntax.append("displayBorderColor", "displayBorder",              "§8        > color <color/hex>");
 		syntax.append("displayBorderType", "displayBorder",               "§8        > none/bracket/caret/curly");
-		syntax.append("displayBorderCustom", "displayBorder",             "§8        > custom <affix>");
+		syntax.append("displayBorderCustom", "displayBorder",             "§8        > custom [<affix>]");
 		syntax.append("displayBorderCustomAffix", "displayBorderCustom",  "§8          > prefix/suffix <custom affix>");
 		syntax.append("username", "edit",                                 "§8    > username <style>");
 		syntax.append("usernameColor", "username",                        "§8      > color <color/hex>");
@@ -47,7 +47,7 @@ public class RoleCommand extends Command {
 		syntax.append("usernameBorder", "username",                       "§8      > border <style>");
 		syntax.append("usernameBorderColor", "usernameBorder",            "§8        > color <color/hex>");
 		syntax.append("usernameBorderType", "usernameBorder",             "§8        > none/bracket/caret/curly");
-		syntax.append("usernameBorderCustom", "usernameBorder",           "§8        > custom <affix>");
+		syntax.append("usernameBorderCustom", "usernameBorder",           "§8        > custom [<affix>]");
 		syntax.append("usernameBorderCustomAffix", "usernameBorderCustom","§8          > prefix/suffix <custom affix>");
 		syntax.append("text", "edit",                                     "§8    > text <style>");
 		syntax.append("textColor", "text",                                "§8      > color <color/hex>");
@@ -320,17 +320,17 @@ public class RoleCommand extends Command {
 
 		RoleData roleData = getRoleFromArg(args[1]);
 
-		if(args.length == 2 && roleData.playersGrantedRole.contains(sender.getPlayer().username)){
-			ConfigManager.loadAllRoles();
-			getRoleFromArg(args[1]).playersGrantedRole.remove(sender.getPlayer().username);
-			ConfigManager.saveAllRoles();
-			sender.sendMessage("§1Revoked Role: " + args[1] + " from player: §0" + sender.getPlayer().username);
-			return true;
-		} else if (args.length == 3 && roleData.playersGrantedRole.contains(sender.getPlayer().username)){
+		if (args.length == 3 && roleData.playersGrantedRole.contains(args[2])) {
 			ConfigManager.loadAllRoles();
 			getRoleFromArg(args[1]).playersGrantedRole.remove(args[2]);
 			ConfigManager.saveAllRoles();
 			sender.sendMessage("§1Revoked Role: " + args[1] + " from player: §0" + args[2]);
+			return true;
+		} else if (args.length == 2 && roleData.playersGrantedRole.contains(sender.getPlayer().username)){
+			ConfigManager.loadAllRoles();
+			getRoleFromArg(args[1]).playersGrantedRole.remove(sender.getPlayer().username);
+			ConfigManager.saveAllRoles();
+			sender.sendMessage("§1Revoked Role: " + args[1] + " from player: §0" + sender.getPlayer().username);
 			return true;
 		} else if (!roleData.playersGrantedRole.contains(sender.getPlayer().username) || !roleData.playersGrantedRole.contains(args[2])) {
 			sender.sendMessage("§eFailed to Revoke Role (Player does not have Role!)");
