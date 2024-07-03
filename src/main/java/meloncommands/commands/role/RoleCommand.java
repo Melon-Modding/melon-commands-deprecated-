@@ -29,6 +29,7 @@ public class RoleCommand extends Command {
 		syntax.append("edit",                                                   "§8  > /role edit <role id> <mode>");
 		syntax.append("priority", "edit",                                 "§8    > priority <priority value>");
 		syntax.append("display", "edit",                                  "§8    > display <style>");
+		syntax.append("displayName", "display",                           "§8      > name <display name>");
 		syntax.append("displayColor", "display",                          "§8      > color <color/hex>");
 		syntax.append("displayUnderline", "display",                      "§8      > underline true/false");
 		syntax.append("displayBold", "display",                           "§8      > bold true/false");
