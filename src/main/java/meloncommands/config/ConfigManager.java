@@ -27,7 +27,7 @@ public class ConfigManager {
 
 	private static final Path roleFilePath = Paths.get(FabricLoader.getInstance().getConfigDir() + "/" + MelonCommands.MOD_ID + "/roles");
 	private static final Path kitFilePath = Paths.get(FabricLoader.getInstance().getConfigDir() + "/" + MelonCommands.MOD_ID + "/kits");
-	private static final Path configFilePath = Paths.get(FabricLoader.getInstance().getConfigDir() + "/" + MelonCommands.MOD_ID);
+	private static final Path configFilePath = Paths.get(FabricLoader.getInstance().getConfigDir() + "/" + MelonCommands.MOD_ID );
 
 	static{new File("./config/meloncommands").mkdirs();}
 	static{new File("./config/meloncommands/kits").mkdirs();}
@@ -55,7 +55,7 @@ public class ConfigManager {
 		if (configFileHashMap.get("config") != null) {
 			return;
 		}
-		configFileHashMap.put("config", new File(configFilePath.toFile(), "config" + ".json"));
+		configFileHashMap.put("config", new File(configFilePath.toFile(), "config.json"));
 	}
 
 	private static void loadKit(String id) {

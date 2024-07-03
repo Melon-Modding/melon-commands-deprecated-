@@ -7,12 +7,12 @@ public class ConfigData {
 
 	//Default Role
 
-	@SerializedName(value = "Default Role: ")
-	@Expose public String defaultRole = null;
+		@SerializedName(value = "Default Role: ")
+		@Expose public String defaultRole = null;
 
 	//Display Mode
 
-	@SerializedName(value = "Display Mode: ")
-	@Expose public String displayMode = "multi";
+		@SerializedName(value = "Display Mode: ")
+		@Expose public String displayMode = "multi";
 
 }

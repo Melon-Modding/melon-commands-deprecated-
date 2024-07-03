@@ -11,7 +11,6 @@ import meloncommands.commands.tpa.TPACommand;
 import meloncommands.commands.tpa.TPADenyCommand;
 import meloncommands.commands.tpa.TPAcceptCommand;
 import meloncommands.commands.utility.MelonCommandsCommand;
-import meloncommands.config.ConfigData;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.data.gamerule.GameRuleBoolean;
 import net.minecraft.core.data.gamerule.GameRules;
@@ -36,6 +35,7 @@ public class MelonCommands implements ModInitializer, GameStartEntrypoint{
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static final Gson GSON = (new GsonBuilder()).setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().registerTypeAdapter(ItemStack.class, new ItemStackJsonAdapter()).create();
+
 
 	public static final HashMap<String, String> colorMap = new HashMap<>();
 	static{
