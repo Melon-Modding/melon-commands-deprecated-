@@ -121,6 +121,10 @@ public class RoleCommand extends Command {
 	private boolean reload(CommandSender sender){
 		ConfigManager.loadAllRoles();
 		sender.sendMessage("§5Reloaded " + ConfigManager.roleHashMap.size() + " Role(s)!");
+		RoleCommand.buildRoleSyntax();
+		sender.sendMessage("§5Built Role Syntax!");
+		ConfigManager.loadConfig();
+		sender.sendMessage("§5Reloaded Config!");
 		return true;
 	}
 

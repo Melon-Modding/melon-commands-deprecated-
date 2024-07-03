@@ -94,13 +94,10 @@ public class MelonCommands implements ModInitializer, GameStartEntrypoint{
 		CommandHelper.createCommand(new RoleCommand());
 		CommandHelper.createCommand(new WhereAmICommand());
 		CommandHelper.createCommand(new KittenCommand());
-		// For summoning dummy lightningBolt
-		// CommandHelper.createCommand(new Smite());
+		//CommandHelper.createCommand(new Smite());
 		CommandHelper.createCommand(new TPACommand());
 		CommandHelper.createCommand(new TPAcceptCommand());
 		CommandHelper.createCommand(new TPADenyCommand());
 		CommandHelper.createCommand(new MelonCommandsCommand());
-
-
 	}
 }
