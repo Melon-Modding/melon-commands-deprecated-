@@ -1,7 +1,11 @@
 package meloncommands;
 
+import meloncommands.config.ConfigManager;
 import meloncommands.config.RoleData;
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.net.command.TextFormatting;
+
+import java.util.ArrayList;
 
 public class RoleBuilder {
 
@@ -107,4 +111,47 @@ public class RoleBuilder {
 		return roleTextFormat;
 	}
 
+	public static String buildPlayerRoleDisplay(EntityPlayer player) {
+
+		String defaultRoleDisplay = RoleBuilder.buildRoleDisplay(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole));
+
+		StringBuilder roleDisplays = new StringBuilder();
+		ArrayList<RoleData> rolesGranted = new ArrayList<>();
+		for (int i = 0; i < 20; i++) {
+			rolesGranted.add(null);
+		}
+
+		boolean hasBeenGrantedRole = false;
+		for (RoleData role : ConfigManager.roleHashMap.values()) {
+			if (role.playersGrantedRole.contains(player.username)) {
+				rolesGranted.add(role.priority, role);
+				hasBeenGrantedRole = true;
+			}
+		}
+
+		String highestPriorityRoleDisplay = "";
+		int tempPriority = Integer.MAX_VALUE;
+		for (RoleData role : rolesGranted) {
+			if (role != null && role.priority < tempPriority) {
+				tempPriority = role.priority;
+				highestPriorityRoleDisplay = buildRoleDisplay(role);
+			}
+		}
+
+		for (int i = rolesGranted.size() - 1; i >= 0; i--) {
+			if (rolesGranted.get(i) != null) {
+				roleDisplays.append(buildRoleDisplay(rolesGranted.get(i)));
+			}
+		}
+
+		if (hasBeenGrantedRole) {
+			if (ConfigManager.getConfig("config").displayMode.equals("multi")) {
+				return defaultRoleDisplay + roleDisplays;
+
+			} else if (ConfigManager.getConfig("config").displayMode.equals("single")) {
+				return highestPriorityRoleDisplay;
+			}
+		}
+        return defaultRoleDisplay;
+    }
 }

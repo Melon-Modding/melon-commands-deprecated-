@@ -15,6 +15,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static net.minecraft.server.util.helper.PlayerList.updateList;
+
 public class ConfigManager {
 
 	private static final HashMap<String, File> kitFileHashMap = new HashMap<>();
@@ -209,12 +211,14 @@ public class ConfigManager {
 	public static void saveAllRoles(){
 		for (String id: roleHashMap.keySet()) {
 			saveRole(id);
+			updateList();
 		}
 	}
 
 	public static void saveAllConfigs(){
 		for (String id: configHashMap.keySet()) {
 			saveConfig(id);
+			updateList();
 		}
 	}
 

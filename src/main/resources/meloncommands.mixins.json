@@ -6,6 +6,7 @@
   "mixins": [
     "MinecraftServerMixin",
     "NetServerHandlerMixin",
+    "PlayerListMixin",
     "VanillaFix_WorldMixin",
     "gamerules.EntityLightningBoltMixin",
     "gamerules.FireTickMixin",

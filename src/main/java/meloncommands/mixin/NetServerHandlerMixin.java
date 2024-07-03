@@ -34,11 +34,11 @@ public class NetServerHandlerMixin {
 	public void handleChat(Packet3Chat packet, CallbackInfo ci, @Local String message) {
 
 		String defaultRoleDisplay = RoleBuilder.buildRoleDisplay(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole));
-		String defaultRoleUsername = RoleBuilder.buildRoleUsername(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole), this.playerEntity.username);
+		String defaultRoleUsername = RoleBuilder.buildRoleUsername(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole), this.playerEntity.getDisplayName());
 		String defaultRoleTextFormatting = RoleBuilder.buildRoleTextFormat(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole));
 
 		StringBuilder roleDisplays = new StringBuilder();
-		String roleUsername = "" + TextFormatting.RESET + TextFormatting.WHITE + "<" + this.playerEntity.username + "> ";
+		String roleUsername = "" + TextFormatting.RESET + TextFormatting.WHITE + "<" + this.playerEntity.getDisplayName() + "> ";
 		String roleTextFormatting = "" + TextFormatting.WHITE;
 
 		ArrayList<RoleData> rolesGranted = new ArrayList<>();
@@ -60,7 +60,7 @@ public class NetServerHandlerMixin {
 			if (role != null && role.priority < tempPriority) {
 				tempPriority = role.priority;
 				highestPriorityRoleDisplay = RoleBuilder.buildRoleDisplay(role);
-				roleUsername = RoleBuilder.buildRoleUsername(role, this.playerEntity.username);
+				roleUsername = RoleBuilder.buildRoleUsername(role, this.playerEntity.getDisplayName());
 				roleTextFormatting = RoleBuilder.buildRoleTextFormat(role);
 			}
         }
