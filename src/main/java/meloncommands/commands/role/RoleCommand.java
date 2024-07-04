@@ -8,6 +8,7 @@ import meloncommands.config.RoleData;
 import net.minecraft.core.net.command.Command;
 import net.minecraft.core.net.command.CommandHandler;
 import net.minecraft.core.net.command.CommandSender;
+import net.minecraft.core.net.command.TextFormatting;
 
 //TODO finish /role set default, /role set displayMode, and /role edit priority
 
@@ -51,7 +52,7 @@ public class RoleCommand extends Command {
 		syntax.append("usernameBorderCustom", "usernameBorder",           "§8        > custom [<affix>]");
 		syntax.append("usernameBorderCustomAffix", "usernameBorderCustom","§8          > prefix/suffix <custom affix>");
 		syntax.append("text", "edit",                                     "§8    > text <style>");
-		syntax.append("textColor", "text",                                "§8      > color <color/hex>");
+		syntax.append("textColor", "text",                                "§8      > color <color/hex> (*bug: hex won't wrap!)");
 		syntax.append("textUnderline", "text",                            "§8      > underline true/false");
 		syntax.append("textBold", "text",                                 "§8      > bold true/false");
 		syntax.append("textItalics", "text",                              "§8      > italics true/false");
@@ -353,17 +354,12 @@ public class RoleCommand extends Command {
 		sender.sendMessage("§8< Roles: >");
 
 		for (String role : ConfigManager.roleHashMap.keySet()) {
-			sender.sendMessage("§8  > " + role );
-			sender.sendMessage("§8    > Display:");
-			sender.sendMessage("§8      > " + RoleBuilder.buildRoleDisplay(ConfigManager.roleHashMap.get(role)));
-			sender.sendMessage("§8    > Username:");
-			sender.sendMessage("§8      > " + RoleBuilder.buildRoleUsername(ConfigManager.roleHashMap.get(role), sender.getPlayer().username));
-			sender.sendMessage("§8    > Text:");
-			sender.sendMessage("§8      > " + RoleBuilder.buildRoleTextFormat(ConfigManager.roleHashMap.get(role)) + "text");
+			sender.sendMessage("§8  > Role ID: " + TextFormatting.WHITE + TextFormatting.ITALIC + role + "§8 - Priority: " + TextFormatting.WHITE + getRoleFromArg(role).priority);
+			sender.sendMessage("§8    > " + RoleBuilder.buildRoleDisplay(ConfigManager.roleHashMap.get(role))
+												+ RoleBuilder.buildRoleUsername(ConfigManager.roleHashMap.get(role), sender.getPlayer().getDisplayName())
+												+ RoleBuilder.buildRoleTextFormat(ConfigManager.roleHashMap.get(role)) + "text");
 		}
 
-		sender.sendMessage("§eFailed to Show Role List (Default Error) (Invalid Syntax?)");
-		syntax.printLayerAndSubLayers("list", sender);
 		return true;
 	}
 
