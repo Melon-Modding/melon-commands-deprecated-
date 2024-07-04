@@ -24,7 +24,7 @@ public class PlayerListMixin {
 		String[] scores = new String[playerCount];
 		for (int i = 0; i < playerCount; ++i) {
 			EntityPlayerMP player = server.playerList.playerEntities.get(i);
-			players[i] = RoleBuilder.buildPlayerRoleDisplay(player) + player.getDisplayName() + " ";
+			players[i] = RoleBuilder.buildPlayerRoleDisplay(player) + player.getDisplayName();
 			scores[i] = String.valueOf(player.getScore());
 		}
 		server.playerList.sendPacketToAllPlayers(new Packet138PlayerList(playerCount, players, scores));

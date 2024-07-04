@@ -28,6 +28,7 @@ public class RoleCommand extends Command {
 		syntax.append("delete",                                                 "§8  > /role delete <role id>");
 		syntax.append("edit",                                                   "§8  > /role edit <role id> <mode>");
 		syntax.append("priority", "edit",                                 "§8    > priority <priority value>");
+		syntax.append("perms", "edit",                                    "§8    > perms <permission>");
 		syntax.append("display", "edit",                                  "§8    > display <style>");
 		syntax.append("displayName", "display",                           "§8      > name <display name>");
 		syntax.append("displayColor", "display",                          "§8      > color <color/hex>");
@@ -57,7 +58,7 @@ public class RoleCommand extends Command {
 		syntax.append("grant",                                                  "§8  > /role grant <role id> [<username>]");
 		syntax.append("revoke",                                                 "§8  > /role revoke <role id> [<username>]");
 		syntax.append("set",                                                    "§8  > /role set <mode>");
-		syntax.append("setDefaultRole", "set",                            "§8    > defaultRole <role id>");
+		syntax.append("setDefaultRole", "set",                            "§8    > defaultRole <role id>/none");
 		syntax.append("setDisplayMode", "set",                            "§8    > displayMode single/multi");
 		syntax.append("list",                                                   "§8  > /role list");
 		syntax.append("reload",                                                 "§8  > /role reload");
@@ -402,6 +403,12 @@ public class RoleCommand extends Command {
 					ConfigManager.getConfig("config").defaultRole = args[2];
 					ConfigManager.saveAllConfigs();
 					sender.sendMessage("§5Set defaultRole to: " + args[2]);
+					return true;
+				} else if (args[2].equals("none")) {
+					ConfigManager.loadAllConfigs();
+					ConfigManager.getConfig("config").defaultRole = null;
+					ConfigManager.saveAllConfigs();
+					sender.sendMessage("§5Set defaultRole to: none");
 					return true;
 				}
 			}

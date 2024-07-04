@@ -113,7 +113,12 @@ public class RoleBuilder {
 
 	public static String buildPlayerRoleDisplay(EntityPlayer player) {
 
-		String defaultRoleDisplay = RoleBuilder.buildRoleDisplay(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole));
+		String defaultRoleDisplay;
+		if(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole) == null){
+			defaultRoleDisplay = null;
+		} else {
+			defaultRoleDisplay = RoleBuilder.buildRoleDisplay(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole));
+		}
 
 		StringBuilder roleDisplays = new StringBuilder();
 		ArrayList<RoleData> rolesGranted = new ArrayList<>();
@@ -144,14 +149,19 @@ public class RoleBuilder {
 			}
 		}
 
-		if (hasBeenGrantedRole) {
+		if(hasBeenGrantedRole){
 			if (ConfigManager.getConfig("config").displayMode.equals("multi")) {
-				return defaultRoleDisplay + roleDisplays;
-
+				if(defaultRoleDisplay != null) {
+					return defaultRoleDisplay + roleDisplays;
+				} else {
+					return "" + roleDisplays;
+				}
 			} else if (ConfigManager.getConfig("config").displayMode.equals("single")) {
 				return highestPriorityRoleDisplay;
 			}
+		} else if(defaultRoleDisplay != null){
+			return defaultRoleDisplay;
 		}
-        return defaultRoleDisplay;
+		return "";
     }
 }

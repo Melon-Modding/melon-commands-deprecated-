@@ -33,12 +33,22 @@ public class NetServerHandlerMixin {
 	@Inject(at = @At(shift = At.Shift.AFTER, value = "INVOKE", target = "Lnet/minecraft/core/net/ChatEmotes;process(Ljava/lang/String;)Ljava/lang/String;"), method = "handleChat", cancellable = true)
 	public void handleChat(Packet3Chat packet, CallbackInfo ci, @Local String message) {
 
-		String defaultRoleDisplay = RoleBuilder.buildRoleDisplay(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole));
-		String defaultRoleUsername = RoleBuilder.buildRoleUsername(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole), this.playerEntity.getDisplayName());
-		String defaultRoleTextFormatting = RoleBuilder.buildRoleTextFormat(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole));
+		String defaultRoleDisplay;
+		String defaultRoleUsername;
+		String defaultRoleTextFormatting;
+
+		if(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole) == null){
+			defaultRoleDisplay = null;
+			defaultRoleUsername = null;
+			defaultRoleTextFormatting = null;
+		} else {
+			defaultRoleDisplay = RoleBuilder.buildRoleDisplay(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole));
+			defaultRoleUsername = RoleBuilder.buildRoleUsername(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole), this.playerEntity.getDisplayName());
+			defaultRoleTextFormatting = RoleBuilder.buildRoleTextFormat(ConfigManager.roleHashMap.get(ConfigManager.getConfig("config").defaultRole));
+		}
 
 		StringBuilder roleDisplays = new StringBuilder();
-		String roleUsername = "" + TextFormatting.RESET + TextFormatting.WHITE + "<" + this.playerEntity.getDisplayName() + "> ";
+		String roleUsername = "" + TextFormatting.RESET + TextFormatting.WHITE + "<" + this.playerEntity.getDisplayName() + TextFormatting.RESET + "> ";
 		String roleTextFormatting = "" + TextFormatting.WHITE;
 
 		ArrayList<RoleData> rolesGranted = new ArrayList<>();
@@ -74,13 +84,18 @@ public class NetServerHandlerMixin {
 
 		if(hasBeenGrantedRole){
 			if (ConfigManager.getConfig("config").displayMode.equals("multi")) {
-				message = defaultRoleDisplay + roleDisplays + roleUsername + roleTextFormatting + message;
-
+				if(defaultRoleDisplay != null) {
+					message = defaultRoleDisplay + roleDisplays + roleUsername + roleTextFormatting + message;
+				} else {
+					message = roleDisplays + roleUsername + roleTextFormatting + message;
+				}
 			} else if (ConfigManager.getConfig("config").displayMode.equals("single")) {
                 message = highestPriorityRoleDisplay + roleUsername + roleTextFormatting + message;
 			}
-		} else {
+		} else if(defaultRoleDisplay != null){
 			message = defaultRoleDisplay + defaultRoleUsername + defaultRoleTextFormatting + message;
+		} else {
+			message = roleUsername + message;
 		}
 
 		logger.info(message);
