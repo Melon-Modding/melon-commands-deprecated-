@@ -21,7 +21,7 @@ public class TPACommand extends Command {
 		EntityPlayerMP player = (EntityPlayerMP) sender.getPlayer();
 		EntityPlayerMP receiver = (EntityPlayerMP) handler.getPlayer(args[0]);
 		if (receiver == null) {
-			sender.sendMessage("Could not find this " + args[0] + " you seek");
+			sender.sendMessage("§eCould not find this " + args[0] + " you seek");
 		    return false;
 	    }
 	    boolean here = args.length == 2 && args[1].equals("here");
@@ -36,6 +36,7 @@ public class TPACommand extends Command {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler commandHandler, CommandSender commandSender) {
-		commandSender.sendMessage("/tpa <destination player> [\"here\"]");
+		commandSender.sendMessage("§8< Command Syntax >");
+		commandSender.sendMessage("§8  > /tpa <destination player> [here]");
 	}
 }

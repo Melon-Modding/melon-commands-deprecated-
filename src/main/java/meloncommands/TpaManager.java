@@ -26,8 +26,8 @@ public class TpaManager {
 		MinecraftServer.getInstance().playerList.sendPacketToPlayer(player.username, new Packet3Chat(message, AES.keyChain.get(player.username)));
 	}
     static void killRequest(TpaRequest tpr, String reason) {
-    	messagePlayer(tpr.player, TextFormatting.RED + "Your tpa request to " + tpr.target.username + " expired! (" + reason + ")");
-    	messagePlayer(tpr.target, TextFormatting.RED + "Your tpa request from " + tpr.player.username + " expired! (" + reason + ")");
+    	messagePlayer(tpr.player, TextFormatting.RED + "> Your tpa request to " + tpr.target.username + " expired! (" + reason + ")");
+    	messagePlayer(tpr.target, TextFormatting.RED + "> Your tpa request from " + tpr.player.username + " expired! (" + reason + ")");
     }
 
 	static public void addRequest(EntityPlayerMP player, EntityPlayerMP target, boolean reverse) {
@@ -37,11 +37,13 @@ public class TpaManager {
             killRequest(tpr, "new request");
 		}
 		if (!reverse) {
-			messagePlayer(target, TextFormatting.ORANGE + player.username + " would like to teleport to you! Use /tpaccept or /tpadeny");
-			messagePlayer(player, TextFormatting.ORANGE + "You requested to teleport to " + target.username);
+			messagePlayer(target, TextFormatting.ORANGE + "> " + player.username + " would like to teleport to you!");
+			messagePlayer(target, TextFormatting.ORANGE + "> Use /tpaccept or /tpadeny");
+			messagePlayer(player, TextFormatting.ORANGE + "> You requested to teleport to " + target.username);
 		} else {
-			messagePlayer(target, TextFormatting.ORANGE + player.username + " would like you teleport to them! Use /tpaccept or /tpadeny");
-			messagePlayer(player, TextFormatting.ORANGE + "You requested for " + target.username + " to teleport to you");
+			messagePlayer(target, TextFormatting.ORANGE + "> " + player.username + " would like you teleport to them!");
+			messagePlayer(target, TextFormatting.ORANGE + "> Use /tpaccept or /tpadeny");
+			messagePlayer(player, TextFormatting.ORANGE + "> You requested for " + target.username + " to teleport to you");
 		}
 	}
 
@@ -58,8 +60,10 @@ public class TpaManager {
 		if (target.dimension != moved.dimension) {
 			MinecraftServer.getInstance().playerList.sendPlayerToOtherDimension(moved, target.dimension);
 		}
+		player.world.playSoundAtEntity(null, player, "mob.ghast.fireball", 1f, 100f);
 		moved.playerNetServerHandler.teleportAndRotate(target.x, target.y, target.z, target.yRot, target.xRot);
-		messagePlayer(player, TextFormatting.ORANGE + "Whoosh!");
+		messagePlayer(player, TextFormatting.ORANGE + "☁ Whoosh! ☁");
+		player.world.playSoundAtEntity(null, player, "mob.ghast.fireball", 1f, 100f);
 		return true;
 	}
 
