@@ -75,6 +75,8 @@ public class MelonCommands implements ModInitializer, GameStartEntrypoint{
 		LOGGER.info("MelonCommands initialized");
 		RoleCommand.buildRoleSyntax();
 		LOGGER.info("MelonCommands Role Syntax Built");
+		KitCommand.buildKitSyntax();
+		LOGGER.info("MelonCommands Kit Syntax Built");
 	}
 
 	@Override

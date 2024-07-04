@@ -281,6 +281,8 @@ public static String hmsConversion(long millis) {
             if (args[0].equals("reload")) {
                 ConfigManager.loadAllKits();
                 sender.sendMessage("§5Reloaded " + ConfigManager.kitHashMap.size() + " Kit(s)!");
+				buildKitSyntax();
+				sender.sendMessage("§5Built Kit Syntax!");
                 return true;
             }
 
