@@ -140,16 +140,17 @@ public static String hmsConversion(long millis) {
 
 	public static void buildKitSyntax(){
 		syntax.clear();
-		syntax.append("title",              "§8< Command Syntax >");
-		syntax.append("give",               "§8  > /kit give <kit> [<overwrite?>]");
-		syntax.append("create",             "§8  > /kit create <kit> [<cooldown>]");
-		syntax.append("delete",             "§8  > /kit delete <kit>");
-		syntax.append("setcooldown",        "§8  > /kit setcooldown <kit> <cooldown>");
-		syntax.append("addto",              "§8  > /kit addto <kit> item/row/all/armor -");
-		syntax.append("addto2",             "§8   - [head/chest/legs/boots/all]");
-		syntax.append("reset",              "§8  > /kit reset <kit> [<username>]");
-		syntax.append("list",               "§8  > /kit list [<kit>]");
-		syntax.append("reload",             "§8  > /kit reload");
+		syntax.append("title",                                "§8< Command Syntax >");
+		syntax.append("give",                                 "§8  > /kit give <kit> [<overwrite?>]");
+		syntax.append("create",                               "§8  > /kit create <kit> [<cooldown>]");
+		syntax.append("delete",                               "§8  > /kit delete <kit>");
+		syntax.append("setcooldown",                          "§8  > /kit setcooldown <kit> <cooldown>");
+		syntax.append("addto",                                "§8  > /kit addto <kit> <mode>");
+		syntax.append("addtoMode", "addto",             "§8    > item/row/armor/all");
+		syntax.append("addtoArmorMode", "addtoMode",    "§8      > [head/chest/legs/boots/all] (if armor)");
+		syntax.append("reset",                                "§8  > /kit reset <kit> [<username>]");
+		syntax.append("list",                                 "§8  > /kit list [<kit>]");
+		syntax.append("reload",                               "§8  > /kit reload");
 	}
 
 	@Override
@@ -382,8 +383,7 @@ public static String hmsConversion(long millis) {
 
                 if (args.length == 1) {
                     sender.sendMessage("§eFailed to Add To Kit (Invalid Syntax)");
-                    sender.sendMessage("§8/kit addto <kit> item/row/all/armor -");
-					sender.sendMessage("§8- [head/chest/legs/boots/all]");
+					syntax.printLayerAndSubLayers("addto", sender);
                     return true;
                 }
 
@@ -566,23 +566,12 @@ public static String hmsConversion(long millis) {
 
 	@Override
 	public void sendCommandSyntax(CommandHandler handler, CommandSender sender) {
-		// Feedback to the player that it executed [ * = To Do ]
-
 		if (sender.isAdmin()) {
-			sender.sendMessage("§8< Command Syntax >");
-			sender.sendMessage("§8  > /kit give <kit> [<overwrite?>]");
-			sender.sendMessage("§8  > /kit create <kit> [<cooldown>]");
-			sender.sendMessage("§8  > /kit delete <kit>");
-			sender.sendMessage("§8  > /kit setcooldown <kit> <cooldown>");
-			sender.sendMessage("§8  > /kit addto <kit> item/row/all/armor -");
-			sender.sendMessage("§8   - [head/chest/legs/boots/all]");
-			sender.sendMessage("§8  > /kit reset <kit> [<username>]");
-			sender.sendMessage("§8  > /kit list [<kit>]");
-			sender.sendMessage("§8  > /kit reload");
+			syntax.printAllLines(sender);
 		} else {
 			sender.sendMessage("§8< Command Syntax >");
 			sender.sendMessage("§8  > /kit give <kit> [<overwrite?>]");
 			sender.sendMessage("§8  > /kit list [<kit>]");
-			}
+		}
 	}
 }

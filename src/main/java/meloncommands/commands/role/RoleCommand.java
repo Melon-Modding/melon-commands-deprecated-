@@ -41,10 +41,10 @@ public class RoleCommand extends Command {
 		syntax.append("displayBorderCustom", "displayBorder",             "§8        > custom [<affix>]");
 		syntax.append("displayBorderCustomAffix", "displayBorderCustom",  "§8          > prefix/suffix <custom affix>");
 		syntax.append("username", "edit",                                 "§8    > username <style>");
-		syntax.append("usernameColor", "username",                        "§8      > color <color/hex>");
+		/*syntax.append("usernameColor", "username",                        "§8      > color <color/hex>");
 		syntax.append("usernameUnderline", "username",                    "§8      > underline true/false");
 		syntax.append("usernameBold", "username",                         "§8      > bold true/false");
-		syntax.append("usernameItalics", "username",                      "§8      > italics true/false");
+		syntax.append("usernameItalics", "username",                      "§8      > italics true/false");*/
 		syntax.append("usernameBorder", "username",                       "§8      > border <style>");
 		syntax.append("usernameBorderColor", "usernameBorder",            "§8        > color <color/hex>");
 		syntax.append("usernameBorderType", "usernameBorder",             "§8        > none/bracket/caret/curly");
@@ -224,14 +224,14 @@ public class RoleCommand extends Command {
 		}
 
 		switch(args[3]){
-			case "color":
+			/*case "color":
 				return EditRoleUsername.usernameColor(sender, args);
 			case "underline":
 				return EditRoleUsername.usernameUnderline(sender, args);
 			case "bold":
 				return EditRoleUsername.usernameBold(sender, args);
 			case "italics":
-				return EditRoleUsername.usernameItalics(sender, args);
+				return EditRoleUsername.usernameItalics(sender, args);*/
 			case "border":
 				return EditRoleUsername.usernameBorder(sender, args);
 		}
