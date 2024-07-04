@@ -11,6 +11,8 @@ import org.spongepowered.asm.mixin.Overwrite;
 @Mixin(value = PlayerList.class, remap = false)
 public class PlayerListMixin {
 
+	//TODO Redirect player.getDisplayName(); with a method that returns RoleBuilder.buildPlayerRoleDisplay(player) + player.getDisplayName();
+
 	/*@Inject(at = @At(shift = At.Shift.AFTER, value = "INVOKE", target = "Lnet/minecraft/server/entity/player/EntityPlayerMP;getDisplayName()Ljava/lang/String;"), method = "updateList", cancellable = true)*/
 	/**
 	 * @author MelonMojito
