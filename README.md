@@ -1,4 +1,4 @@
-# Melon Command Utilities
+# Melon Command Utilities [Deprecated]
 
 Just a small mod I (Prophet/Master) started to accomplish a few things:
 
